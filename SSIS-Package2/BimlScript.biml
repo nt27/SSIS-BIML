@@ -1,0 +1,26 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+<Connections>
+    <OleDbConnection Name="Source" ConnectionString="Provider=SQLNCLI11.1;Data Source=win-vs-sql;Initial Catalog=Source-DB;Integrated Security=SSPI;"/>
+    <OleDbConnection Name="Dest" ConnectionString="Provider=SQLNCLI11.1;Data Source=win-vs-sql;Initial Catalog=Dest-DB;Integrated Security=SSPI;"/>
+</Connections>
+<Packages>
+    <Package Name="Product" ConstraintMode="Linear">
+        <Tasks>
+            <ExecuteSQL Name="Execute SQL" ConnectionName="Dest">
+                <DirectInput>Truncate Table Product</DirectInput>
+            </ExecuteSQL>
+            
+                <Dataflow Name="Load Data to Dest">
+                    <Transformations>
+                        <OleDbSource Name="Source Table" ConnectionName="Source">
+                            <ExternalTableInput Table="Product"/>
+                        </OleDbSource>
+                        <OleDbDestination Name="Dest Name" ConnectionName="Dest">
+                            <ExternalTableOutput Table="Product"/>
+                        </OleDbDestination>
+                    </Transformations>
+                </Dataflow>
+        </Tasks>
+    </Package>
+</Packages>
+</Biml>

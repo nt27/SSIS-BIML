@@ -1,0 +1,92 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Connections>
+        <Connection Name="Dest" ConnectionString="Data Source=.;Initial Catalog=Dest-DB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+        <Connection Name="Source" ConnectionString="Data Source=.;Initial Catalog=Source-DB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+    </Connections>
+    <Packages>
+        <Package Name="Package-Product" Language="None" ConstraintMode="LinearOnCompletion" ProtectionLevel="EncryptSensitiveWithUserKey">
+            <Tasks>l
+                <Dataflow Name="Data Flow Task">
+                    <Transformations>
+                        <OleDbSource Name="Dest" ConnectionName="Dest">
+                            <ExternalTableInput Table="[dbo].[Product]" />
+                        </OleDbSource>
+                        <Sort Name="Sort 1" AutoPassThrough="false" />
+                        <OleDbSource Name="Source" ConnectionName="Source">
+                            <ExternalTableInput Table="[dbo].[Product]"  />
+                        </OleDbSource>
+                        <Sort Name="Sort" AutoPassThrough="false" />
+                        <MergeJoin Name="Merge Join" JoinType="LeftOuterJoin">
+                            <LeftInputPath OutputPathName="Sort.Output">
+                                <Columns>
+                                    <Column SourceColumn="id" IsUsed="false" />
+                                    <Column SourceColumn="ProductName" IsUsed="false" />
+                                    <Column SourceColumn="ProductColor" IsUsed="false" />
+                                    <Column SourceColumn="Price" IsUsed="false" />
+                                </Columns>
+                            </LeftInputPath>
+                            <RightInputPath OutputPathName="Sort 1.Output">
+                                <Columns>
+                                    <Column SourceColumn="id" IsUsed="false" />
+                                </Columns>
+                            </RightInputPath>
+                        </MergeJoin>
+                        <ConditionalSplit Name="Conditional Split">
+                            <OutputPaths>
+                                <OutputPath Name="New Record">
+                                    <Expression>!ISNULL([id]) &amp;&amp; ISNULL(id2)</Expression>
+                                </OutputPath>
+                                <OutputPath Name="Delete">
+                                    <Expression>ISNULL([id]) &amp;&amp; !ISNULL(id2)</Expression>
+                                </OutputPath>
+                            </OutputPaths>
+                        </ConditionalSplit>
+                        <Lookup Name="Lookup" OleDbConnectionName="Dest" NoMatchBehavior="RedirectRowsToNoMatchOutput">
+                            <Parameters>
+                                <Parameter SourceColumn="id" />
+                                <Parameter SourceColumn="ProductName" />
+                                <Parameter SourceColumn="ProductColor" />
+                                <Parameter SourceColumn="Price" />
+                            </Parameters>
+                            <Inputs>
+                                <Column SourceColumn="ProductName" TargetColumn="ProductName" />
+                                <Column SourceColumn="id" TargetColumn="id" />
+                                <Column SourceColumn="ProductColor" TargetColumn="ProductColor" />
+                                <Column SourceColumn="Price" TargetColumn="Price" />
+                            </Inputs>
+                            <DirectInput>select * from [dbo].[Product]</DirectInput>
+                            <ParameterizedQuery>select * from (select * from [dbo].[Product]) [refTable]
+where [refTable].[id] = ? and [refTable].[ProductName] = ? and [refTable].[ProductColor] = ? and [refTable].[Price] = ?</ParameterizedQuery>
+                        </Lookup>
+                        <OleDbCommand Name="OLE DB Command" ConnectionName="Dest">
+                            <InputPath OutputPathName="Lookup.NoMatch" />
+                            <Parameters>
+                                <Parameter SourceColumn="ProductName" TargetColumn="Param_0" DataType="AnsiStringFixedLength" Length="50" CodePage="1252" />
+                                <Parameter SourceColumn="ProductColor" TargetColumn="Param_1" DataType="AnsiStringFixedLength" Length="50" CodePage="1252" />
+                                <Parameter SourceColumn="Price" TargetColumn="Param_2" DataType="Decimal" Precision="5" Scale="2" />
+                                <Parameter SourceColumn="id2" TargetColumn="Param_3" DataType="Int32" />
+                            </Parameters>
+                            <DirectInput>Update Product Set
+ProductName = ?,
+ProductColor=?,
+Price=?
+Where Id =?</DirectInput>
+                        </OleDbCommand>
+                        <OleDbDestination Name="Insert" ConnectionName="Dest">
+                            <InputPath OutputPathName="Conditional Split.New Record" />
+                            <ExternalTableOutput Table="[dbo].[Product]" />
+                        </OleDbDestination>
+                        <OleDbCommand Name="Delete" ConnectionName="Dest">
+                            <InputPath OutputPathName="Conditional Split.Delete" />
+                            <Parameters>
+                                <Parameter SourceColumn="id2" TargetColumn="Param_0" DataType="Int32" />
+                            </Parameters>
+                            <DirectInput>Delete from Product Where Id = ?</DirectInput>
+                        </OleDbCommand>
+                        
+                    </Transformations>
+                </Dataflow>
+            </Tasks>
+        </Package>
+    </Packages>
+</Biml>
