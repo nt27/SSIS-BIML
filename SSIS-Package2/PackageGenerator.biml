@@ -3,8 +3,7 @@
     <Packages>
         <Package Name="AllTables" ConstraintMode="Linear">
             <Tasks>
-                
-                <#
+            <#
             List<string> tables = new List<string>();
             var connectionStringBuilder = new System.Data.SqlClient.SqlConnectionStringBuilder("Server=localhost;Initial Catalog=Source-DB;Integrated Security=SSPI;");
             var con = new System.Data.SqlClient.SqlConnection(connectionStringBuilder.ConnectionString);
@@ -21,7 +20,6 @@
             con.Close();
             foreach(var table in tables) { #>
                 <Dataflow Name="dfTask_<#=table#>">
-                    
                 </Dataflow>
                 <#}#>
             </Tasks>

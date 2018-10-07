@@ -2,7 +2,7 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>SSIS-Package2</Name>
-    <LastWriteTime>2018-10-07T10:23:27.0491278Z</LastWriteTime>
+    <LastWriteTime>2018-10-07T13:27:19.6334879Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
@@ -14,41 +14,6 @@
     <ProjectBuildItemInfo>
       <Name>Product.dtsx</Name>
       <LastWriteTime>2018-10-06T13:04:35.5676291Z</LastWriteTime>
-      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
-    </ProjectBuildItemInfo>
-    <ProjectBuildItemInfo>
-      <Name>MainPackage.dtsx</Name>
-      <LastWriteTime>2018-10-07T10:23:00.7336335Z</LastWriteTime>
-      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
-    </ProjectBuildItemInfo>
-    <ProjectBuildItemInfo>
-      <Name>Product-BIML_0.dtsx</Name>
-      <LastWriteTime>2018-10-07T10:23:00.7476324Z</LastWriteTime>
-      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
-    </ProjectBuildItemInfo>
-    <ProjectBuildItemInfo>
-      <Name>Product-BIML_1.dtsx</Name>
-      <LastWriteTime>2018-10-07T10:23:00.7616323Z</LastWriteTime>
-      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
-    </ProjectBuildItemInfo>
-    <ProjectBuildItemInfo>
-      <Name>Product-BIML_2.dtsx</Name>
-      <LastWriteTime>2018-10-07T10:23:00.7746337Z</LastWriteTime>
-      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
-    </ProjectBuildItemInfo>
-    <ProjectBuildItemInfo>
-      <Name>Product-BIML_3.dtsx</Name>
-      <LastWriteTime>2018-10-07T10:23:00.7886338Z</LastWriteTime>
-      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
-    </ProjectBuildItemInfo>
-    <ProjectBuildItemInfo>
-      <Name>Product-BIML_4.dtsx</Name>
-      <LastWriteTime>2018-10-07T10:23:00.8087917Z</LastWriteTime>
-      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
-    </ProjectBuildItemInfo>
-    <ProjectBuildItemInfo>
-      <Name>Product-BIML_5.dtsx</Name>
-      <LastWriteTime>2018-10-07T10:23:00.8256305Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>
