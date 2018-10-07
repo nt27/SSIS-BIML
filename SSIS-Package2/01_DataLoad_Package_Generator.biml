@@ -2,8 +2,8 @@
 <Biml
 	xmlns="http://schemas.varigence.com/biml.xsd">
 	<Packages>
-	      <# for(int i=0;i<=10;i++) {#>
-		<Package Name="Product-BIML_<#=i#>" ConstraintMode="Linear">
+	      <# for(int i=0;i<=5;i++) {#>
+		<Package Name="Product-BIML_<#=i#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
 			<Tasks>
 				<Container Name="Product-Container_<#=i#>" ConstraintMode="Linear">
 					<Tasks>

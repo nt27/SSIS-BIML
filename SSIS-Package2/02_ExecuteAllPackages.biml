@@ -1,110 +1,15 @@
-﻿<#@template tier="1"#>
+﻿<#@template tier="2"#>
 <Biml
 	xmlns="http://schemas.varigence.com/biml.xsd">
 	<Packages>
-	      <# for(int i=0;i<=10;i++) {#>
-		<Package Name="Product-BIML_<#=i#>" ConstraintMode="Linear">
-			<Tasks>
-				<Container Name="Product-Container_<#=i#>" ConstraintMode="Linear">
-					<Tasks>
-						<ExecuteSQL Name="Execute SQL" ConnectionName="Dest">
-							<DirectInput>Truncate Table Product</DirectInput>
-						</ExecuteSQL>
-						<Dataflow Name="Load Data to Dest_<#=i#>">
-							<Transformations>
-								<OleDbSource Name="Source Table" ConnectionName="Source">
-									<ExternalTableInput Table="Product"/>
-								</OleDbSource>
-								<Sort Name="Sort-Product-Source" AutoPassThrough="true">
-									<Columns>
-										<Column SourceColumn="id" IsUsed="true" Sort="true" SortOrder="Asc" SortKeyPosition="1"/>
-									</Columns>
-								</Sort>
-								<OleDbSource Name="Dest Table" ConnectionName="Dest">
-									<ExternalTableInput Table="Product"/>
-								</OleDbSource>
-								<Sort Name="Sort-Product-Dest" AutoPassThrough="false">
-									<Columns>
-										<Column SourceColumn="id" IsUsed="true" Sort="true" SortOrder="Asc" SortKeyPosition="1"/>
-									</Columns>
-								</Sort>
-								<MergeJoin Name="Merge Join" JoinType="LeftOuterJoin">
-									<LeftInputPath OutputPathName="Sort-Product-Source.Output">
-										<Columns>
-											<Column SourceColumn="id" IsUsed="true" TargetColumn="id" SortKeyPosition="1"  />
-											<Column SourceColumn="ProductName" TargetColumn="ProductName" IsUsed="true" SortKeyPosition="2"/>
-											<Column SourceColumn="ProductColor" TargetColumn="ProductColor" IsUsed="true" SortKeyPosition="3"/>
-											<Column SourceColumn="Price" IsUsed="true" TargetColumn="Price" SortKeyPosition="4"/>
-										</Columns>
-									</LeftInputPath>
-									<RightInputPath  OutputPathName="Sort-Product-Dest.Output">
-										<Columns>
-											<Column SourceColumn="id" TargetColumn="id2" IsUsed="true" SortKeyPosition="1" />
-										</Columns>
-									</RightInputPath>
-									<JoinKeys>
-										<JoinKey LeftColumn="id" RightColumn="id2"/>
-									</JoinKeys>
-								</MergeJoin>
-								<ConditionalSplit Name="Conditional-Split" >
-									<OutputPaths>
-										<OutputPath Name="New-Record">
-											<Expression>!ISNULL([id]) &amp;&amp; ISNULL([id2])</Expression>
-										</OutputPath>
-										<OutputPath Name="Delete-Record">
-											<Expression>ISNULL([id]) &amp;&amp; !ISNULL([id2])</Expression>
-										</OutputPath>
-									</OutputPaths>
-								</ConditionalSplit>
-								<Lookup Name="Update Lookup" OleDbConnectionName="Dest" NoMatchBehavior="RedirectRowsToNoMatchOutput">
-									<Parameters>
-										<Parameter SourceColumn="id" />
-										<Parameter SourceColumn="ProductName" />
-										<Parameter SourceColumn="ProductColor" />
-										<Parameter SourceColumn="Price" />
-									</Parameters>
-									<Inputs>
-										<Column SourceColumn="ProductName" TargetColumn="ProductName" />
-										<Column SourceColumn="id" TargetColumn="id" />
-										<Column SourceColumn="ProductColor" TargetColumn="ProductColor" />
-										<Column SourceColumn="Price" TargetColumn="Price" />
-									</Inputs>
-									<DirectInput>select * from [dbo].[Product]</DirectInput>
-									<ParameterizedQuery>select * from (select * from [dbo].[Product]) [refTable]
-where [refTable].[id] = ? and [refTable].[ProductName] = ? and [refTable].[ProductColor] = ? and [refTable].[Price] = ?</ParameterizedQuery>
-								</Lookup>
-								<OleDbCommand Name="Update Record" ConnectionName="Dest">
-									<InputPath OutputPathName="Update Lookup.NoMatch"/>
-									<Parameters>
-										<Parameter SourceColumn="ProductName" TargetColumn="Param_0" DataType="AnsiStringFixedLength" Length="50" CodePage="1252" />
-										<Parameter SourceColumn="ProductColor" TargetColumn="Param_1" DataType="AnsiStringFixedLength" Length="50" CodePage="1252" />
-										<Parameter SourceColumn="Price" TargetColumn="Param_2" DataType="Decimal" Precision="5" Scale="2" />
-										<Parameter SourceColumn="id2" TargetColumn="Param_3" DataType="Int32" />
-									</Parameters>
-									<DirectInput>Update Product Set
-ProductName = ?,
-ProductColor=?,
-Price=?
-Where Id =?</DirectInput>
-								</OleDbCommand>
-								<OleDbDestination Name="Insert" ConnectionName="Dest">
-									<InputPath OutputPathName="Conditional-Split.New-Record" />
-									<ExternalTableOutput Table="[dbo].[Product]" />
-								</OleDbDestination>
-								<OleDbCommand Name="Delete" ConnectionName="Dest">
-									<InputPath OutputPathName="Conditional-Split.Delete-Record" />
-									<Parameters>
-										<Parameter SourceColumn="id2" TargetColumn="Param_0" DataType="Int32" />
-									</Parameters>
-									<DirectInput>Delete from Product Where Id = ?</DirectInput>
-								</OleDbCommand>
-							</Transformations>
-						</Dataflow>
-					</Tasks>
-				</Container>
-				   
-			</Tasks>
-		</Package>
-		     <#}#>
-	</Packages>
+	    <Package Name="MainPackage" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+	        <Tasks>
+	            <# foreach(var package in RootNode.Packages) { #>
+	            <ExecutePackage Name="Execute-<#=package.Name#>">
+	                <Package PackageName="<#=package.Name#>" />
+	            </ExecutePackage>
+                <#}#>
+	        </Tasks>
+	    </Package>
+    </Packages>
 </Biml>

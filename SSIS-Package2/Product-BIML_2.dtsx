@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DTS:Executable DTS:CreationDate="10/07/2018 10:23:00" DTS:CreationName="Microsoft.Package" DTS:CreatorComputerName="win-vs-sql" DTS:CreatorName="cgiadmin" DTS:DTSID="{BCB9202B-4D6A-4A1B-A87B-47B5466834F4}" DTS:ExecutableType="Microsoft.Package" DTS:LastModifiedProductVersion="" DTS:LocaleID="1033" DTS:ObjectName="Product-BIML_2" DTS:refId="Package" DTS:VersionBuild="0" DTS:VersionGUID="{8895479D-8819-423D-8625-279BC0EB369D}" DTS:VersionMajor="0" xmlns:DTS="www.microsoft.com/SqlServer/Dts">
+  <DTS:Property DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager DTS:CreationName="OLEDB" DTS:DTSID="{9EBE5845-3C91-4480-A722-4127BF84EC26}" DTS:ObjectName="Source" DTS:refId="Package.ConnectionManagers[Source]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectionString="provider=SQLNCLI11.1;data source=win-vs-sql;initial catalog=Source-DB;integrated security=SSPI" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager DTS:CreationName="OLEDB" DTS:DTSID="{D0CEF8F5-035E-4CFA-A802-0D9BF366DA39}" DTS:ObjectName="Dest" DTS:refId="Package.ConnectionManagers[Dest]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectionString="provider=SQLNCLI11.1;data source=win-vs-sql;initial catalog=Dest-DB;integrated security=SSPI" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Executables>
+    <DTS:Executable DTS:CreationName="STOCK:SEQUENCE" DTS:DTSID="{F78E10A3-90A4-4467-AD85-37EDF56D9950}" DTS:ExecutableType="STOCK:SEQUENCE" DTS:LocaleID="-1" DTS:ObjectName="Product-Container_2" DTS:refId="Package\Product-Container_2">
+      <DTS:Executables>
+        <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{4A16C89E-33F9-4066-A743-B32343E7E0C9}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="Execute SQL" DTS:refId="Package\Product-Container_2\Execute SQL" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData SQLTask:Connection="Dest" SQLTask:SqlStatementSource="Truncate Table Product" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{20E1F8EE-0612-47A6-9E9C-FF13944A1739}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="Load Data to Dest_2" DTS:refId="Package\Product-Container_2\Load Data to Dest_2" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:ObjectData>
+            <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1">
+              <components>
+                <component componentClassID="Microsoft.OLEDBSource" contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7" name="Dest Table" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table" usesDispositions="true" version="7">
+                  <connections>
+                    <connection connectionManagerID="{D0CEF8F5-035E-4CFA-A802-0D9BF366DA39}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Connections[OleDbConnection]" />
+                  </connections>
+                  <outputs>
+                    <output name="Output" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output]">
+                      <externalMetadataColumns isUsed="True">
+                        <externalMetadataColumn dataType="i4" name="id" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].ExternalColumns[id]" />
+                        <externalMetadataColumn codePage="1252" dataType="str" length="50" name="ProductName" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].ExternalColumns[ProductName]" />
+                        <externalMetadataColumn codePage="1252" dataType="str" length="50" name="ProductColor" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].ExternalColumns[ProductColor]" />
+                        <externalMetadataColumn dataType="numeric" name="Price" precision="5" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].ExternalColumns[Price]" scale="2" />
+                      </externalMetadataColumns>
+                      <outputColumns>
+                        <outputColumn dataType="i4" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].ExternalColumns[id]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].Columns[id]" name="id" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].Columns[id]" truncationRowDisposition="FailComponent" />
+                        <outputColumn codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].ExternalColumns[ProductName]" length="50" lineageId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].Columns[ProductName]" name="ProductName" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].Columns[ProductName]" truncationRowDisposition="FailComponent" />
+                        <outputColumn codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].ExternalColumns[ProductColor]" length="50" lineageId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].Columns[ProductColor]" name="ProductColor" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].Columns[ProductColor]" truncationRowDisposition="FailComponent" />
+                        <outputColumn dataType="numeric" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].ExternalColumns[Price]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].Columns[Price]" name="Price" precision="5" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].Columns[Price]" scale="2" truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                    </output>
+                    <output isErrorOut="true" name="Error" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error]">
+                      <externalMetadataColumns />
+                      <outputColumns>
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error].Columns[id]" name="id" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error].Columns[id]" />
+                        <outputColumn codePage="1252" dataType="str" length="50" lineageId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error].Columns[ProductName]" name="ProductName" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error].Columns[ProductName]" />
+                        <outputColumn codePage="1252" dataType="str" length="50" lineageId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error].Columns[ProductColor]" name="ProductColor" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error].Columns[ProductColor]" />
+                        <outputColumn dataType="numeric" lineageId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error].Columns[Price]" name="Price" precision="5" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error].Columns[Price]" scale="2" />
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                      </outputColumns>
+                    </output>
+                  </outputs>
+                  <properties>
+                    <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                    <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">Product</property>
+                    <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable" />
+                    <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor" />
+                    <property dataType="System.String" description="The variable that contains the SQL command to be executed." name="SqlCommandVariable" />
+                    <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                    <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                    <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode" typeConverter="AccessMode">0</property>
+                    <property dataType="System.String" description="The mappings between the parameters in the SQL command and variables." name="ParameterMapping" />
+                  </properties>
+                </component>
+                <component componentClassID="Microsoft.Sort" contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1" name="Sort-Product-Dest" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Dest" version="1">
+                  <inputs>
+                    <input name="Dest Table_Output_Sort-Product-Dest" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Dest.Inputs[Dest Table_Output_Sort-Product-Dest]">
+                      <externalMetadataColumns />
+                      <inputColumns>
+                        <inputColumn cachedDataType="i4" cachedName="id" lineageId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].Columns[id]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Dest.Inputs[Dest Table_Output_Sort-Product-Dest].Columns[id]">
+                          <properties>
+                            <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                            <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output isSorted="true" name="Output" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Dest.Outputs[Output]">
+                      <externalMetadataColumns />
+                      <outputColumns>
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Dest.Outputs[Output].Columns[id]" name="id" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Dest.Outputs[Output].Columns[id]" sortKeyPosition="1">
+                          <properties>
+                            <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output].Columns[id]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                    </output>
+                  </outputs>
+                  <properties>
+                    <property dataType="System.Boolean" description="Indicates whether the Sort transformation removes rows with duplicate sort values." name="EliminateDuplicates">false</property>
+                    <property dataType="System.Int32" description="Specifies the maximum number of threads to use for sorting." expressionType="Notify" name="MaximumThreads">-1</property>
+                  </properties>
+                </component>
+                <component componentClassID="Microsoft.OLEDBSource" contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7" name="Source Table" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table" usesDispositions="true" version="7">
+                  <connections>
+                    <connection connectionManagerID="{9EBE5845-3C91-4480-A722-4127BF84EC26}:external" connectionManagerRefId="Package.ConnectionManagers[Source]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Connections[OleDbConnection]" />
+                  </connections>
+                  <outputs>
+                    <output name="Output" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output]">
+                      <externalMetadataColumns isUsed="True">
+                        <externalMetadataColumn dataType="i4" name="id" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].ExternalColumns[id]" />
+                        <externalMetadataColumn codePage="1252" dataType="str" length="50" name="ProductName" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].ExternalColumns[ProductName]" />
+                        <externalMetadataColumn codePage="1252" dataType="str" length="50" name="ProductColor" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].ExternalColumns[ProductColor]" />
+                        <externalMetadataColumn dataType="numeric" name="Price" precision="5" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].ExternalColumns[Price]" scale="2" />
+                      </externalMetadataColumns>
+                      <outputColumns>
+                        <outputColumn dataType="i4" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].ExternalColumns[id]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[id]" name="id" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[id]" truncationRowDisposition="FailComponent" />
+                        <outputColumn codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].ExternalColumns[ProductName]" length="50" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[ProductName]" name="ProductName" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[ProductName]" truncationRowDisposition="FailComponent" />
+                        <outputColumn codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].ExternalColumns[ProductColor]" length="50" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[ProductColor]" name="ProductColor" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[ProductColor]" truncationRowDisposition="FailComponent" />
+                        <outputColumn dataType="numeric" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].ExternalColumns[Price]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[Price]" name="Price" precision="5" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[Price]" scale="2" truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                    </output>
+                    <output isErrorOut="true" name="Error" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error]">
+                      <externalMetadataColumns />
+                      <outputColumns>
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error].Columns[id]" name="id" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error].Columns[id]" />
+                        <outputColumn codePage="1252" dataType="str" length="50" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error].Columns[ProductName]" name="ProductName" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error].Columns[ProductName]" />
+                        <outputColumn codePage="1252" dataType="str" length="50" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error].Columns[ProductColor]" name="ProductColor" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error].Columns[ProductColor]" />
+                        <outputColumn dataType="numeric" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error].Columns[Price]" name="Price" precision="5" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error].Columns[Price]" scale="2" />
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                      </outputColumns>
+                    </output>
+                  </outputs>
+                  <properties>
+                    <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                    <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">Product</property>
+                    <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable" />
+                    <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor" />
+                    <property dataType="System.String" description="The variable that contains the SQL command to be executed." name="SqlCommandVariable" />
+                    <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                    <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                    <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode" typeConverter="AccessMode">0</property>
+                    <property dataType="System.String" description="The mappings between the parameters in the SQL command and variables." name="ParameterMapping" />
+                  </properties>
+                </component>
+                <component componentClassID="Microsoft.Sort" contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1" name="Sort-Product-Source" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source" version="1">
+                  <inputs>
+                    <input name="Source Table_Output_Sort-Product-Source" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Inputs[Source Table_Output_Sort-Product-Source]">
+                      <externalMetadataColumns />
+                      <inputColumns>
+                        <inputColumn cachedDataType="i4" cachedName="id" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[id]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Inputs[Source Table_Output_Sort-Product-Source].Columns[id]">
+                          <properties>
+                            <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                            <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="50" cachedName="ProductName" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[ProductName]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Inputs[Source Table_Output_Sort-Product-Source].Columns[ProductName]">
+                          <properties>
+                            <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                            <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="50" cachedName="ProductColor" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[ProductColor]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Inputs[Source Table_Output_Sort-Product-Source].Columns[ProductColor]">
+                          <properties>
+                            <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                            <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn cachedDataType="numeric" cachedName="Price" cachedPrecision="5" cachedScale="2" lineageId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[Price]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Inputs[Source Table_Output_Sort-Product-Source].Columns[Price]">
+                          <properties>
+                            <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                            <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output isSorted="true" name="Output" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output]">
+                      <externalMetadataColumns />
+                      <outputColumns>
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output].Columns[id]" name="id" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output].Columns[id]" sortKeyPosition="1">
+                          <properties>
+                            <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[id]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn codePage="1252" dataType="str" length="50" lineageId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output].Columns[ProductName]" name="ProductName" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output].Columns[ProductName]">
+                          <properties>
+                            <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[ProductName]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn codePage="1252" dataType="str" length="50" lineageId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output].Columns[ProductColor]" name="ProductColor" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output].Columns[ProductColor]">
+                          <properties>
+                            <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[ProductColor]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn dataType="numeric" lineageId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output].Columns[Price]" name="Price" precision="5" refId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output].Columns[Price]" scale="2">
+                          <properties>
+                            <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output].Columns[Price]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                    </output>
+                  </outputs>
+                  <properties>
+                    <property dataType="System.Boolean" description="Indicates whether the Sort transformation removes rows with duplicate sort values." name="EliminateDuplicates">false</property>
+                    <property dataType="System.Int32" description="Specifies the maximum number of threads to use for sorting." expressionType="Notify" name="MaximumThreads">-1</property>
+                  </properties>
+                </component>
+                <component componentClassID="Microsoft.MergeJoin" contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1" name="Merge Join" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join" version="1">
+                  <inputs>
+                    <input hasSideEffects="true" name="Sort-Product-Source_Output_Merge Join" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Source_Output_Merge Join]">
+                      <externalMetadataColumns />
+                      <inputColumns>
+                        <inputColumn cachedDataType="i4" cachedName="id" cachedSortKeyPosition="1" lineageId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output].Columns[id]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Source_Output_Merge Join].Columns[id]" />
+                        <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="50" cachedName="ProductName" lineageId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output].Columns[ProductName]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Source_Output_Merge Join].Columns[ProductName]" />
+                        <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="50" cachedName="ProductColor" lineageId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output].Columns[ProductColor]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Source_Output_Merge Join].Columns[ProductColor]" />
+                        <inputColumn cachedDataType="numeric" cachedName="Price" cachedPrecision="5" cachedScale="2" lineageId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output].Columns[Price]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Source_Output_Merge Join].Columns[Price]" />
+                      </inputColumns>
+                    </input>
+                    <input hasSideEffects="true" name="Sort-Product-Dest_Output_Merge Join" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Dest_Output_Merge Join]">
+                      <externalMetadataColumns />
+                      <inputColumns>
+                        <inputColumn cachedDataType="i4" cachedName="id" cachedSortKeyPosition="1" lineageId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Dest.Outputs[Output].Columns[id]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Dest_Output_Merge Join].Columns[id]" />
+                      </inputColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output isSorted="true" name="Output" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output]">
+                      <externalMetadataColumns />
+                      <outputColumns>
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id]" name="id" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id]" sortKeyPosition="1">
+                          <properties>
+                            <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Source_Output_Merge Join].Columns[id]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn codePage="1252" dataType="str" length="50" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[ProductName]" name="ProductName" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[ProductName]">
+                          <properties>
+                            <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Source_Output_Merge Join].Columns[ProductName]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn codePage="1252" dataType="str" length="50" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[ProductColor]" name="ProductColor" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[ProductColor]">
+                          <properties>
+                            <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Source_Output_Merge Join].Columns[ProductColor]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn dataType="numeric" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[Price]" name="Price" precision="5" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[Price]" scale="2">
+                          <properties>
+                            <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Source_Output_Merge Join].Columns[Price]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id2]" name="id2" refId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id2]">
+                          <properties>
+                            <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Dest_Output_Merge Join].Columns[id]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                    </output>
+                  </outputs>
+                  <properties>
+                    <property dataType="System.Int32" description="Specifies the type of join to perform." name="JoinType" typeConverter="JoinType">1</property>
+                    <property dataType="System.Int32" description="Specifies the number of columns in the ordering key." name="NumKeyColumns">1</property>
+                    <property dataType="System.Boolean" description="Indicates whether the null values are treated as equal values." name="TreatNullsAsEqual">true</property>
+                    <property dataType="System.Int32" description="Indicates the requested maximum buffers per input before blocking." name="MaxBuffersPerInput">5</property>
+                  </properties>
+                </component>
+                <component componentClassID="Microsoft.ConditionalSplit" contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0" name="Conditional-Split" refId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split" usesDispositions="true">
+                  <inputs>
+                    <input name="Merge Join_Output_Conditional-Split" refId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]">
+                      <externalMetadataColumns />
+                      <inputColumns>
+                        <inputColumn cachedDataType="i4" cachedName="id" cachedSortKeyPosition="1" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split].Columns[id]" />
+                        <inputColumn cachedDataType="i4" cachedName="id2" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id2]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split].Columns[id2]" />
+                      </inputColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" exclusionGroup="1" name="New-Record" refId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Outputs[New-Record]" synchronousInputId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]" truncationRowDisposition="FailComponent">
+                      <externalMetadataColumns />
+                      <properties>
+                        <property containsID="true" dataType="System.String" name="Expression">!ISNULL(#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id]}) &amp;&amp; ISNULL(#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id2]})</property>
+                        <property containsID="true" dataType="System.String" expressionType="Notify" name="FriendlyExpression">!ISNULL([id]) &amp;&amp; ISNULL([id2])</property>
+                        <property dataType="System.Int32" name="EvaluationOrder">0</property>
+                      </properties>
+                    </output>
+                    <output errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" exclusionGroup="1" name="Delete-Record" refId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Outputs[Delete-Record]" synchronousInputId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]" truncationRowDisposition="FailComponent">
+                      <externalMetadataColumns />
+                      <properties>
+                        <property containsID="true" dataType="System.String" name="Expression">ISNULL(#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id]}) &amp;&amp; !ISNULL(#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id2]})</property>
+                        <property containsID="true" dataType="System.String" expressionType="Notify" name="FriendlyExpression">ISNULL([id]) &amp;&amp; !ISNULL([id2])</property>
+                        <property dataType="System.Int32" name="EvaluationOrder">1</property>
+                      </properties>
+                    </output>
+                    <output exclusionGroup="1" name="Default" refId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Outputs[Default]" synchronousInputId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]">
+                      <externalMetadataColumns />
+                      <properties>
+                        <property dataType="System.Boolean" name="IsDefaultOut">true</property>
+                      </properties>
+                    </output>
+                    <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Outputs[Error]" synchronousInputId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]">
+                      <externalMetadataColumns />
+                      <outputColumns>
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                      </outputColumns>
+                    </output>
+                  </outputs>
+                </component>
+                <component componentClassID="Microsoft.Lookup" contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6" name="Update Lookup" refId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup" usesDispositions="true" version="6">
+                  <connections>
+                    <connection connectionManagerID="{D0CEF8F5-035E-4CFA-A802-0D9BF366DA39}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="Connection manager used to access lookup data." name="OleDbConnection" refId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Connections[OleDbConnection]" />
+                  </connections>
+                  <inputs>
+                    <input name="Conditional-Split_Default_Update Lookup" refId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Inputs[Conditional-Split_Default_Update Lookup]">
+                      <externalMetadataColumns />
+                      <inputColumns>
+                        <inputColumn cachedDataType="i4" cachedName="id" cachedSortKeyPosition="1" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Inputs[Conditional-Split_Default_Update Lookup].Columns[id]">
+                          <properties>
+                            <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">id</property>
+                            <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="50" cachedName="ProductName" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[ProductName]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Inputs[Conditional-Split_Default_Update Lookup].Columns[ProductName]">
+                          <properties>
+                            <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">ProductName</property>
+                            <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="50" cachedName="ProductColor" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[ProductColor]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Inputs[Conditional-Split_Default_Update Lookup].Columns[ProductColor]">
+                          <properties>
+                            <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">ProductColor</property>
+                            <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn cachedDataType="numeric" cachedName="Price" cachedPrecision="5" cachedScale="2" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[Price]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Inputs[Conditional-Split_Default_Update Lookup].Columns[Price]">
+                          <properties>
+                            <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">Price</property>
+                            <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output errorOrTruncationOperation="Lookup" exclusionGroup="1" name="Match" refId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Outputs[Match]" synchronousInputId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Inputs[Conditional-Split_Default_Update Lookup]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;" exclusionGroup="1" name="NoMatch" refId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Outputs[NoMatch]" synchronousInputId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Inputs[Conditional-Split_Default_Update Lookup]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Outputs[Error]" synchronousInputId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Inputs[Conditional-Split_Default_Update Lookup]">
+                      <externalMetadataColumns />
+                      <outputColumns>
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                      </outputColumns>
+                    </output>
+                  </outputs>
+                  <properties>
+                    <property dataType="System.String" description="Specifies the SQL statement that generates the lookup table." expressionType="Notify" name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Product]</property>
+                    <property dataType="System.String" description="Specifies a SQL statement that uses parameters to generate the lookup table." expressionType="Notify" name="SqlCommandParam" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Product]) [refTable]
+where [refTable].[id] = ? and [refTable].[ProductName] = ? and [refTable].[ProductColor] = ? and [refTable].[Price] = ?</property>
+                    <property dataType="System.Int32" description="Specifies the type of connection used to access the reference dataset." name="ConnectionType" typeConverter="LookupConnectionType">0</property>
+                    <property dataType="System.Int32" description="Specifies the cache type of the lookup table." name="CacheType" typeConverter="CacheType">0</property>
+                    <property dataType="System.Int32" description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set." name="NoMatchBehavior" typeConverter="LookupNoMatchBehavior">1</property>
+                    <property dataType="System.Int32" description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset." name="NoMatchCachePercentage">0</property>
+                    <property dataType="System.Int32" description="Maximum Memory Usage for Reference Cache on a 32 bit platform." name="MaxMemoryUsage">25</property>
+                    <property dataType="System.Int64" description="Maximum Memory Usage for Reference Cache on a 64 bit platform." name="MaxMemoryUsage64">25</property>
+                    <property dataType="System.String" description="Indicates whether to reference metadata in an XML format." name="ReferenceMetadataXml">&lt;referenceMetadata&gt;
+  &lt;referenceColumns&gt;
+    &lt;referenceColumn name="id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="ProductName" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252" /&gt;
+    &lt;referenceColumn name="ProductColor" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252" /&gt;
+    &lt;referenceColumn name="Price" dataType="DT_NUMERIC" length="0" precision="5" scale="2" codePage="0" /&gt;
+  &lt;/referenceColumns&gt;
+&lt;/referenceMetadata&gt;</property>
+                    <property containsID="true" dataType="System.String" description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons." name="ParameterMap">#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id]};#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[ProductName]};#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[ProductColor]};#{Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[Price]};</property>
+                    <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                    <property dataType="System.Boolean" description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used." name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                </component>
+                <component componentClassID="Microsoft.OLEDBCommand" contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2" name="Update Record" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record" usesDispositions="true" version="2">
+                  <connections>
+                    <connection connectionManagerID="{D0CEF8F5-035E-4CFA-A802-0D9BF366DA39}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Connections[OleDbConnection]" />
+                  </connections>
+                  <inputs>
+                    <input errorOrTruncationOperation="Command Execution" errorRowDisposition="FailComponent" hasSideEffects="true" name="Update Lookup_NoMatch_Update Record" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record]">
+                      <externalMetadataColumns isUsed="True">
+                        <externalMetadataColumn codePage="1252" dataType="str" length="50" name="Param_0" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record].ExternalColumns[Param_0]">
+                          <properties>
+                            <property dataType="System.Int32" description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values." name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn codePage="1252" dataType="str" length="50" name="Param_1" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record].ExternalColumns[Param_1]">
+                          <properties>
+                            <property dataType="System.Int32" description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values." name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn dataType="numeric" name="Param_2" precision="5" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record].ExternalColumns[Param_2]" scale="2">
+                          <properties>
+                            <property dataType="System.Int32" description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values." name="DBParamInfoFlags">17</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn dataType="i4" name="Param_3" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record].ExternalColumns[Param_3]">
+                          <properties>
+                            <property dataType="System.Int32" description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values." name="DBParamInfoFlags">17</property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                      <inputColumns>
+                        <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="50" cachedName="ProductName" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record].ExternalColumns[Param_0]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[ProductName]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record].Columns[ProductName]" />
+                        <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="50" cachedName="ProductColor" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record].ExternalColumns[Param_1]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[ProductColor]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record].Columns[ProductColor]" />
+                        <inputColumn cachedDataType="numeric" cachedName="Price" cachedPrecision="5" cachedScale="2" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record].ExternalColumns[Param_2]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[Price]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record].Columns[Price]" />
+                        <inputColumn cachedDataType="i4" cachedName="id2" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record].ExternalColumns[Param_3]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id2]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record].Columns[id2]" />
+                      </inputColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output exclusionGroup="1" name="Output" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Outputs[Output]" synchronousInputId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Outputs[Error]" synchronousInputId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record]">
+                      <externalMetadataColumns />
+                      <outputColumns>
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                      </outputColumns>
+                    </output>
+                  </outputs>
+                  <properties>
+                    <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                    <property dataType="System.String" description="The SQL command to be executed." expressionType="Notify" name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Update Product Set
+ProductName = ?,
+ProductColor=?,
+Price=?
+Where Id =?</property>
+                    <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                  </properties>
+                </component>
+                <component componentClassID="Microsoft.OLEDBCommand" contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2" name="Delete" refId="Package\Product-Container_2\Load Data to Dest_2\Delete" usesDispositions="true" version="2">
+                  <connections>
+                    <connection connectionManagerID="{D0CEF8F5-035E-4CFA-A802-0D9BF366DA39}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\Product-Container_2\Load Data to Dest_2\Delete.Connections[OleDbConnection]" />
+                  </connections>
+                  <inputs>
+                    <input errorOrTruncationOperation="Command Execution" errorRowDisposition="FailComponent" hasSideEffects="true" name="Conditional-Split_Delete-Record_Delete" refId="Package\Product-Container_2\Load Data to Dest_2\Delete.Inputs[Conditional-Split_Delete-Record_Delete]">
+                      <externalMetadataColumns isUsed="True">
+                        <externalMetadataColumn dataType="i4" name="Param_0" refId="Package\Product-Container_2\Load Data to Dest_2\Delete.Inputs[Conditional-Split_Delete-Record_Delete].ExternalColumns[Param_0]">
+                          <properties>
+                            <property dataType="System.Int32" description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values." name="DBParamInfoFlags">17</property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                      <inputColumns>
+                        <inputColumn cachedDataType="i4" cachedName="id2" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Delete.Inputs[Conditional-Split_Delete-Record_Delete].ExternalColumns[Param_0]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id2]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Delete.Inputs[Conditional-Split_Delete-Record_Delete].Columns[id2]" />
+                      </inputColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output exclusionGroup="1" name="Output" refId="Package\Product-Container_2\Load Data to Dest_2\Delete.Outputs[Output]" synchronousInputId="Package\Product-Container_2\Load Data to Dest_2\Delete.Inputs[Conditional-Split_Delete-Record_Delete]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\Product-Container_2\Load Data to Dest_2\Delete.Outputs[Error]" synchronousInputId="Package\Product-Container_2\Load Data to Dest_2\Delete.Inputs[Conditional-Split_Delete-Record_Delete]">
+                      <externalMetadataColumns />
+                      <outputColumns>
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Delete.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\Product-Container_2\Load Data to Dest_2\Delete.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Delete.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\Product-Container_2\Load Data to Dest_2\Delete.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                      </outputColumns>
+                    </output>
+                  </outputs>
+                  <properties>
+                    <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                    <property dataType="System.String" description="The SQL command to be executed." expressionType="Notify" name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Delete from Product Where Id = ?</property>
+                    <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                  </properties>
+                </component>
+                <component componentClassID="Microsoft.OLEDBDestination" contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4" name="Insert" refId="Package\Product-Container_2\Load Data to Dest_2\Insert" usesDispositions="true" version="4">
+                  <connections>
+                    <connection connectionManagerID="{D0CEF8F5-035E-4CFA-A802-0D9BF366DA39}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Connections[OleDbConnection]" />
+                  </connections>
+                  <inputs>
+                    <input errorOrTruncationOperation="Insert" errorRowDisposition="FailComponent" hasSideEffects="true" name="Conditional-Split_New-Record_Insert" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert]">
+                      <externalMetadataColumns isUsed="True">
+                        <externalMetadataColumn dataType="i4" name="id" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[id]" />
+                        <externalMetadataColumn codePage="1252" dataType="str" length="50" name="ProductName" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[ProductName]" />
+                        <externalMetadataColumn codePage="1252" dataType="str" length="50" name="ProductColor" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[ProductColor]" />
+                        <externalMetadataColumn dataType="numeric" name="Price" precision="5" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[Price]" scale="2" />
+                      </externalMetadataColumns>
+                      <inputColumns>
+                        <inputColumn cachedDataType="i4" cachedName="id" cachedSortKeyPosition="1" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[id]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[id]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[id]" />
+                        <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="50" cachedName="ProductName" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[ProductName]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[ProductName]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[ProductName]" />
+                        <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="50" cachedName="ProductColor" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[ProductColor]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[ProductColor]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[ProductColor]" />
+                        <inputColumn cachedDataType="numeric" cachedName="Price" cachedPrecision="5" cachedScale="2" externalMetadataColumnId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[Price]" lineageId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output].Columns[Price]" name="" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[Price]" />
+                      </inputColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Outputs[Error]" synchronousInputId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert]">
+                      <externalMetadataColumns />
+                      <outputColumns>
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Insert.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                        <outputColumn dataType="i4" lineageId="Package\Product-Container_2\Load Data to Dest_2\Insert.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\Product-Container_2\Load Data to Dest_2\Insert.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                      </outputColumns>
+                    </output>
+                  </outputs>
+                  <properties>
+                    <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                    <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">[dbo].[Product]</property>
+                    <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable" />
+                    <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor" />
+                    <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                    <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                    <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode">3</property>
+                    <property dataType="System.Boolean" description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on." name="FastLoadKeepIdentity">false</property>
+                    <property dataType="System.Boolean" description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on." name="FastLoadKeepNulls">false</property>
+                    <property dataType="System.String" description="Specifies options to be used with fast load.  Applies only if fast load is turned on." name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property dataType="System.Int32" description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on." name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                </component>
+              </components>
+              <paths>
+                <path endId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Inputs[Source Table_Output_Sort-Product-Source]" name="Source Table_Output_Sort-Product-Source" refId="Package\Product-Container_2\Load Data to Dest_2.Paths[Source Table_Output_Sort-Product-Source]" startId="Package\Product-Container_2\Load Data to Dest_2\Source Table.Outputs[Output]" />
+                <path endId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Dest.Inputs[Dest Table_Output_Sort-Product-Dest]" name="Dest Table_Output_Sort-Product-Dest" refId="Package\Product-Container_2\Load Data to Dest_2.Paths[Dest Table_Output_Sort-Product-Dest]" startId="Package\Product-Container_2\Load Data to Dest_2\Dest Table.Outputs[Output]" />
+                <path endId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Source_Output_Merge Join]" name="Sort-Product-Source_Output_Merge Join" refId="Package\Product-Container_2\Load Data to Dest_2.Paths[Sort-Product-Source_Output_Merge Join]" startId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Source.Outputs[Output]" />
+                <path endId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Inputs[Sort-Product-Dest_Output_Merge Join]" name="Sort-Product-Dest_Output_Merge Join" refId="Package\Product-Container_2\Load Data to Dest_2.Paths[Sort-Product-Dest_Output_Merge Join]" startId="Package\Product-Container_2\Load Data to Dest_2\Sort-Product-Dest.Outputs[Output]" />
+                <path endId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]" name="Merge Join_Output_Conditional-Split" refId="Package\Product-Container_2\Load Data to Dest_2.Paths[Merge Join_Output_Conditional-Split]" startId="Package\Product-Container_2\Load Data to Dest_2\Merge Join.Outputs[Output]" />
+                <path endId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Inputs[Conditional-Split_Default_Update Lookup]" name="Conditional-Split_Default_Update Lookup" refId="Package\Product-Container_2\Load Data to Dest_2.Paths[Conditional-Split_Default_Update Lookup]" startId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Outputs[Default]" />
+                <path endId="Package\Product-Container_2\Load Data to Dest_2\Update Record.Inputs[Update Lookup_NoMatch_Update Record]" name="Update Lookup_NoMatch_Update Record" refId="Package\Product-Container_2\Load Data to Dest_2.Paths[Update Lookup_NoMatch_Update Record]" startId="Package\Product-Container_2\Load Data to Dest_2\Update Lookup.Outputs[NoMatch]" />
+                <path endId="Package\Product-Container_2\Load Data to Dest_2\Insert.Inputs[Conditional-Split_New-Record_Insert]" name="Conditional-Split_New-Record_Insert" refId="Package\Product-Container_2\Load Data to Dest_2.Paths[Conditional-Split_New-Record_Insert]" startId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Outputs[New-Record]" />
+                <path endId="Package\Product-Container_2\Load Data to Dest_2\Delete.Inputs[Conditional-Split_Delete-Record_Delete]" name="Conditional-Split_Delete-Record_Delete" refId="Package\Product-Container_2\Load Data to Dest_2.Paths[Conditional-Split_Delete-Record_Delete]" startId="Package\Product-Container_2\Load Data to Dest_2\Conditional-Split.Outputs[Delete-Record]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{ADDE1A31-588E-4D9E-95AA-FA5B9DC8FC5F}" DTS:From="Package\Product-Container_2\Execute SQL" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_Execute SQL_To_Load Data to Dest_2" DTS:refId="Package\Product-Container_2.PrecedenceConstraints[Constraint_Execute SQL_To_Load Data to Dest_2]" DTS:To="Package\Product-Container_2\Load Data to Dest_2" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+</DTS:Executable>
