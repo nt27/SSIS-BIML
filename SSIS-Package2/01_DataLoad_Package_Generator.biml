@@ -1,4 +1,9 @@
 ﻿<#@template tier="1"#>
+
+<#
+var souceConnection = SchemaManager.CreateConnectionNode("Source", @"Data Source=.;Initial Catalog=Source-DB;Provider=SQLNCLI11;Integrated Security=SSPI;");
+ var sourceMetadata = sourceConnection.GetDatabaseSchema();
+#>
 <Biml
 	xmlns="http://schemas.varigence.com/biml.xsd">
 	<Packages>

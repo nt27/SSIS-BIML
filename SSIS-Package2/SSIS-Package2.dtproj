@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">win-vs-sql</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATtilb4poDUWzRfknzRPTdQAAAAACAAAAAAAQZgAAAAEAACAAAAByPT+cx3f3XOIXk7gRc/B7At85w+tB9kpyzkkRV2hyGgAAAAAOgAAAAAIAACAAAACq4qcfp1sapkmeDXkWRTWf6HQKps/xdSuRKEVeOx8uv5AAAAC7k1rhmVHV7HyKTuNJV5CLzHGNa3JwTlU/qDu4IaIvvOBAZBVS/3X7ex3iXS8r8XDP088smPRSp8eyaY5jPllAJMgjO9twW82HPsW62GfbG1ra3m7/ARZsI+YqctMs2yH/a+vTgBuQM8rqbNkiHd1ZgVCgcfbI0A1qOO5rB7mF1dZs1d6JV3iVFX8iXFuA1bVAAAAAAJIGBLz5HbchkMyHgqiq8CqRUSUxpZk4i/RaU1TqmR2QclVOECC4y+ay9ncFO8lMRVQ/IpXPzts3+eMXLdWhzw==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATtilb4poDUWzRfknzRPTdQAAAAACAAAAAAAQZgAAAAEAACAAAABVHrKWrkQX+CddGtvYApo8i+ALhDtT0ZTCCfRRasWQOgAAAAAOgAAAAAIAACAAAADDMXYOqhmwW6YhDuvsUrkKOMoeVyMIWCA4to7sgibIB5AAAADoVhKIwCaxS0RSYLM/LWH1w3tuOyhvhuDvg2tq7+t0HUkPTzz8inJmyCiHp4Evzl5o5f46t92lJqv+ek8krDJwFMoAPGtFM194uKq4UJ6pVP6II25NKISqR1Tei0WlOBKT5X3crtNULqBYZTo4orCYo1M04fFcp/AD2tFp1rwjAuSC7mzZyc6dYgGdTJc1dOZAAAAA0vvwL5/uxTIfjJZSoqDdE7XZZ8UoBenyg8m5Yxz0QV3u1ZPXVZXzwB5y0yQde9pKm1EOW37DNhUsWG2n3zzYoA==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -39,6 +39,7 @@
           <SSIS:Package SSIS:Name="Product-BIML_3.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="Product-BIML_4.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="Product-BIML_5.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="AllTables.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers />
         <SSIS:DeploymentInfo>
@@ -1704,6 +1705,23 @@
                 </SSIS:Parameter>
               </SSIS:Parameters>
             </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="AllTables.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{98B36150-D5D4-459B-ABC5-D907E3326931}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">AllTables</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{58433CD4-0497-465F-A391-3E49FB4B5DE7}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">0</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
+            </SSIS:PackageMetaData>
           </SSIS:PackageInfo>
         </SSIS:DeploymentInfo>
       </SSIS:Project>
@@ -1716,16 +1734,20 @@
       <FullPath>00_Connection.biml</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>02_ExecuteAllPackages.biml</Name>
-      <FullPath>02_ExecuteAllPackages.biml</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>01_DataLoad_Package_Generator.biml</Name>
       <FullPath>01_DataLoad_Package_Generator.biml</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>02_ExecuteAllPackages.biml</Name>
+      <FullPath>02_ExecuteAllPackages.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>BimlScript.biml</Name>
       <FullPath>BimlScript.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>PackageGenerator.biml</Name>
+      <FullPath>PackageGenerator.biml</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Product-Generated.biml</Name>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DTS:Executable DTS:CreationDate="10/07/2018 11:14:48" DTS:CreationName="Microsoft.Package" DTS:CreatorComputerName="win-vs-sql" DTS:CreatorName="cgiadmin" DTS:DTSID="{98B36150-D5D4-459B-ABC5-D907E3326931}" DTS:ExecutableType="Microsoft.Package" DTS:LastModifiedProductVersion="" DTS:LocaleID="1033" DTS:ObjectName="AllTables" DTS:ProtectionLevel="0" DTS:refId="Package" DTS:VersionBuild="0" DTS:VersionGUID="{58433CD4-0497-465F-A391-3E49FB4B5DE7}" DTS:VersionMajor="0" xmlns:DTS="www.microsoft.com/SqlServer/Dts">
+  <DTS:Property DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Executables>
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{3A04EDD0-2AF2-412F-96B8-15CA0435A8F4}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="dfTask_Product" DTS:refId="Package\dfTask_Product" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{641634EE-FFE0-43CB-B008-ABA0FBAE633D}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="dfTask_ACCOUNT" DTS:refId="Package\dfTask_ACCOUNT" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{CD8FB441-A565-4AC9-8DF2-166261E220D9}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="dfTask_ACC_TRANSACTION" DTS:refId="Package\dfTask_ACC_TRANSACTION" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{1B05A57D-E1EA-485A-98B5-9C3505CEFA3A}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="dfTask_BRANCH" DTS:refId="Package\dfTask_BRANCH" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{9F191779-989C-4AD0-9A14-2A19A68AE4A7}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="dfTask_BUSINESS" DTS:refId="Package\dfTask_BUSINESS" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{B2EA8B02-7454-4DBE-B1B0-2E79AA99863D}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="dfTask_CUSTOMER" DTS:refId="Package\dfTask_CUSTOMER" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{1C5213AD-D9CB-4458-8CAE-05A475A3E6F0}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="dfTask_DEPARTMENT" DTS:refId="Package\dfTask_DEPARTMENT" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{FC93A31B-D3BD-4F58-B195-DF7B43A19AB5}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="dfTask_EMPLOYEE" DTS:refId="Package\dfTask_EMPLOYEE" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{85683C5C-1E77-4B44-BBBB-502DC4EE2E58}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="dfTask_INDIVIDUAL" DTS:refId="Package\dfTask_INDIVIDUAL" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{E3BE8585-C2F4-417A-B3E8-3A4CDA868DA7}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="dfTask_OFFICER" DTS:refId="Package\dfTask_OFFICER" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{DDA0C167-7DE0-4974-A1CE-1EA1D1C18445}" DTS:From="Package\dfTask_Product" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_dfTask_Product_To_dfTask_ACCOUNT" DTS:refId="Package.PrecedenceConstraints[Constraint_dfTask_Product_To_dfTask_ACCOUNT]" DTS:To="Package\dfTask_ACCOUNT" />
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{39DCA7EE-F943-4E89-9B33-56C412202C17}" DTS:From="Package\dfTask_ACCOUNT" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_dfTask_ACCOUNT_To_dfTask_ACC_TRANSACTION" DTS:refId="Package.PrecedenceConstraints[Constraint_dfTask_ACCOUNT_To_dfTask_ACC_TRANSACTION]" DTS:To="Package\dfTask_ACC_TRANSACTION" />
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{BF074884-4E55-4F14-8E05-AB40BB962A80}" DTS:From="Package\dfTask_ACC_TRANSACTION" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_dfTask_ACC_TRANSACTION_To_dfTask_BRANCH" DTS:refId="Package.PrecedenceConstraints[Constraint_dfTask_ACC_TRANSACTION_To_dfTask_BRANCH]" DTS:To="Package\dfTask_BRANCH" />
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{6699F05A-B6E7-4ECE-87AB-80BA402E6625}" DTS:From="Package\dfTask_BRANCH" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_dfTask_BRANCH_To_dfTask_BUSINESS" DTS:refId="Package.PrecedenceConstraints[Constraint_dfTask_BRANCH_To_dfTask_BUSINESS]" DTS:To="Package\dfTask_BUSINESS" />
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{E3F6E716-9A8D-4015-8280-5209ACB7822D}" DTS:From="Package\dfTask_BUSINESS" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_dfTask_BUSINESS_To_dfTask_CUSTOMER" DTS:refId="Package.PrecedenceConstraints[Constraint_dfTask_BUSINESS_To_dfTask_CUSTOMER]" DTS:To="Package\dfTask_CUSTOMER" />
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{DF3E3A91-4057-4FEA-9800-45334E5C3B0F}" DTS:From="Package\dfTask_CUSTOMER" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_dfTask_CUSTOMER_To_dfTask_DEPARTMENT" DTS:refId="Package.PrecedenceConstraints[Constraint_dfTask_CUSTOMER_To_dfTask_DEPARTMENT]" DTS:To="Package\dfTask_DEPARTMENT" />
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{6D5692D9-9A50-49D4-A407-D566605AE160}" DTS:From="Package\dfTask_DEPARTMENT" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_dfTask_DEPARTMENT_To_dfTask_EMPLOYEE" DTS:refId="Package.PrecedenceConstraints[Constraint_dfTask_DEPARTMENT_To_dfTask_EMPLOYEE]" DTS:To="Package\dfTask_EMPLOYEE" />
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{9FB11198-BE4C-4E2D-8BC3-EA4ABDD24361}" DTS:From="Package\dfTask_EMPLOYEE" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_dfTask_EMPLOYEE_To_dfTask_INDIVIDUAL" DTS:refId="Package.PrecedenceConstraints[Constraint_dfTask_EMPLOYEE_To_dfTask_INDIVIDUAL]" DTS:To="Package\dfTask_INDIVIDUAL" />
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{B4117979-C2EB-48EA-ADFF-4DCF7CC92C95}" DTS:From="Package\dfTask_INDIVIDUAL" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_dfTask_INDIVIDUAL_To_dfTask_OFFICER" DTS:refId="Package.PrecedenceConstraints[Constraint_dfTask_INDIVIDUAL_To_dfTask_OFFICER]" DTS:To="Package\dfTask_OFFICER" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>
