@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DTS:Executable DTS:CreationDate="10/12/2018 22:39:37" DTS:CreationName="Microsoft.Package" DTS:CreatorComputerName="Win2016-SQL" DTS:CreatorName="cgiadmin" DTS:DTSID="{013B7453-2141-4FAF-BFA7-F919BA5C4E83}" DTS:ExecutableType="Microsoft.Package" DTS:LastModifiedProductVersion="" DTS:LocaleID="1033" DTS:ObjectName="MainPackage" DTS:refId="Package" DTS:VersionBuild="0" DTS:VersionGUID="{7BBCF47B-A963-4536-A452-C9031AD43C35}" DTS:VersionMajor="0" xmlns:DTS="www.microsoft.com/SqlServer/Dts">
+  <DTS:Property DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager DTS:CreationName="FILE" DTS:DTSID="{3751D851-B2E3-45AA-B912-5531AD1D748F}" DTS:ObjectName="_MainPackage.Execute-_sub_package_Product" DTS:refId="Package.ConnectionManagers[_MainPackage.Execute-_sub_package_Product]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectionString="C:\Users\cgiadmin\source\repos\nt27\SSIS-BIML\SSIS-Package2\_sub_package_Product.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager DTS:CreationName="FILE" DTS:DTSID="{3F6BB825-CFDB-46F8-9C76-EF223B9FB680}" DTS:ObjectName="_MainPackage.Execute-_sub_package_Product_1" DTS:refId="Package.ConnectionManagers[_MainPackage.Execute-_sub_package_Product_1]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectionString="C:\Users\cgiadmin\source\repos\nt27\SSIS-BIML\SSIS-Package2\_sub_package_Product_1.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager DTS:CreationName="FILE" DTS:DTSID="{325122F8-50F7-439B-9F4B-1453845463BE}" DTS:ObjectName="_MainPackage.Execute-_sub_package_Product_2" DTS:refId="Package.ConnectionManagers[_MainPackage.Execute-_sub_package_Product_2]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectionString="C:\Users\cgiadmin\source\repos\nt27\SSIS-BIML\SSIS-Package2\_sub_package_Product_2.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Executables>
+    <DTS:Executable DTS:CreationName="Microsoft.ExecutePackageTask" DTS:DTSID="{ED1B8DDD-54A6-4048-9D63-EFB3BDFB957A}" DTS:ExecutableType="Microsoft.ExecutePackageTask" DTS:LocaleID="-1" DTS:ObjectName="Execute-_sub_package_Product" DTS:refId="Package\Execute-_sub_package_Product" DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{3751D851-B2E3-45AA-B912-5531AD1D748F}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.ExecutePackageTask" DTS:DTSID="{203B2140-1D18-446D-A8BD-3315532E19BA}" DTS:ExecutableType="Microsoft.ExecutePackageTask" DTS:LocaleID="-1" DTS:ObjectName="Execute-_sub_package_Product_1" DTS:refId="Package\Execute-_sub_package_Product_1" DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{3F6BB825-CFDB-46F8-9C76-EF223B9FB680}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.ExecutePackageTask" DTS:DTSID="{7FB46695-3DD8-4A32-9820-5ADFE256C0A5}" DTS:ExecutableType="Microsoft.ExecutePackageTask" DTS:LocaleID="-1" DTS:ObjectName="Execute-_sub_package_Product_2" DTS:refId="Package\Execute-_sub_package_Product_2" DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{325122F8-50F7-439B-9F4B-1453845463BE}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{D1A05BE5-E1B8-493A-88C8-FAB1BB5A2FED}" DTS:From="Package\Execute-_sub_package_Product" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_Execute-_sub_package_Product_To_Execute-_sub_package_Product_1" DTS:refId="Package.PrecedenceConstraints[Constraint_Execute-_sub_package_Product_To_Execute-_sub_package_Product_1]" DTS:To="Package\Execute-_sub_package_Product_1" />
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{53564659-7D28-4F9B-91F8-0A03610720B4}" DTS:From="Package\Execute-_sub_package_Product_1" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_Execute-_sub_package_Product_1_To_Execute-_sub_package_Product_2" DTS:refId="Package.PrecedenceConstraints[Constraint_Execute-_sub_package_Product_1_To_Execute-_sub_package_Product_2]" DTS:To="Package\Execute-_sub_package_Product_2" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="10/7/2018 1:14:59 PM"
+  DTS:CreationDate="10/12/2018 10:39:37 PM"
   DTS:CreationName="Microsoft.Package"
-  DTS:CreatorComputerName="win-vs-sql"
+  DTS:CreatorComputerName="Win2016-SQL"
   DTS:CreatorName="cgiadmin"
-  DTS:DTSID="{DC1C2802-0B45-4974-B862-5E517CFE4F02}"
+  DTS:DTSID="{55181A19-69E1-43B9-8474-A35F47890EB6}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.0900.30"
+  DTS:LastModifiedProductVersion="14.0.3002.107"
   DTS:LocaleID="1033"
   DTS:ObjectName="_sub_package_Product"
-  DTS:VersionGUID="{21205DAB-E080-422E-8679-5920D3C17F29}"
+  DTS:VersionGUID="{B6059C03-D903-4446-A7DD-7A4AF7F0D029}"
   DTS:VersionMajor="0">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
@@ -18,21 +18,21 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Dest]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{ADA2E238-4068-4286-A223-25FC8D64B698}"
+      DTS:DTSID="{A21BD528-3859-4B84-A229-FB0FA89DE71E}"
       DTS:ObjectName="Dest">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="data source=win-vs-sql;initial catalog=Dest-DB;provider=SQLNCLI11.1;integrated security=SSPI;" />
+          DTS:ConnectionString="data source=Win2016-SQL;initial catalog=Dest-DB;provider=SQLNCLI11.1;integrated security=SSPI;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Source]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{D74C626A-760B-46A9-BFE0-48006E1B4AE7}"
+      DTS:DTSID="{942843EB-4B39-4C48-BD2F-E490C63EB241}"
       DTS:ObjectName="Source">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="data source=win-vs-sql;initial catalog=Source-DB;provider=SQLNCLI11.1;integrated security=SSPI;" />
+          DTS:ConnectionString="data source=Win2016-SQL;initial catalog=Source-DB;provider=SQLNCLI11.1;integrated security=SSPI;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -41,7 +41,7 @@
     <DTS:Executable
       DTS:refId="Package\DataFlow-LoadData"
       DTS:CreationName="Microsoft.Pipeline"
-      DTS:DTSID="{3A4088B3-1F87-4745-AF73-0E9B79C01035}"
+      DTS:DTSID="{5009CEB3-413A-44F1-9373-A688C1485ABA}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="DataFlow-LoadData"
@@ -181,7 +181,7 @@
                   description="The SQL command to be executed."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Delete from Product Where Id = ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Delete from Product Where Id = ?</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -282,7 +282,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -459,7 +459,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -582,6 +582,160 @@
                       refId="Package\DataFlow-LoadData\Insert.Outputs[Error].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\DataFlow-LoadData\Insert.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DataFlow-LoadData\Insert-Update-Record"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="Insert-Update-Record"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Temp_Product]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DataFlow-LoadData\Insert-Update-Record.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Dest]"
+                  connectionManagerRefId="Package.ConnectionManagers[Dest]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Update-Lookup_NoMatch_Insert-Update-Record">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[id]"
+                      cachedDataType="i4"
+                      cachedName="id"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[id]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[ProductName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ProductName"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[ProductName]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[ProductName]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[ProductColor]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ProductColor"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[ProductColor]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[ProductColor]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[Price]"
+                      cachedDataType="numeric"
+                      cachedName="Price"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[Price]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Price]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[ProductName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[ProductColor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ProductColor" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[Price]"
+                      dataType="numeric"
+                      name="Price"
+                      precision="5"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1005,7 +1159,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1171,15 +1325,19 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[Product]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Product]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[Product]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Product]) [refTable]
                                                         where [refTable].[id] = ? 
-                                                        and [refTable].[ProductName] = ? and [refTable].[ProductColor] = ? and [refTable].[Price] = ?</property>
+                                                                                                                    and [refTable].[id] = ?
+                                                                                                                    and [refTable].[ProductName] = ?
+                                                                                                                    and [refTable].[ProductColor] = ?
+                                                                                                                    and [refTable].[Price] = ?
+                                                                                        </property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the type of connection used to access the reference dataset."
@@ -1361,168 +1519,6 @@
                 </output>
               </outputs>
             </component>
-            <component
-              refId="Package\DataFlow-LoadData\Update-Record"
-              componentClassID="Microsoft.OLEDBCommand"
-              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
-              name="Update-Record"
-              usesDispositions="true"
-              version="2">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Update Product Set
-                                                ProductName = ?,
-                                                ProductColor=?,
-                                                Price=?
-                                                Where Id =?
-                                </property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\DataFlow-LoadData\Update-Record.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Dest]"
-                  connectionManagerRefId="Package.ConnectionManagers[Dest]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record]"
-                  errorOrTruncationOperation="Command Execution"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="Update-Lookup_NoMatch_Update-Record">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record].Columns[ProductName]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="ProductName"
-                      externalMetadataColumnId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record].ExternalColumns[Param_0]"
-                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[ProductName]" />
-                    <inputColumn
-                      refId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record].Columns[ProductColor]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="ProductColor"
-                      externalMetadataColumnId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record].ExternalColumns[Param_1]"
-                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[ProductColor]" />
-                    <inputColumn
-                      refId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record].Columns[Price]"
-                      cachedDataType="numeric"
-                      cachedName="Price"
-                      cachedPrecision="5"
-                      cachedScale="2"
-                      externalMetadataColumnId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record].ExternalColumns[Param_2]"
-                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Price]" />
-                    <inputColumn
-                      refId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record].Columns[id2]"
-                      cachedDataType="i4"
-                      cachedName="id2"
-                      externalMetadataColumnId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record].ExternalColumns[Param_3]"
-                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id2]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record].ExternalColumns[Param_0]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="Param_0">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record].ExternalColumns[Param_1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="Param_1">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record].ExternalColumns[Param_2]"
-                      dataType="numeric"
-                      name="Param_2"
-                      precision="5"
-                      scale="2">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">17</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record].ExternalColumns[Param_3]"
-                      dataType="i4"
-                      name="Param_3">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">17</property>
-                      </properties>
-                    </externalMetadataColumn>
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\DataFlow-LoadData\Update-Record.Outputs[Output]"
-                  exclusionGroup="1"
-                  name="Output"
-                  synchronousInputId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\DataFlow-LoadData\Update-Record.Outputs[Error]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Error"
-                  synchronousInputId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\DataFlow-LoadData\Update-Record.Outputs[Error].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\DataFlow-LoadData\Update-Record.Outputs[Error].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\DataFlow-LoadData\Update-Record.Outputs[Error].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\DataFlow-LoadData\Update-Record.Outputs[Error].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
           </components>
           <paths>
             <path
@@ -1566,9 +1562,9 @@
               name="Source-Table_Output_Sort-Source"
               startId="Package\DataFlow-LoadData\Source-Table.Outputs[Output]" />
             <path
-              refId="Package\DataFlow-LoadData.Paths[Update-Lookup_NoMatch_Update-Record]"
-              endId="Package\DataFlow-LoadData\Update-Record.Inputs[Update-Lookup_NoMatch_Update-Record]"
-              name="Update-Lookup_NoMatch_Update-Record"
+              refId="Package\DataFlow-LoadData.Paths[Update-Lookup_NoMatch_Insert-Update-Record]"
+              endId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record]"
+              name="Update-Lookup_NoMatch_Insert-Update-Record"
               startId="Package\DataFlow-LoadData\Update-Lookup.Outputs[NoMatch]" />
           </paths>
         </pipeline>
@@ -1577,7 +1573,7 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{58D8ADC8-CE3C-4D86-B5AB-D2DD56577960}"
+      DTS:DTSID="{55066CBB-7EE0-4392-9BF1-762DAFDD8128}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL"
@@ -1586,16 +1582,40 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{ADA2E238-4068-4286-A223-25FC8D64B698}"
-          SQLTask:SqlStatementSource="Truncate Table Product" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:Connection="{A21BD528-3859-4B84-A229-FB0FA89DE71E}"
+          SQLTask:SqlStatementSource="Truncate Table Temp_Product" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL-Update Record"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{8D488E88-DFE0-4A65-823A-4A52B4ADCB04}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL-Update Record"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A21BD528-3859-4B84-A229-FB0FA89DE71E}"
+          SQLTask:SqlStatementSource="&#xA;                                           &#xA;           Update Product Set &#xA;                                id =  B.[id],ProductName =  B.[ProductName],ProductColor =  B.[ProductColor],Price =  B.[Price]&#xA;                                From Product A Inner Join Temp_Product B&#xA;                                On  A.Id = B.ID&#xA;       " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DataFlow-LoadData_To_Execute SQL-Update Record]"
+      DTS:CreationName=""
+      DTS:DTSID="{FC85EAF7-DA60-47ED-9210-041B1F78C9C6}"
+      DTS:From="Package\DataFlow-LoadData"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DataFlow-LoadData_To_Execute SQL-Update Record"
+      DTS:To="Package\Execute SQL-Update Record" />
+    <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_Execute SQL_To_DataFlow-LoadData]"
       DTS:CreationName=""
-      DTS:DTSID="{F2E77124-6A27-4E56-BA8C-68C86F96D386}"
+      DTS:DTSID="{0090877B-C78E-40CF-B069-EFE526B3BF8C}"
       DTS:From="Package\Execute SQL"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_Execute SQL_To_DataFlow-LoadData"

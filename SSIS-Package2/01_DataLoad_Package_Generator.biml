@@ -39,7 +39,7 @@
             <Package Name="_sub_package_<#=Table#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
 			<Tasks>
 						<ExecuteSQL Name="Execute SQL" ConnectionName="Dest">
-							<DirectInput>Truncate Table Product</DirectInput>
+							<DirectInput>Truncate Table Temp_<#=Table#></DirectInput>
 						</ExecuteSQL>
 						<Dataflow Name="DataFlow-LoadData">
 							<Transformations>
@@ -110,26 +110,19 @@
 									<DirectInput>select * from [dbo].[<#=Table#>]</DirectInput>
 									<ParameterizedQuery>select * from (select * from [dbo].[<#=Table#>]) [refTable]
                                                         where [refTable].[id] = ? 
-                                                        and [refTable].[ProductName] = ? and [refTable].[ProductColor] = ? and [refTable].[Price] = ?</ParameterizedQuery>
+                                                        <#
+                                                        foreach(var Column in TableColumns) {#>
+                                                            and [refTable].[<#=Column#>] = ?
+                                                        <#}#>
+                                </ParameterizedQuery>
 								</Lookup>
-								<OleDbCommand Name="Update-Record" ConnectionName="Dest">
-									<InputPath OutputPathName="Update-Lookup.NoMatch"/>
-									<Parameters>
-										<Parameter SourceColumn="ProductName" TargetColumn="Param_0" DataType="AnsiStringFixedLength" Length="50" CodePage="1252" />
-										<Parameter SourceColumn="ProductColor" TargetColumn="Param_1" DataType="AnsiStringFixedLength" Length="50" CodePage="1252" />
-										<Parameter SourceColumn="Price" TargetColumn="Param_2" DataType="Decimal" Precision="5" Scale="2" />
-										<Parameter SourceColumn="id2" TargetColumn="Param_3" DataType="Int32" />
-									</Parameters>
-									<DirectInput>Update <#=Table#> Set
-                                                ProductName = ?,
-                                                ProductColor=?,
-                                                Price=?
-                                                Where Id =?
-                                </DirectInput>
-								</OleDbCommand>
+								<OleDbDestination Name="Insert-Update-Record" ConnectionName="Dest">
+								<InputPath OutputPathName="Update-Lookup.NoMatch" />
+								<ExternalTableOutput Table="[dbo].[Temp_<#=Table#>]" />
+							</OleDbDestination>
 								<OleDbDestination Name="Insert" ConnectionName="Dest">
 									<InputPath OutputPathName="Conditional-Split.New-Record" />
-									<ExternalTableOutput Table="[dbo].[Product]" />
+									<ExternalTableOutput Table="[dbo].[<#=Table#>]" />
 								</OleDbDestination>
 								<OleDbCommand Name="Delete" ConnectionName="Dest">
 									<InputPath OutputPathName="Conditional-Split.Delete-Record" />
@@ -140,9 +133,25 @@
 								</OleDbCommand>
 							</Transformations>
 						</Dataflow>
+						<ExecuteSQL Name="Execute SQL-Update Record" ConnectionName="Dest">
+							<DirectInput>
+                                <#
+                                string strQuery = "";
+                                foreach(var Column in TableColumns)
+                                {
+                                    strQuery += Column + " =  B.[" + Column + "],";
+                                }
+                                strQuery = strQuery.Substring(0, strQuery.Length - 1);  
+                                #>
+							    
+							    Update <#=Table#> Set 
+                                <#=strQuery#>
+                                From <#=Table#> A Inner Join Temp_<#=Table#> B
+                                On  A.Id = B.ID
+							</DirectInput>
+						</ExecuteSQL>
 			</Tasks>
 		</Package>
-		
 		<#}
 		 sqlConnection.Close();
 		#>
