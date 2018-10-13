@@ -4,7 +4,8 @@
     <Configuration>
       <Name>Development</Name>
       <Options>
-        <StartObjectID>01_02_App_DataMovement_to_Staging_Delta.dtsx</StartObjectID>
+        <ServerName />
+        <PathOnServer />
         <UserIDs />
         <UserPasswords />
         <OfflineMode>false</OfflineMode>

@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="10/13/2018 9:41:25 AM"
+  DTS:CreationDate="10/13/2018 11:22:32 AM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="Win2016-SQL"
   DTS:CreatorName="cgiadmin"
-  DTS:DTSID="{FB3A9878-FC68-4CC0-A6A4-760621B73B90}"
+  DTS:DTSID="{E653CBBF-BD19-4234-8EE7-5E404138003B}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.107"
   DTS:LocaleID="1033"
   DTS:ObjectName="01_02_4_Customer"
-  DTS:VersionGUID="{E88B28FF-F52A-4992-8BE6-C565CBB73397}"
+  DTS:VersionGUID="{025F5436-0259-424A-B67D-409B57ADC876}"
   DTS:VersionMajor="0">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
@@ -18,7 +18,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Dest]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{3697FE5D-75BE-4777-A433-F3801B91EB9F}"
+      DTS:DTSID="{C424527F-988C-45FE-B374-CD02089DBFB5}"
       DTS:ObjectName="Dest">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -28,7 +28,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Source]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{F61B25D4-675D-47C6-A06E-34F6643F6DE9}"
+      DTS:DTSID="{CB47E728-AA2D-47B7-8CF1-8EEA2180D4C1}"
       DTS:ObjectName="Source">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -41,7 +41,7 @@
     <DTS:Executable
       DTS:refId="Package\DataFlow-LoadData"
       DTS:CreationName="Microsoft.Pipeline"
-      DTS:DTSID="{D672CE02-959C-4718-8C63-78187507BC0F}"
+      DTS:DTSID="{616751C6-2138-408E-AB0A-5CD49D43A315}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="DataFlow-LoadData"
@@ -3871,7 +3871,7 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{A8DD5441-00AB-4174-B916-A05E028B9810}"
+      DTS:DTSID="{32FE6BC1-39D4-4B9A-93FD-10721A65C097}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL"
@@ -3880,14 +3880,14 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{3697FE5D-75BE-4777-A433-F3801B91EB9F}"
+          SQLTask:Connection="{C424527F-988C-45FE-B374-CD02089DBFB5}"
           SQLTask:SqlStatementSource="Truncate Table Temp_Customer" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Execute SQL-Update Record"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{F4ABCFB1-C10D-4FA8-AD2D-BFD996EC233A}"
+      DTS:DTSID="{74C46FC3-7BB4-49BF-AA53-46ED8FAA968B}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL-Update Record"
@@ -3896,7 +3896,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{3697FE5D-75BE-4777-A433-F3801B91EB9F}"
+          SQLTask:Connection="{C424527F-988C-45FE-B374-CD02089DBFB5}"
           SQLTask:SqlStatementSource="&#xA;                                           &#xA;           Update Customer Set &#xA;                                id =  B.[id],billingEntityFk =  B.[billingEntityFk],customerClassFk =  B.[customerClassFk],customerTypeFk =  B.[customerTypeFk],number =  B.[number],name =  B.[name],companyName =  B.[companyName],companyNo =  B.[companyNo],companyRegAddressFk =  B.[companyRegAddressFk],titleFk =  B.[titleFk],forename =  B.[forename],surname =  B.[surname],state =  B.[state],managerUserTblFk =  B.[managerUserTblFk],marketingOptOutFl =  B.[marketingOptOutFl],creditScore =  B.[creditScore],deceasedFl =  B.[deceasedFl],taxExemptReasonFk =  B.[taxExemptReasonFk],reference =  B.[reference],deleteFl =  B.[deleteFl],versionNo =  B.[versionNo],partitionId =  B.[partitionId]&#xA;                                From Customer A Inner Join Temp_Customer B&#xA;                                On  A.Id = B.ID&#xA;       " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3905,7 +3905,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_DataFlow-LoadData_To_Execute SQL-Update Record]"
       DTS:CreationName=""
-      DTS:DTSID="{A3A537D8-3505-4601-AAA1-A46137837446}"
+      DTS:DTSID="{18658423-0272-4B54-9D8A-10C02CF8C748}"
       DTS:From="Package\DataFlow-LoadData"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_DataFlow-LoadData_To_Execute SQL-Update Record"
@@ -3913,7 +3913,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_Execute SQL_To_DataFlow-LoadData]"
       DTS:CreationName=""
-      DTS:DTSID="{466535A0-0C7D-4D5F-A54E-7A6A0FAE6260}"
+      DTS:DTSID="{54E8BF63-ABA2-4A7D-8CB3-7E445FB41A77}"
       DTS:From="Package\Execute SQL"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_Execute SQL_To_DataFlow-LoadData"

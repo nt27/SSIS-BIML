@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="10/13/2018 9:41:26 AM"
+  DTS:CreationDate="10/13/2018 11:22:32 AM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="Win2016-SQL"
   DTS:CreatorName="cgiadmin"
-  DTS:DTSID="{483BD6A4-01D8-48FB-934E-8279D51752F3}"
+  DTS:DTSID="{51259C28-9FAA-4BB9-BD55-8E0E51485D80}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.107"
   DTS:LocaleID="1033"
   DTS:ObjectName="01_02_App_DataMovement_to_Staging_Delta"
-  DTS:VersionGUID="{56563583-69FE-4203-BE72-181B5C583485}"
+  DTS:VersionGUID="{D529DDE6-BFF2-402F-B734-BD8540F6A3CA}"
   DTS:VersionMajor="0">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
@@ -18,7 +18,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_1_Account]"
       DTS:CreationName="FILE"
-      DTS:DTSID="{4BEA66A9-C593-49C6-B7C8-932DC7A44E51}"
+      DTS:DTSID="{F9E8E7A0-086D-4F7F-BBF1-0F74DA0236E5}"
       DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_1_Account">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -28,7 +28,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_2_AccountTransaction]"
       DTS:CreationName="FILE"
-      DTS:DTSID="{94920E74-B7CA-4BF0-965D-DE989C7812A3}"
+      DTS:DTSID="{4131CBE7-B311-466F-8E5B-ABF09BD7E155}"
       DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_2_AccountTransaction">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -38,7 +38,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_3_AccountTransactionType]"
       DTS:CreationName="FILE"
-      DTS:DTSID="{997635FA-CEFF-4A4B-A978-BC1F82E3B24A}"
+      DTS:DTSID="{B810647D-4B14-4AFE-9709-121B307C1A50}"
       DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_3_AccountTransactionType">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -48,7 +48,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_4_Customer]"
       DTS:CreationName="FILE"
-      DTS:DTSID="{DECFF715-186A-4C19-8B4C-152F65A5BC7B}"
+      DTS:DTSID="{0D713442-B458-4C3B-9527-40B3E498CB0D}"
       DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_4_Customer">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -58,7 +58,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_5_CustomerClass]"
       DTS:CreationName="FILE"
-      DTS:DTSID="{1521F91A-6F69-4CD9-A6E2-B3BEDA9E0E94}"
+      DTS:DTSID="{B5270F9D-BFBF-4294-A74F-167796EDB88C}"
       DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_5_CustomerClass">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -68,7 +68,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_6_CustomerType]"
       DTS:CreationName="FILE"
-      DTS:DTSID="{8F219268-4BCF-4F1D-815A-17CEA143FD00}"
+      DTS:DTSID="{15097FE4-4193-4B83-8828-97CED996B504}"
       DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_6_CustomerType">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -81,7 +81,7 @@
     <DTS:Executable
       DTS:refId="Package\Execute-01_02_1_Account"
       DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:DTSID="{DBC86339-2BBD-4D8B-B155-D52DE8EF9E31}"
+      DTS:DTSID="{BC60038A-BC0C-4D97-B249-2715A98A0D92}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute-01_02_1_Account"
@@ -89,14 +89,14 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
-          <Connection>{4BEA66A9-C593-49C6-B7C8-932DC7A44E51}</Connection>
+          <Connection>{F9E8E7A0-086D-4F7F-BBF1-0F74DA0236E5}</Connection>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Execute-01_02_2_AccountTransaction"
       DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:DTSID="{3684E55E-8539-4BAB-9499-ADBACA1AD883}"
+      DTS:DTSID="{D75F40DD-F926-453B-A738-F8328E99AD5F}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute-01_02_2_AccountTransaction"
@@ -104,14 +104,14 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
-          <Connection>{94920E74-B7CA-4BF0-965D-DE989C7812A3}</Connection>
+          <Connection>{4131CBE7-B311-466F-8E5B-ABF09BD7E155}</Connection>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Execute-01_02_3_AccountTransactionType"
       DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:DTSID="{121EEC30-BD9C-43A1-915F-2CBC05B9B6A3}"
+      DTS:DTSID="{29BF295B-C240-4FCE-A55D-92058FAF0B54}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute-01_02_3_AccountTransactionType"
@@ -119,14 +119,14 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
-          <Connection>{997635FA-CEFF-4A4B-A978-BC1F82E3B24A}</Connection>
+          <Connection>{B810647D-4B14-4AFE-9709-121B307C1A50}</Connection>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Execute-01_02_4_Customer"
       DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:DTSID="{AC86B094-283E-4E34-B371-4C3A6C68018C}"
+      DTS:DTSID="{599AB6C2-40C8-43D7-BDDA-D941DC1B977D}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute-01_02_4_Customer"
@@ -134,14 +134,14 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
-          <Connection>{DECFF715-186A-4C19-8B4C-152F65A5BC7B}</Connection>
+          <Connection>{0D713442-B458-4C3B-9527-40B3E498CB0D}</Connection>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Execute-01_02_5_CustomerClass"
       DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:DTSID="{EE95C185-68AB-48E8-87B3-795244766270}"
+      DTS:DTSID="{03BFFDEC-3374-414D-AFDF-15E514DBA666}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute-01_02_5_CustomerClass"
@@ -149,14 +149,14 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
-          <Connection>{1521F91A-6F69-4CD9-A6E2-B3BEDA9E0E94}</Connection>
+          <Connection>{B5270F9D-BFBF-4294-A74F-167796EDB88C}</Connection>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Execute-01_02_6_CustomerType"
       DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:DTSID="{F3C8D9E1-DCB5-48E8-B994-D75F197A2FB4}"
+      DTS:DTSID="{6BB57F1C-3E06-4AA3-A63E-9DEDAA86D757}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute-01_02_6_CustomerType"
@@ -164,7 +164,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
-          <Connection>{8F219268-4BCF-4F1D-815A-17CEA143FD00}</Connection>
+          <Connection>{15097FE4-4193-4B83-8828-97CED996B504}</Connection>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -173,7 +173,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_Execute-01_02_1_Account_To_Execute-01_02_2_AccountTransaction]"
       DTS:CreationName=""
-      DTS:DTSID="{9B63DEA2-1764-4351-B469-A0CBF328367D}"
+      DTS:DTSID="{E81EF204-D6E8-4309-A97F-5168B040734F}"
       DTS:From="Package\Execute-01_02_1_Account"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_Execute-01_02_1_Account_To_Execute-01_02_2_AccountTransaction"
@@ -181,7 +181,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_Execute-01_02_2_AccountTransaction_To_Execute-01_02_3_AccountTransactionType]"
       DTS:CreationName=""
-      DTS:DTSID="{F8EC6559-85B5-47E2-9854-C2D6942DC9AD}"
+      DTS:DTSID="{17F42764-7E14-43EB-A5A0-40F3D2914FAE}"
       DTS:From="Package\Execute-01_02_2_AccountTransaction"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_Execute-01_02_2_AccountTransaction_To_Execute-01_02_3_AccountTransactionType"
@@ -189,7 +189,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_Execute-01_02_3_AccountTransactionType_To_Execute-01_02_4_Customer]"
       DTS:CreationName=""
-      DTS:DTSID="{B18919A3-8495-4461-BBBF-16108DE1B963}"
+      DTS:DTSID="{1706A1C3-BBE5-4D0D-A76C-1E41320CB847}"
       DTS:From="Package\Execute-01_02_3_AccountTransactionType"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_Execute-01_02_3_AccountTransactionType_To_Execute-01_02_4_Customer"
@@ -197,7 +197,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_Execute-01_02_4_Customer_To_Execute-01_02_5_CustomerClass]"
       DTS:CreationName=""
-      DTS:DTSID="{9EC67109-A9AF-4392-8E04-9046FBD1069E}"
+      DTS:DTSID="{22DC8101-4CBE-4C83-A2EB-5A706BDDC03A}"
       DTS:From="Package\Execute-01_02_4_Customer"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_Execute-01_02_4_Customer_To_Execute-01_02_5_CustomerClass"
@@ -205,7 +205,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_Execute-01_02_5_CustomerClass_To_Execute-01_02_6_CustomerType]"
       DTS:CreationName=""
-      DTS:DTSID="{E2783830-5073-4C44-8B54-43DF2934CC1D}"
+      DTS:DTSID="{A2D0C3F1-BDCC-4536-8889-AB17572AB1A5}"
       DTS:From="Package\Execute-01_02_5_CustomerClass"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_Execute-01_02_5_CustomerClass_To_Execute-01_02_6_CustomerType"
