@@ -1,0 +1,161 @@
+﻿<#@template tier="1"#>
+
+<Biml
+	xmlns="http://schemas.varigence.com/biml.xsd">
+	<Packages>
+	        <#
+	        int i=0;
+	        string strConnectionString = "Server=localhost;Initial Catalog=ODS;Integrated Security=SSPI;";
+            List<string> Tables  = new List<string>();
+            var connectionStringBuilder = new System.Data.SqlClient.SqlConnectionStringBuilder(strConnectionString);
+            var sqlConnection  = new System.Data.SqlClient.SqlConnection(connectionStringBuilder.ConnectionString);
+            sqlConnection.Open();
+        
+            string strSql = "Select Name as TableName from Sys.tables";
+            System.Data.SqlClient.SqlCommand sqlCmdTable = new System.Data.SqlClient.SqlCommand(strSql,sqlConnection);
+            using(System.Data.SqlClient.SqlDataReader sqlReaderTable = sqlCmdTable.ExecuteReader())
+            {
+                while(sqlReaderTable.Read())
+                {
+                    Tables.Add(sqlReaderTable["TableName"].ToString());
+                }
+            }
+           int iTableCount =0;
+           foreach(var Table in Tables) 
+            { 
+                //Fetch Table Columns
+                List<string> TableColumns = new List<string>();
+                strSql = "Select Column_Name From INFORMATION_SCHEMA.COLUMNS Where TABLE_NAME='"+ Table +"'";
+                System.Data.SqlClient.SqlCommand sqlCmdColumn = new System.Data.SqlClient.SqlCommand(strSql,sqlConnection);
+                using(System.Data.SqlClient.SqlDataReader sqlReaderColumn = sqlCmdColumn.ExecuteReader())
+                {
+                    while(sqlReaderColumn.Read())
+                    {
+                        TableColumns.Add(sqlReaderColumn["Column_Name"].ToString());
+                    }
+                }
+                
+                iTableCount++;
+                
+            #>
+            <Package Name="01_02_<#=iTableCount#>_<#=Table#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+			<Tasks>
+						<ExecuteSQL Name="Execute SQL" ConnectionName="Dest">
+							<DirectInput>Truncate Table Temp_<#=Table#></DirectInput>
+						</ExecuteSQL>
+						<Dataflow Name="DataFlow-LoadData">
+							<Transformations>
+								<OleDbSource Name="Source-Table" ConnectionName="Source">
+									<ExternalTableInput Table="<#=Table#>"/>
+								</OleDbSource>
+								<Sort Name="Sort-Source" AutoPassThrough="true">
+									<Columns>
+										<Column SourceColumn="id" IsUsed="true" Sort="true" SortOrder="Asc" SortKeyPosition="1"/>
+									</Columns>
+								</Sort>
+								<OleDbSource Name="Dest-Table" ConnectionName="Dest">
+									<ExternalTableInput Table="<#=Table#>"/>
+								</OleDbSource>
+								<Sort Name="Sort-Dest" AutoPassThrough="false">
+									<Columns>
+										<Column SourceColumn="id" IsUsed="true" Sort="true" SortOrder="Asc" SortKeyPosition="1"/>
+									</Columns>
+								</Sort>
+								<MergeJoin Name="Merge Join" JoinType="FullOuterJoin">
+									<LeftInputPath OutputPathName="Sort-Source.Output">
+										<Columns>
+											<# 
+                                            i=1;
+											foreach(var Column in TableColumns) {#>
+											<Column SourceColumn="<#=Column#>" TargetColumn="<#=Column#>" IsUsed="true" SortKeyPosition="<#=i#>"/>
+											<#
+											    i++;
+											}#>
+									</Columns>
+									</LeftInputPath>
+									<RightInputPath  OutputPathName="Sort-Dest.Output">
+										<Columns>
+											<Column SourceColumn="id" TargetColumn="id2" IsUsed="true" SortKeyPosition="1" />
+										</Columns>
+									</RightInputPath>
+									<JoinKeys>
+										<JoinKey LeftColumn="id" RightColumn="id2"/>
+									</JoinKeys>
+								</MergeJoin>
+								<ConditionalSplit Name="Conditional-Split" >
+									<OutputPaths>
+										<OutputPath Name="New-Record">
+											<Expression>!ISNULL([id]) &amp;&amp; ISNULL([id2])</Expression>
+										</OutputPath>
+										<OutputPath Name="Delete-Record">
+											<Expression>ISNULL([id]) &amp;&amp; !ISNULL([id2])</Expression>
+										</OutputPath>
+									</OutputPaths>
+								</ConditionalSplit>
+								<Lookup Name="Update-Lookup" OleDbConnectionName="Dest" NoMatchBehavior="RedirectRowsToNoMatchOutput">
+									<Parameters>
+									    	<# 
+                                            i=1;
+											foreach(var Column in TableColumns) {#>
+											<Parameter SourceColumn="<#=Column#>" />
+											<#
+											    i++;
+											}#>
+									</Parameters>
+									<Inputs>
+									    	<# 
+                                            foreach(var Column in TableColumns) {#>
+											<Column SourceColumn="<#=Column#>" TargetColumn="<#=Column#>"/>
+											<#
+											}#>
+									</Inputs>
+									<DirectInput>select * from [dbo].[<#=Table#>]</DirectInput>
+									<ParameterizedQuery>select * from (select * from [dbo].[<#=Table#>]) [refTable]
+                                                        where [refTable].[id] = ? 
+                                                        <#
+                                                        foreach(var Column in TableColumns) {#>
+                                                            and [refTable].[<#=Column#>] = ?
+                                                        <#}#>
+                                </ParameterizedQuery>
+								</Lookup>
+								<OleDbDestination Name="Insert-Update-Record" ConnectionName="Dest">
+								<InputPath OutputPathName="Update-Lookup.NoMatch" />
+								<ExternalTableOutput Table="[dbo].[Temp_<#=Table#>]" />
+							</OleDbDestination>
+								<OleDbDestination Name="Insert" ConnectionName="Dest">
+									<InputPath OutputPathName="Conditional-Split.New-Record" />
+									<ExternalTableOutput Table="[dbo].[<#=Table#>]" />
+								</OleDbDestination>
+								<OleDbCommand Name="Delete" ConnectionName="Dest">
+									<InputPath OutputPathName="Conditional-Split.Delete-Record" />
+									<Parameters>
+										<Parameter SourceColumn="id2" TargetColumn="Param_0" DataType="Int32" />
+									</Parameters>
+									<DirectInput>Delete from <#=Table#> Where Id = ?</DirectInput>
+								</OleDbCommand>
+							</Transformations>
+						</Dataflow>
+						<ExecuteSQL Name="Execute SQL-Update Record" ConnectionName="Dest">
+							<DirectInput>
+                                <#
+                                string strQuery = "";
+                                foreach(var Column in TableColumns)
+                                {
+                                    strQuery += Column + " =  B.[" + Column + "],";
+                                }
+                                strQuery = strQuery.Substring(0, strQuery.Length - 1);  
+                                #>
+							    
+							    Update <#=Table#> Set 
+                                <#=strQuery#>
+                                From <#=Table#> A Inner Join Temp_<#=Table#> B
+                                On  A.Id = B.ID
+							</DirectInput>
+						</ExecuteSQL>
+			</Tasks>
+		</Package>
+		<#}
+		 sqlConnection.Close();
+		#>
+	</Packages>
+</Biml>

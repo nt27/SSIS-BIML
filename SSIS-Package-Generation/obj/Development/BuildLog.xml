@@ -1,39 +1,44 @@
 <?xml version="1.0"?>
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
-    <Name>SSIS-Package</Name>
-    <LastWriteTime>2018-10-13T08:23:10.7415491Z</LastWriteTime>
+    <Name>SSIS-Package-Generation</Name>
+    <LastWriteTime>2018-10-13T09:58:33.6457657Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
-      <Name>Package.dtsx</Name>
-      <LastWriteTime>2018-10-12T20:34:08.8794036Z</LastWriteTime>
+      <Name>01_02_1_Account.dtsx</Name>
+      <LastWriteTime>2018-10-13T09:41:26.252113Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
-      <Name>Product.dtsx</Name>
-      <LastWriteTime>2018-10-12T20:34:08.8924036Z</LastWriteTime>
+      <Name>01_02_2_AccountTransaction.dtsx</Name>
+      <LastWriteTime>2018-10-13T09:41:26.2741071Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
-      <Name>MainPackage.dtsx</Name>
-      <LastWriteTime>2018-10-12T22:39:40.1424197Z</LastWriteTime>
+      <Name>01_02_3_AccountTransactionType.dtsx</Name>
+      <LastWriteTime>2018-10-13T09:41:26.3061082Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
-      <Name>_sub_package_Product.dtsx</Name>
-      <LastWriteTime>2018-10-12T22:39:40.1574184Z</LastWriteTime>
+      <Name>01_02_4_Customer.dtsx</Name>
+      <LastWriteTime>2018-10-13T09:41:26.3231072Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
-      <Name>_sub_package_Product_1.dtsx</Name>
-      <LastWriteTime>2018-10-12T22:39:40.1704193Z</LastWriteTime>
+      <Name>01_02_5_CustomerClass.dtsx</Name>
+      <LastWriteTime>2018-10-13T09:41:26.3391075Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
-      <Name>_sub_package_Product_2.dtsx</Name>
-      <LastWriteTime>2018-10-12T22:39:40.1824215Z</LastWriteTime>
+      <Name>01_02_6_CustomerType.dtsx</Name>
+      <LastWriteTime>2018-10-13T09:41:26.3611056Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>01_02_App_DataMovement_to_Staging_Delta.dtsx</Name>
+      <LastWriteTime>2018-10-13T09:41:26.38111Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>
