@@ -5,13 +5,13 @@
 	<Packages>
 	        <#
 	        int i=0;
-	        string strConnectionString = "Server=localhost;Initial Catalog=ODS;Integrated Security=SSPI;";
+	        string strConnectionString = "Server=localhost;Initial Catalog=JUN_ODS;Integrated Security=SSPI;";
             List<string> Tables  = new List<string>();
             var connectionStringBuilder = new System.Data.SqlClient.SqlConnectionStringBuilder(strConnectionString);
             var sqlConnection  = new System.Data.SqlClient.SqlConnection(connectionStringBuilder.ConnectionString);
             sqlConnection.Open();
         
-            string strSql = "Select Name as TableName from Sys.tables Where Name='Account'";
+            string strSql = "SELECT Distinct TABLE_NAME as TableName From INFORMATION_SCHEMA.VIEW_TABLE_USAGE Where VIEW_NAME like 'vw_ndm_Account2' Order by TABLE_NAME";
             System.Data.SqlClient.SqlCommand sqlCmdTable = new System.Data.SqlClient.SqlCommand(strSql,sqlConnection);
             using(System.Data.SqlClient.SqlDataReader sqlReaderTable = sqlCmdTable.ExecuteReader())
             {
@@ -114,17 +114,19 @@
 									string strReferenceColumns = "";
                                     foreach(var Column in TableColumns) 
                                     {
-                                        strReferenceColumns += " and [refTable].[" + Column + "] = ?";
+                                        strReferenceColumns += " [refTable].[" + Column + "] = ? and";
                                     }
+                                    strReferenceColumns = strReferenceColumns.Substring(0, strReferenceColumns.Length -3);  
                                     #>
 									<ParameterizedQuery>select * from (select * from [dbo].[<#=Table#>]) [refTable]
-                                                        where [refTable].[id] = ? <#=strReferenceColumns#>
+                                                        where <#=strReferenceColumns#>
                                     </ParameterizedQuery>
 								</Lookup>
-								<OleDbDestination Name="Insert-Update-Record" ConnectionName="Dest">
+							<OleDbDestination Name="Insert-Update-Record" ConnectionName="Dest">
 								<InputPath OutputPathName="Update-Lookup.NoMatch" />
 								<ExternalTableOutput Table="[dbo].[Temp_<#=Table#>]" />
 							</OleDbDestination>
+							
 								<OleDbDestination Name="Insert" ConnectionName="Dest">
 									<InputPath OutputPathName="Conditional-Split.New-Record" />
 									<ExternalTableOutput Table="[dbo].[<#=Table#>]" />

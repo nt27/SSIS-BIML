@@ -1,0 +1,9 @@
+﻿<#@ template tier="0" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+     <Connections>
+        <OleDbConnection Name="Source" ConnectionString="Provider=SQLNCLI11.1;Data Source=Win2016-SQL;Initial Catalog=JUN_ODS;Integrated Security=SSPI;">
+    
+        </OleDbConnection>
+        <OleDbConnection Name="Dest" ConnectionString="Provider=SQLNCLI11.1;Data Source=Win2016-SQL;Initial Catalog=JUN_STG;Integrated Security=SSPI;"/>
+    </Connections>
+</Biml>

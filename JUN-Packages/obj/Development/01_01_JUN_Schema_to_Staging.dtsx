@@ -1,0 +1,438 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/13/2018 11:19:05 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NPWMGT-LVW-CTX2"
+  DTS:CreatorName="PAVEMENT\cgi-thangarajn"
+  DTS:DTSID="{BA0210FA-27C1-4C2A-970B-E6D17DD44BE8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.107"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="01_01_Junifer_Schema_to_Staging"
+  DTS:PackageType="5"
+  DTS:VersionBuild="40"
+  DTS:VersionGUID="{05D6BAFE-5415-484D-B220-8FEBFAB506DE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_Junifer_STG]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7248B6C8-3427-4D40-A57F-63F5FB9C430C}"
+      DTS:ObjectName="OLEDB_Junifer_STG">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[$Project::Junifer_STG_DatabaseName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Password">@[$Project::Junifer_STG_Password]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Project::Junifer_STG_ServerName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="UserName">@[$Project::Junifer_STG_UserName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=WIN2016-SQL;User ID=ssis-release-user;Initial Catalog=JUN_STG;Provider=SQLNCLI11.1;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAdIJVJlH4d8gPejvZ2MDAP1N2v+5O5M6js6qFO+U3yWAAAAAAOgAAAAAIAACAAAADNOqu4alQIGv/mkIMJxRNwJC4gGnEDYXR7D/8WoSdWuCAAAAC6mkKK2Rh9i1fkVFtkSw43dnacCYgHdZXN4FpBN3JszEAAAAASDl/dZLEnUl1pYJDAXhYjBWk2OYjvrRh9nUY4au2wlZO4juDEpX30q5Araugao9dG/3qoJWC8G+5n+ZxhhaLp</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLED_Junifer_ODS]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{D62CC385-F168-4898-9BEF-49B5D05AC88F}"
+      DTS:ObjectName="OLED_Junifer_ODS">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[$Project::Junifer_ODS_DatabaseName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Password">@[$Project::Junifer_ODS_Password]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Project::Junifer_ODS_ServerName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="UserName">@[$Project::Junifer_ODS_UserName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=WIN2016-SQL;User ID=ssis-release-user;Initial Catalog=JUN_ODS;Provider=SQLNCLI11.1;Persist Security Info=True;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADJBxo7apxKUPj0ZY/Zj2WAhBHSg6vX0Vd8rq459J7OewAAAAAOgAAAAAIAACAAAAAKFNXOBhSzb2hPu143rYEDME9bIYv0Mn9JNnONCroLdCAAAAAtR1l5QmIcg6l7cPKeA5yghEjHsibADdhPK0YxPq8/PUAAAACePUMlHh4cpqI4T+KO6jVDEwnKd2nw4Nng3buH8q52dugWyIMkj0rvpEXilWHBbtcF6OjXIAeAqImAasR0NjRg</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMO_Junifer_ODS]"
+      DTS:CreationName="SMOServer"
+      DTS:DTSID="{D9444023-C721-4D2C-B6E3-9BF4A728F48C}"
+      DTS:ObjectName="SMO_Junifer_ODS">
+      <DTS:PropertyExpression
+        DTS:Name="Password">@[$Project::Junifer_ODS_Password]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="SqlServerName">@[$Project::Junifer_ODS_ServerName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="UserName">@[$Project::Junifer_ODS_UserName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SMOServerConnectionManager
+          ConnectionString="SqlServerName=WIN2016-SQL;UseWindowsAuthentication=False;UserName=ssis-release-user;">
+          <PassWord
+            Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADIdrAORmdcqDnbjSp5vwu58USVt/bclj+YW3yaKcipQAAAAAAOgAAAAAIAACAAAAA9k/0dBeyGEAAi43zBosvxfkwlLCfzOvSFjfekN+nN/yAAAADBMvQSbRWDAQAEbgDgISnbAKvd4bB1hezPMjTQI/cmKUAAAACRGlk/B1LMx4u1D6F1DoEBlNwOUP910K8Hb6/WwHux5X70JpUQFp5ylTbywLCM45XzoKh9ovCr++NEJ0KWgHdA</PassWord>
+        </SMOServerConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMO_Junifer_STG]"
+      DTS:CreationName="SMOServer"
+      DTS:DTSID="{37f4b585-0010-485b-a080-b986e18d74b1}"
+      DTS:ObjectName="SMO_Junifer_STG">
+      <DTS:PropertyExpression
+        DTS:Name="Password">@[$Project::Junifer_STG_Password]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="SqlServerName">@[$Project::Junifer_STG_ServerName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="UserName">@[$Project::Junifer_STG_UserName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SMOServerConnectionManager
+          ConnectionString="SqlServerName=WIN2016-SQL;UseWindowsAuthentication=False;UserName=ssis-release-user;">
+          <PassWord
+            Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB23lXqodwgnXyhuj2EUgkTKJSY+pLCGIrf3uvdy8hzeAAAAAAOgAAAAAIAACAAAABnmyIAAfm7NEK/QHdS/In0l2a4c/hy1UqhIIU/uwwlziAAAAD+5LRFGBgm5Z3pjCY4xxqY5CE1m/Z9SfpY+dMZvmJ1qEAAAACbDYlxqekegs+z/NA0TSK22TfStxTQGAZ5HRQ8Goz6WciWZMBRYsJsjyNiKjoOnXWWDpPD5wYxzxzc/3/CJuiG</PassWord>
+        </SMOServerConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D512CB6B-7F3C-49DA-982D-AD7FC2519468}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varTableCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Delete Non-NDM Tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{34690f7f-1a94-4761-b264-f0862add5012}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete Non-NDM Tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7248B6C8-3427-4D40-A57F-63F5FB9C430C}"
+          SQLTask:SqlStatementSource="Declare @SQl nVarchar(Max) = ''&#xA;Declare @crlf VARCHAR(2) = CHAR(13) + CHAR(10) ;&#xA;&#xA;SELECT @SQl = @SQl + &#xA;'DROP TABLE ' + table_schema + '.' + table_name +';' + @crlf&#xA;FROM INFORMATION_SCHEMA.TABLES&#xA;WHERE TABLE_TYPE LIKE '%TABLE%'&#xA;AND TABLE_NAME not like 'temp_%'&#xA;AND TABLE_NAME NOT IN&#xA;&#x9;&#x9;(SELECT DISTINCT TABLE_NAME&#xA;&#x9;&#x9; FROM INFORMATION_SCHEMA.VIEW_TABLE_USAGE vw&#xA;&#x9;&#x9; WHERE View_Name like '%ndm%' )&#xA;Exec (@Sql)&#xA;--PRINT @SQl" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Move All NDM View"
+      DTS:CreationName="Microsoft.TransferSqlServerObjectsTask"
+      DTS:Description="Transfer SQL Server Objects Task"
+      DTS:DTSID="{a11f58ee-4783-4993-9793-d1b39f80ea8e}"
+      DTS:ExecutableType="Microsoft.TransferSqlServerObjectsTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Move All NDM View"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="DestinationDatabase">@[$Project::Junifer_STG_DatabaseName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="SourceDatabase">@[$Project::Junifer_ODS_DatabaseName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <TransferSqlServerObjectsTaskData
+          SourceConnection="{D9444023-C721-4D2C-B6E3-9BF4A728F48C}"
+          DestinationConnection="{37f4b585-0010-485b-a080-b986e18d74b1}"
+          SourceDatabase="JUN_ODS"
+          DestinationDatabase="JUN_STG"
+          ViewsList="28,22,[dbo].[vw_ndm_Account],38,[dbo].[vw_ndm_AccountAgedDebtFollowUp],37,[dbo].[vw_ndm_AccountAgedDebtHistory],33,[dbo].[vw_ndm_AccountTransaction],22,[dbo].[vw_ndm_Address],19,[dbo].[vw_ndm_Bill],32,[dbo].[vw_ndm_BillBreakdownLine],23,[dbo].[vw_ndm_Customer],20,[dbo].[vw_ndm_Meter],25,[dbo].[vw_ndm_MeterPoint],28,[dbo].[vw_ndm_MeterRegister],22,[dbo].[vw_ndm_mpanEAC],21,[dbo].[vw_ndm_mprnAQ],20,[dbo].[vw_ndm_Offer],33,[dbo].[vw_ndm_OfferProductBundle],22,[dbo].[vw_ndm_Product],28,[dbo].[vw_ndm_ProductBundle],35,[dbo].[vw_ndm_ProductPropertyAsset],23,[dbo].[vw_ndm_Prospect],20,[dbo].[vw_ndm_Quote],25,[dbo].[vw_ndm_Quotemodel],32,[dbo].[vw_ndm_Quotemodelmapping],21,[dbo].[vw_ndm_Ticket],30,[dbo].[vw_ndm_TicketComplaint],25,[dbo].[vw_ndm_TicketStep],40,[dbo].[vw_ndm_UkCommercialMpanBillEntry],40,[dbo].[vw_ndm_UkCommercialMprnBillEntry],34,[dbo].[vw_ndm_UkCommSiteBillEntry],"
+          DropObjectsFirst="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container - Schema Creation"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{27ce2aca-80e6-4b13-8802-c7d3daacca2c}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container - Schema Creation">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container - Schema Creation\Checking the Object Exists?"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{b56b4ad7-36c0-4216-9f44-03f64a1292ec}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Checking the Object Exists?"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7248B6C8-3427-4D40-A57F-63F5FB9C430C}"
+              SQLTask:SqlStatementSource="Select Count(*) TableCount From INFORMATION_SCHEMA.TABLES"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="TableCount"
+                SQLTask:DtsVariableName="User::varTableCount" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container - Schema Creation\Move all Table Schema to Staging (First Time)"
+          DTS:CreationName="Microsoft.TransferSqlServerObjectsTask"
+          DTS:Description="Tranfer Junifer database Tables from main instance to BDL staging database"
+          DTS:DTSID="{9cba1d07-1310-4ecf-aab4-435f2fc252c0}"
+          DTS:ExecutableType="Microsoft.TransferSqlServerObjectsTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Move all Table Schema to Staging (First Time)"
+          DTS:TaskContact="Transfer Objects Task; Microsoft Corporation; SQL Server 2017 RC1; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="DestinationDatabase">@[$Project::Junifer_STG_DatabaseName]</DTS:PropertyExpression>
+          <DTS:PropertyExpression
+            DTS:Name="SourceDatabase">@[$Project::Junifer_ODS_DatabaseName]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <TransferSqlServerObjectsTaskData
+              SourceConnection="{D9444023-C721-4D2C-B6E3-9BF4A728F48C}"
+              DestinationConnection="{37f4b585-0010-485b-a080-b986e18d74b1}"
+              SourceDatabase="JUN_ODS"
+              DestinationDatabase="JUN_STG"
+              CopyAllTables="True"
+              TablesList="1333,29,[dbo].[AccLossOverrideReason],15,[dbo].[Account],31,[dbo].[AccountAgedDebtFollowUp],30,[dbo].[AccountAgedDebtHistory],27,[dbo].[AccountAgedDebtTran],27,[dbo].[AccountBillCurrency],20,[dbo].[AccountClass],22,[dbo].[AccountContact],21,[dbo].[AccountCredit],27,[dbo].[AccountCreditReason],20,[dbo].[AccountDebit],26,[dbo].[AccountDebitReason],21,[dbo].[AccountDemand],31,[dbo].[AccountDemandDefinition],27,[dbo].[AccountDemandSubDfn],20,[dbo].[AccountExtra],27,[dbo].[AccountLossOverride],31,[dbo].[AccountManualSmsMessage],28,[dbo].[AccountPaymentMethod],31,[dbo].[AccountPaymentReference],29,[dbo].[AccountPaymentRefType],27,[dbo].[AccountReviewPeriod],27,[dbo].[AccountReviewReason],26,[dbo].[AccountTransaction],30,[dbo].[AccountTransactionType],29,[dbo].[AccountTxnExportBatch],33,[dbo].[AccountTxnExportBatchFile],33,[dbo].[AccountTxnExportBatchItem],28,[dbo].[AccountTxnExportType],30,[dbo].[AccountTxnReviewPeriod],30,[dbo].[AccountTxnReviewReason],19,[dbo].[AccountType],30,[dbo].[AccountTypeBillMinimum],26,[dbo].[AccountTypeDefault],30,[dbo].[AccReceivableRoleLimit],27,[dbo].[AccTxnTypeAuthLimit],15,[dbo].[Address],32,[dbo].[AddressLineValidSetValue],20,[dbo].[AddressToken],19,[dbo].[AddressType],23,[dbo].[AddressTypeLine],22,[dbo].[AgedDebtAction],30,[dbo].[AgedDebtFollowUpReason],23,[dbo].[AggregationFile],21,[dbo].[AgreementType],13,[dbo].[Alert],16,[dbo].[AlertDfn],18,[dbo].[AlertGroup],24,[dbo].[AlertPublication],28,[dbo].[AlertPublicationType],25,[dbo].[AlertSubscription],27,[dbo].[AlertSuppressPeriod],27,[dbo].[AllPayAccountExport],21,[dbo].[AllPayPayment],25,[dbo].[AllPayPaymentType],24,[dbo].[ApiEventDelivery],25,[dbo].[ApiEventStatistic],26,[dbo].[ApiEventSubscriber],28,[dbo].[ApiEventSubscription],20,[dbo].[ApiEventType],23,[dbo].[ApiEventVersion],25,[dbo].[ApplicationModule],22,[dbo].[ApplicationTbl],23,[dbo].[ApplicationUser],16,[dbo].[AqReview],28,[dbo].[AqReviewAmendRequest],27,[dbo].[AqReviewCalculation],23,[dbo].[AqReviewReading],27,[dbo].[AqReviewReadingPair],26,[dbo].[AqReviewReadingSet],31,[dbo].[AqReviewSpecCalcRequest],13,[dbo].[Asset],20,[dbo].[AssetContact],17,[dbo].[AssetType],13,[dbo].[Audit],21,[dbo].[AuditRevision],27,[dbo].[AuditRevisionEntity],33,[dbo].[AuditRevisionEntityChange],28,[dbo].[AutoAccLossExclusion],25,[dbo].[AwsS3ArchivedFile],19,[dbo].[BacsPayment],23,[dbo].[BalanceTransfer],12,[dbo].[Band],16,[dbo].[BandType],28,[dbo].[BankAccountValidator],26,[dbo].[BankAddressDetails],21,[dbo].[BearerService],12,[dbo].[Bill],21,[dbo].[BillAdhocItem],27,[dbo].[BillAdhocItemReason],25,[dbo].[BillBreakdownLine],29,[dbo].[BillBreakdownLineType],33,[dbo].[BillCollectionTransaction],24,[dbo].[BillDailySummary],17,[dbo].[BillDirty],23,[dbo].[BillDirtyReason],26,[dbo].[BilledMeterReading],17,[dbo].[BillEmail],16,[dbo].[BillFile],25,[dbo].[BillFrequencyCode],28,[dbo].[BillHierarchyHistory],20,[dbo].[BillingCycle],21,[dbo].[BillingEntity],30,[dbo].[BillingEntityBillImage],30,[dbo].[BillingEntityCustClass],19,[dbo].[BillPackage],30,[dbo].[BillPackageAccountType],20,[dbo].[BillPageType],27,[dbo].[BillPaymentReminder],18,[dbo].[BillPeriod],19,[dbo].[BillRequest],25,[dbo].[BillRequestPeriod],15,[dbo].[BillSms],22,[dbo].[BillStaticText],25,[dbo].[BillStaticTextKey],14,[dbo].[Broker],19,[dbo].[BrokerAgent],21,[dbo].[CacheStrategy],23,[dbo].[CalendarHoliday],19,[dbo].[CalendarTbl],33,[dbo].[CampaignIdentifierMapping],30,[dbo].[CapMrktPassThruPrdItem],33,[dbo].[CapMrktPassThruPrdItemDfn],15,[dbo].[CclCert],24,[dbo].[CclEqProductItem],27,[dbo].[CclEqProductItemDfn],16,[dbo].[CclPrice],23,[dbo].[CclPriceVersion],22,[dbo].[CclProductItem],25,[dbo].[CclProductItemDfn],32,[dbo].[CclVatChangeHistoryAudit],18,[dbo].[CdrExtract],22,[dbo].[CdrExtractBand],24,[dbo].[CdrExtractColumn],27,[dbo].[CdrExtractColumnDfn],23,[dbo].[CdrExtractRoute],23,[dbo].[ChangeOfTenancy],30,[dbo].[ChangeOfTenancyAccount],30,[dbo].[ChangeOfTenancyContact],30,[dbo].[ChangeOfTenancyHistory],32,[dbo].[ChangeOfTenancyUkBankAcc],18,[dbo].[ChargeCode],15,[dbo].[Charset],14,[dbo].[Cheque],32,[dbo].[ChValidationCustomerType],16,[dbo].[CliAsset],20,[dbo].[CliAssetInst],16,[dbo].[CliClass],18,[dbo].[CliService],21,[dbo].[CollectedFile],20,[dbo].[CommDelivery],25,[dbo].[CommDeliveryEmail],24,[dbo].[CommDeliveryFile],26,[dbo].[CommDeliveryLetter],23,[dbo].[CommDeliverySms],32,[dbo].[CommEnrolRejectionReason],32,[dbo].[CommodityIdxRecurItemDfn],33,[dbo].[CommodityIdxRecurItemInst],22,[dbo].[CommodityIndex],29,[dbo].[CommodityIndexItemDfn],28,[dbo].[CommodityIndexPeriod],25,[dbo].[CommodityIndexSet],28,[dbo].[CommodityIndexSetDfn],29,[dbo].[CommodityIndexSetItem],32,[dbo].[CommodityIndexSetItemDfn],26,[dbo].[CommodityIndexType],24,[dbo].[CommTypeApiEvent],21,[dbo].[CommTypeEmail],29,[dbo].[CommTypeEmailTemplate],20,[dbo].[CommTypeFile],28,[dbo].[CommTypeFileTemplate],22,[dbo].[CommTypeLetter],33,[dbo].[CommTypeMailMergeTemplate],22,[dbo].[CommTypeMethod],25,[dbo].[CommTypeMethodDfn],27,[dbo].[CommTypeMethodGroup],19,[dbo].[CommTypeSms],22,[dbo].[CommTypeTarget],21,[dbo].[Communication],28,[dbo].[CommunicationAccount],25,[dbo].[CommunicationAuto],29,[dbo].[CommunicationAutoType],27,[dbo].[CommunicationBroker],29,[dbo].[CommunicationCategory],29,[dbo].[CommunicationCustomer],31,[dbo].[CommunicationPurchGroup],25,[dbo].[CommunicationTeam],25,[dbo].[CommunicationType],28,[dbo].[CommunicationUserTbl],28,[dbo].[CommunicationWebUser],26,[dbo].[CompanionFileEntry],20,[dbo].[ComplaintDfn],31,[dbo].[ComplaintReferralSource],23,[dbo].[ComplaintSubDfn],21,[dbo].[ComplaintType],17,[dbo].[Component],22,[dbo].[ComponentGroup],15,[dbo].[Consent],25,[dbo].[ConsentDefinition],24,[dbo].[ConsumptionCurve],15,[dbo].[Contact],31,[dbo].[ContactSecurityQuestion],20,[dbo].[ContactToken],19,[dbo].[ContactType],22,[dbo].[ContactVersion],21,[dbo].[CostComponent],28,[dbo].[CostComponentPackage],33,[dbo].[CostComponentPackageCmpnt],29,[dbo].[CostComponentPassThru],32,[dbo].[CostComponentPassThruDfn],20,[dbo].[CostPassThru],23,[dbo].[CostPassThruDfn],22,[dbo].[CostPlusTariff],28,[dbo].[CostPlusTariffPeriod],26,[dbo].[CostPlusTariffRate],17,[dbo].[CostSheet],29,[dbo].[CostSheetDenomination],26,[dbo].[CostSheetDimension],31,[dbo].[CostSheetDimensionClass],24,[dbo].[CostSheetDimFlag],25,[dbo].[CostSheetDimRange],26,[dbo].[CostSheetDimString],23,[dbo].[CostSheetPeriod],20,[dbo].[CostSheetRow],23,[dbo].[CostSheetRowDim],24,[dbo].[CostSheetVersion],16,[dbo].[CostType],15,[dbo].[Country],19,[dbo].[CountryType],14,[dbo].[Credit],27,[dbo].[CreditAuthorisation],27,[dbo].[CreditBreakdownLine],31,[dbo].[CreditBreakdownLineType],19,[dbo].[CreditEmail],18,[dbo].[CreditFile],25,[dbo].[CreditNoteRequest],20,[dbo].[CreditReason],22,[dbo].[CreditWriteOff],28,[dbo].[CreditWriteOffReason],16,[dbo].[Currency],16,[dbo].[Customer],22,[dbo].[CustomerBroker],21,[dbo].[CustomerClass],31,[dbo].[CustomerClToAccountType],23,[dbo].[CustomerContact],24,[dbo].[CustomerMBAnswer],24,[dbo].[CustomerMBPeriod],24,[dbo].[CustomerProperty],31,[dbo].[CustomerPropertyContact],24,[dbo].[CustomerTeamUser],20,[dbo].[CustomerType],18,[dbo].[CustomList],23,[dbo].[CustomListValue],29,[dbo].[DashboardActivityType],28,[dbo].[DashboardWarningType],16,[dbo].[DataFlow],31,[dbo].[DataFlowActiveCatalogue],33,[dbo].[DataFlowAutoTicketTrigger],20,[dbo].[DataFlowCase],25,[dbo].[DataFlowCatalogue],31,[dbo].[DataFlowCatalogueMarket],29,[dbo].[DataFlowCatalogueType],19,[dbo].[DataFlowDfn],20,[dbo].[DataFlowFile],32,[dbo].[DataFlowFileIgnoreReason],24,[dbo].[DataFlowGroupDfn],20,[dbo].[DataFlowInst],23,[dbo].[DataFlowMessage],23,[dbo].[DataFlowRequest],27,[dbo].[DataFlowRequirement],20,[dbo].[DataFlowType],28,[dbo].[DataFlowUnarchiveReq],20,[dbo].[DataGroupDfn],27,[dbo].[DataGroupDfnElement],21,[dbo].[DataGroupInst],24,[dbo].[DataGroupItemDfn],19,[dbo].[DataItemDfn],20,[dbo].[DataItemInst],29,[dbo].[DataItemValidSetValue],20,[dbo].[DataLoadFile],21,[dbo].[DateTimeShift],24,[dbo].[DateTimeShiftLog],14,[dbo].[DayDfn],17,[dbo].[DayString],15,[dbo].[DayType],19,[dbo].[DayTypeDate],24,[dbo].[DayTypeDayString],18,[dbo].[DayTypeDfn],22,[dbo].[DayTypeHoliday],19,[dbo].[DayTypeList],25,[dbo].[DayTypeListMember],28,[dbo].[DebtCollectionAgency],32,[dbo].[DebtCollectionExportFile],33,[dbo].[DebtCollectionTransaction],26,[dbo].[DebtRecoveryPeriod],25,[dbo].[DemandContactType],15,[dbo].[Deposit],21,[dbo].[DialStringSet],31,[dbo].[DialStringSetDialString],26,[dbo].[DirectConnectClass],28,[dbo].[DirectConnectService],19,[dbo].[DirectDebit],29,[dbo].[DirectDebitCollection],29,[dbo].[DirectDebitExportFile],29,[dbo].[DirectDebitImportFile],30,[dbo].[DirectDebitInstruction],32,[dbo].[DirectDebitRespCodeGroup],31,[dbo].[DirectDebitResponseCode],30,[dbo].[DirectDebitResponseRow],25,[dbo].[DirectDebitScheme],19,[dbo].[DiscountDfn],30,[dbo].[DiscountDfnAccountType],27,[dbo].[DiscountDfnEBilling],27,[dbo].[DiscountDfnMultiBuy],32,[dbo].[DiscountDfnMultiProdType],32,[dbo].[DiscountDfnPaymentMethod],32,[dbo].[DiscountDfnProdComboItem],31,[dbo].[DiscountDfnProductCombo],23,[dbo].[DistributedFile],32,[dbo].[DistrictHeatConfigPeriod],22,[dbo].[DistrictHeater],25,[dbo].[DistrictHeaterEac],25,[dbo].[DomesticEnrolment],21,[dbo].[DunningCharge],19,[dbo].[DunningInst],23,[dbo].[DunningInstStep],24,[dbo].[DunningLetterDfn],25,[dbo].[DunningLetterInst],22,[dbo].[DunningPackage],26,[dbo].[DunningPackageStep],23,[dbo].[DunningStepType],24,[dbo].[DunningTicketDfn],25,[dbo].[DunningTicketInst],28,[dbo].[DynamiccsCreditCheck],26,[dbo].[EarlyTermChargeDfn],32,[dbo].[EarlyTermChargeDfnAmount],27,[dbo].[EarlyTermChargeInst],31,[dbo].[EarlyTermChargeInstBill],32,[dbo].[Economy7ProdBundleFilter],24,[dbo].[ElectricityAsset],30,[dbo].[ElectronicInvQueueItem],15,[dbo].[Element],25,[dbo].[ElementConnection],18,[dbo].[ElementSet],21,[dbo].[EmailTemplate],26,[dbo].[EmailTemplateImage],31,[dbo].[EmailTemplateRenderType],26,[dbo].[EnergylinxSupplier],22,[dbo].[EntityProperty],30,[dbo].[EntityPropertyDfnGroup],31,[dbo].[EntityPropertyInstGroup],27,[dbo].[EntitySuppressAudit],17,[dbo].[EntityTbl],25,[dbo].[EntityUserHistory],27,[dbo].[EventDiagnosticLine],26,[dbo].[EventDiagnosticTbl],25,[dbo].[EventErrorMessage],30,[dbo].[EventErrorMessageGroup],20,[dbo].[EventLegCode],24,[dbo].[EventLegScenario],30,[dbo].[EventLegScenarioMember],22,[dbo].[EventProcessor],29,[dbo].[EventProcessorService],19,[dbo].[EventSource],17,[dbo].[ExportDfn],27,[dbo].[ExportDfnStoredProc],18,[dbo].[ExportFile],21,[dbo].[ExportRequest],22,[dbo].[ExportSchedule],31,[dbo].[ExportScheduleParamDttm],20,[dbo].[ExtraControl],26,[dbo].[ExtraValueDfnGroup],27,[dbo].[ExtraValueInstGroup],22,[dbo].[FileCollection],27,[dbo].[FileCollectionEMail],32,[dbo].[FileCollectionFileSystem],24,[dbo].[FileDistribution],27,[dbo].[FitEiiExemptionCert],19,[dbo].[FitPassThru],22,[dbo].[FitPassThruDfn],22,[dbo].[FrequencyGroup],31,[dbo].[FrequencyGroupComponent],14,[dbo].[FxRate],19,[dbo].[FxRateGroup],20,[dbo].[FxRatePeriod],29,[dbo].[GasImbalanceCostParam],26,[dbo].[GasImbalanceExport],19,[dbo].[GdprRequest],25,[dbo].[GeneralLedgerCode],33,[dbo].[GeneralLedgerMappedEntity],28,[dbo].[GeneralLedgerMapping],24,[dbo].[GenericCostParam],30,[dbo].[GoCardlessDDCollection],31,[dbo].[GoCardlessDDInstruction],31,[dbo].[GoCardlessDDResponseRow],29,[dbo].[GoCardlessDirectDebit],28,[dbo].[GoCardlessErrorInput],20,[dbo].[GtValidation],26,[dbo].[GtValidationAqBand],23,[dbo].[HalfHourRateDfn],27,[dbo].[HalfHourRateDfnItem],28,[dbo].[HhRateDfnItemDayType],33,[dbo].[HistoricConsumptionImport],15,[dbo].[HourDfn],20,[dbo].[IACostParams],23,[dbo].[IAMinimumMargin],15,[dbo].[IconTbl],19,[dbo].[IdGenerator],22,[dbo].[IeBusinessType],33,[dbo].[IeCommElecChargeBillEntry],33,[dbo].[IeCommercialGprnBillEntry],33,[dbo].[IeCommercialMprnBillEntry],28,[dbo].[IeCommercialPsoEntry],32,[dbo].[IeCommGasChargeBillEntry],30,[dbo].[IeCommGasReadBillEntry],32,[dbo].[IeCommMeterReadBillEntry],23,[dbo].[IeCustomerExtra],23,[dbo].[IeDebtThreshold],27,[dbo].[IeDistrbCapProdItem],30,[dbo].[IeDistrbCapProdItemDfn],27,[dbo].[IeDistrbComProdItem],30,[dbo].[IeDistrbComProdItemDfn],28,[dbo].[IeDistributionTariff],29,[dbo].[IeDistrLossFactorCode],32,[dbo].[IeDistrLossFactorVersion],33,[dbo].[IeDuosCapacityChargePrice],30,[dbo].[IeDuosCapacProdItemDfn],30,[dbo].[IeDuosCapacProductItem],19,[dbo].[IeDuosGroup],21,[dbo].[IeDuosInvoice],25,[dbo].[IeDuosInvoiceBill],27,[dbo].[IeDuosInvoiceCharge],31,[dbo].[IeDuosInvoiceChargeType],19,[dbo].[IeDuosPrice],31,[dbo].[IeDuosProductChargeType],25,[dbo].[IeDuosProductItem],28,[dbo].[IeDuosProductItemDfn],28,[dbo].[IeElecMedSpecialNeed],28,[dbo].[IeElecMedVulnTypeDfn],22,[dbo].[IeElecReadType],29,[dbo].[IeElecReadTypeQuality],14,[dbo].[IeGprn],31,[dbo].[IeGprnAnnualConsumption],26,[dbo].[IeGprnConfigPeriod],29,[dbo].[IeGprnConsumptionBand],17,[dbo].[IeGprnMdq],28,[dbo].[IeGprnProductItemDfn],26,[dbo].[IeGprnSupplyStatus],21,[dbo].[IeLoadProfile],32,[dbo].[IeLoadProfileCoefficient],25,[dbo].[IeMeterConfigCode],14,[dbo].[IeMprn],26,[dbo].[IeMprnConfigPeriod],17,[dbo].[IeMprnEac],20,[dbo].[IeMprnEacSet],31,[dbo].[IeMprnErroneousTransfer],32,[dbo].[IeMprnMeterInvestigation],31,[dbo].[IeMprnProdItemDfnPeriod],29,[dbo].[IeMprnProdItemDfnRate],25,[dbo].[IeMprnProductItem],28,[dbo].[IeMprnProductItemDfn],31,[dbo].[IeMprnProductItemPeriod],29,[dbo].[IeMprnProductItemRate],26,[dbo].[IeMprnSupplyStatus],30,[dbo].[IeRegisterTypeTimeslot],18,[dbo].[IeTimeslot],25,[dbo].[IeTimeslotMapping],28,[dbo].[IeTimeslotMappingSet],26,[dbo].[IeTransCapProdItem],29,[dbo].[IeTransCapProdItemDfn],26,[dbo].[IeTransComProdItem],29,[dbo].[IeTransComProdItemDfn],28,[dbo].[IeTransmissionTariff],22,[dbo].[IeTuosCapPrice],28,[dbo].[IeTuosCapProductItem],31,[dbo].[IeTuosCapProductItemDfn],30,[dbo].[IeTuosCustomerCategory],19,[dbo].[IeTuosPrice],25,[dbo].[IeTuosProductItem],28,[dbo].[IeTuosProductItemDfn],20,[dbo].[ImportEntity],21,[dbo].[ImportMessage],27,[dbo].[ImportMessageSource],21,[dbo].[ImportRequest],26,[dbo].[ImportRequestBatch],18,[dbo].[ImportType],31,[dbo].[IncomingBalanceTransfer],19,[dbo].[IndexPeriod],18,[dbo].[IndexPrice],22,[dbo].[IndexPriceType],16,[dbo].[IndexTbl],17,[dbo].[IndexType],20,[dbo].[IndexVersion],20,[dbo].[InterestRate],24,[dbo].[InterestRatePlan],28,[dbo].[InterestRatePlanType],30,[dbo].[jnkuiii ;'pppppppppppp],20,[dbo].[KpiDashboard],25,[dbo].[KpiDashboardGroup],24,[dbo].[KpiDashboardUser],21,[dbo].[KpiDataSource],31,[dbo].[KpiStoredProcDataSource],19,[dbo].[LanguageTbl],18,[dbo].[LicenseKey],24,[dbo].[LogicalFileGroup],30,[dbo].[LogicalFileGroupMember],22,[dbo].[LogicalFileTbl],27,[dbo].[LogicalFileTblBatch],19,[dbo].[LogicalPath],12,[dbo].[Mail],22,[dbo].[MailAttachment],19,[dbo].[MailHistory],25,[dbo].[MailMergeCategory],27,[dbo].[MailMergeEntityType],27,[dbo].[MailMergeRenderType],27,[dbo].[MailMergeStyleSheet],31,[dbo].[MailMergeStyleSheetInfo],25,[dbo].[MailMergeTemplate],30,[dbo].[MailMergeTemplateExtra],30,[dbo].[MailMergeTemplateStyle],19,[dbo].[MailPending],21,[dbo].[MailRecipient],18,[dbo].[MailServer],18,[dbo].[ManualBill],22,[dbo].[ManualBillLine],24,[dbo].[ManualBillReason],16,[dbo].[MapEntry],14,[dbo].[MapTbl],31,[dbo].[MarketingCampaignSource],24,[dbo].[MarketingMessage],28,[dbo].[MarketingMessageBill],32,[dbo].[MarketingMessageEBilling],31,[dbo].[MarketingMessagePackage],28,[dbo].[MarketingMessageType],33,[dbo].[MarketingMsgCustomerClass],33,[dbo].[MarketingMsgPaymentMethod],33,[dbo].[MarketingMsgProdBundleDfn],25,[dbo].[MarketParticipant],29,[dbo].[MarketParticipantRole],18,[dbo].[MarketRole],13,[dbo].[Meter],28,[dbo].[MeterMeasurementType],18,[dbo].[MeterPoint],30,[dbo].[MeterPointConfigPeriod],23,[dbo].[MeterPointEvent],23,[dbo].[MeterPointGroup],29,[dbo].[MeterPointGroupReason],32,[dbo].[MeterPointInactivePeriod],31,[dbo].[MeterPointPhyTimeSeries],25,[dbo].[MeterPointPublish],32,[dbo].[MeterPointRematchReqItem],32,[dbo].[MeterPointRematchRequest],29,[dbo].[MeterPointServiceType],30,[dbo].[MeterPointSupplyPeriod],28,[dbo].[MeterPointSuppReason],26,[dbo].[MeterPointSuppress],28,[dbo].[MeterPointTimeSeries],32,[dbo].[MeterPointVirtTimeSeries],26,[dbo].[MeterReadingConfig],26,[dbo].[MeterReadingManual],33,[dbo].[MeterReadingManualReading],27,[dbo].[MeterReadingRequest],21,[dbo].[MeterRegister],33,[dbo].[MeterRegisterConfigPeriod],25,[dbo].[MeterRegisterType],32,[dbo].[MeterServiceApportionDfn],33,[dbo].[MeterServiceApportionInst],23,[dbo].[MeterServiceDfn],24,[dbo].[MeterServiceInst],27,[dbo].[MeterServicePeakDfn],28,[dbo].[MeterServicePeakInst],28,[dbo].[MeterServiceSplitDfn],29,[dbo].[MeterServiceSplitInst],31,[dbo].[MeterServiceStandardDfn],32,[dbo].[MeterServiceStandardInst],31,[dbo].[MeterSvcRegisterTypeDfn],32,[dbo].[MeterSvcRegisterTypeInst],31,[dbo].[MeterSvcSplitDfnPercent],30,[dbo].[MeterSvcSplitDfnPeriod],29,[dbo].[MeterSvcSplitDfnSplit],32,[dbo].[MeterSvcSplitInstPercent],31,[dbo].[MeterSvcSplitInstPeriod],30,[dbo].[MeterSvcSplitInstSplit],17,[dbo].[MeterType],18,[dbo].[MetricUnit],28,[dbo].[MetricUnitConversion],22,[dbo].[MetricUnitType],29,[dbo].[MicroBusinessQuestion],31,[dbo].[MoveOutAppMeterRegister],23,[dbo].[MoveOutApproval],30,[dbo].[MoveOutApprovalAccount],28,[dbo].[MoveOutApprovalMeter],12,[dbo].[Mpan],29,[dbo].[MpanAnnualisedAdvance],32,[dbo].[MpanAnnualisedAdvanceSet],23,[dbo].[MpanComcRequest],24,[dbo].[MpanConfigPeriod],16,[dbo].[MpanCost],31,[dbo].[MpanCostConsumptSummary],32,[dbo].[MpanCostCostSheetVersion],22,[dbo].[MpanCostDetail],22,[dbo].[MpanCostExport],28,[dbo].[MpanCostPriceVersion],28,[dbo].[MpanCostProfileCurve],23,[dbo].[MpanCostSummary],32,[dbo].[MpanDisconnectionRequest],31,[dbo].[MpanDisputedReadProcess],32,[dbo].[MpanDisputedReadRegister],27,[dbo].[MpanDisputedReadSet],31,[dbo].[MpanDisputedReadSetItem],15,[dbo].[MpanEac],18,[dbo].[MpanEacSet],16,[dbo].[MpanEacv],16,[dbo].[MpanEapd],31,[dbo].[MpanEnergisationRequest],29,[dbo].[MpanErroneousTransfer],20,[dbo].[MpanForecast],25,[dbo].[MpanInvestigation],33,[dbo].[MpanInvestigationRegister],31,[dbo].[MpanMeterRemovalRequest],27,[dbo].[MpanMsActionRequest],33,[dbo].[MpanMsActionRequestAction],32,[dbo].[MpanMsActionRequestMeter],25,[dbo].[MpanMsfChangeCode],28,[dbo].[MpanMsfChangeRequest],19,[dbo].[MpanNhhTuos],28,[dbo].[MpanProdDfnDccConfig],23,[dbo].[MpanProductItem],26,[dbo].[MpanProductItemDfn],32,[dbo].[MpanProductItemDfnPeriod],30,[dbo].[MpanProductItemDfnRate],29,[dbo].[MpanProductItemPeriod],27,[dbo].[MpanProductItemRate],31,[dbo].[MpanProductItemRateName],28,[dbo].[MpanReadingFrequency],24,[dbo].[MpanSupplyStatus],12,[dbo].[Mprn],26,[dbo].[MprnAnnualQuantity],24,[dbo].[MprnConfigPeriod],16,[dbo].[MprnCost],31,[dbo].[MprnCostConsumptSummary],32,[dbo].[MprnCostCostSheetVersion],22,[dbo].[MprnCostDetail],22,[dbo].[MprnCostExport],28,[dbo].[MprnCostPriceVersion],30,[dbo].[MprnCostPriceVersionAq],31,[dbo].[MprnCostPriceVersionSoq],33,[dbo].[MprnCostRiskFactorVersion],23,[dbo].[MprnCostSummary],24,[dbo].[MprnDisputedRead],28,[dbo].[MprnDisputedReadItem],31,[dbo].[MprnDisputedReadProcess],27,[dbo].[MprnEndUserCategory],29,[dbo].[MprnErroneousTransfer],20,[dbo].[MprnForecast],20,[dbo].[MprnIgtPrice],29,[dbo].[MprnNominationEnquiry],26,[dbo].[MprnNtsToExitPrice],31,[dbo].[MprnOrjobAdvWorkRequest],32,[dbo].[MprnOrjobCnclWorkRequest],31,[dbo].[MprnOrjobExchMtrRequest],32,[dbo].[MprnOrjobInstlMtrRequest],33,[dbo].[MprnOrjobOtherWorkRequest],33,[dbo].[MprnOrjobRemoveMtrRequest],32,[dbo].[MprnOrjobReposMtrRequest],32,[dbo].[MprnOrjobRplnWorkRequest],28,[dbo].[MprnReadingFrequency],15,[dbo].[MprnShq],15,[dbo].[MprnSoq],31,[dbo].[MprnSupplyPointCategory],24,[dbo].[MprnSupplyStatus],29,[dbo].[MprnWinterConsumption],17,[dbo].[MsgcPrice],27,[dbo].[MsgcProductCategory],23,[dbo].[MsgcProductItem],26,[dbo].[MsgcProductItemDfn],26,[dbo].[NemoBusinessSector],27,[dbo].[NemoMprnExportEvent],23,[dbo].[NemoProductName],25,[dbo].[NemoStagedMessage],27,[dbo].[NemoUserJuniferUser],29,[dbo].[NormalisedReadingUnit],12,[dbo].[Note],17,[dbo].[NoteEntry],19,[dbo].[NoteSubject],20,[dbo].[Notification],27,[dbo].[NPowerEdiPreference],30,[dbo].[NPowerMonthlyConsSpend],32,[dbo].[NPowerPaymentPlanContact],27,[dbo].[NPowerTradeFacility],28,[dbo].[NumberedErrorMessage],32,[dbo].[NumberedErrorMessageType],19,[dbo].[NumberGroup],25,[dbo].[NumberGroupNumber],26,[dbo].[NumberPortingClass],28,[dbo].[NumberPortingService],18,[dbo].[NumberTran],23,[dbo].[NumberTranClass],28,[dbo].[NumberTranMatchGroup],24,[dbo].[NumberTranPeriod],24,[dbo].[NumberTranPrefix],25,[dbo].[NumberTranService],22,[dbo].[NumberTranType],13,[dbo].[Offer],25,[dbo].[OfferCancelReason],18,[dbo].[OfferClass],25,[dbo].[OfferClassPackage],33,[dbo].[OfferClassValidationCmpnt],21,[dbo].[OfferDuration],18,[dbo].[OfferGroup],17,[dbo].[OfferLead],21,[dbo].[OfferMpanCost],21,[dbo].[OfferMprnCost],20,[dbo].[OfferPackage],26,[dbo].[OfferProductBundle],26,[dbo].[OfferPropertyAsset],25,[dbo].[OfgemPostCodeArea],27,[dbo].[OfgemPostCodeRegion],21,[dbo].[OneOffItemDfn],27,[dbo].[OneOffItemDfnAmount],22,[dbo].[OneOffItemInst],26,[dbo].[OneOffItemInstBill],31,[dbo].[OutgoingBalanceTransfer],33,[dbo].[PafValidationCustomerType],20,[dbo].[PartitionTbl],24,[dbo].[PassthruBillHist],15,[dbo].[Payment],25,[dbo].[PaymentImportFile],28,[dbo].[PaymentImportFileRow],29,[dbo].[PaymentImportFileType],21,[dbo].[PaymentMethod],26,[dbo].[PaymentMethodEvent],25,[dbo].[PaymentMethodType],19,[dbo].[PaymentPlan],26,[dbo].[PaymentPlanPayment],29,[dbo].[PaymentPlanPaymentTxn],30,[dbo].[PaymentPlanTransaction],28,[dbo].[PaymentProcessingFee],22,[dbo].[PaymentRequest],29,[dbo].[PaymentRequestAttempt],30,[dbo].[PaymentRequestReminder],27,[dbo].[PaymentScheduleItem],29,[dbo].[PaymentSchedulePeriod],29,[dbo].[PaymentScheduleReview],19,[dbo].[PaymentTerm],33,[dbo].[PaymentTermMonthFCAligned],27,[dbo].[PaymentTermStandard],25,[dbo].[PaySchedRevFactor],27,[dbo].[PaySchedSeasonalDfn],31,[dbo].[PaySchedSeasonalDfnItem],23,[dbo].[PendingDataLoad],27,[dbo].[PendingMeterReading],30,[dbo].[PendingMeterReadingReq],30,[dbo].[PendingRegisterReading],19,[dbo].[PendingTask],18,[dbo].[Permission],22,[dbo].[PermissionAuth],21,[dbo].[PostCodeGroup],29,[dbo].[PostCodeGroupPostCode],19,[dbo].[PrePaidCard],17,[dbo].[PricePlan],29,[dbo].[PricePlanDimAgreement],22,[dbo].[PricePlanDimAQ],26,[dbo].[PricePlanDimension],31,[dbo].[PricePlanDimensionClass],24,[dbo].[PricePlanDimFlag],28,[dbo].[PricePlanDimFreeText],31,[dbo].[PricePlanDimIeDuosGroup],25,[dbo].[PricePlanDimRange],26,[dbo].[PricePlanDimSeason],33,[dbo].[PricePlanDimUkDistribArea],33,[dbo].[PricePlanDimUkGasExitZone],28,[dbo].[PricePlanDimUkGasLdz],30,[dbo].[PricePlanDimUkGspGroup],31,[dbo].[PricePlanDimUkProfClass],32,[dbo].[PricePlanDimUkWatMetSize],20,[dbo].[PricePlanRow],29,[dbo].[PricePlanRowDimension],24,[dbo].[PricePlanRowItem],29,[dbo].[PricePlanTemplateItem],20,[dbo].[PriceQuality],23,[dbo].[PriceQualitySet],32,[dbo].[ProdBundFilterDependency],27,[dbo].[ProdBundFilterRange],29,[dbo].[ProdBundleAccountType],31,[dbo].[ProdBundleAgreementType],24,[dbo].[ProdBundleFilter],22,[dbo].[ProdItemFilter],31,[dbo].[ProdSvcSubTypeAssetType],15,[dbo].[Product],21,[dbo].[ProductBundle],29,[dbo].[ProductBundleAppendix],24,[dbo].[ProductBundleDfn],29,[dbo].[ProductBundleDfnGroup],28,[dbo].[ProductBundleDfnType],28,[dbo].[ProductBundleUkGreen],20,[dbo].[ProductClass],25,[dbo].[ProductComparison],31,[dbo].[ProductComparisonBundle],29,[dbo].[ProductCompResultItem],18,[dbo].[ProductDfn],24,[dbo].[ProductDfnSimple],24,[dbo].[ProductFlexClass],19,[dbo].[ProductItem],28,[dbo].[ProductItemAssetBill],23,[dbo].[ProductItemBill],24,[dbo].[ProductItemClass],22,[dbo].[ProductItemDfn],30,[dbo].[ProductItemDfnInactive],23,[dbo].[ProductItemType],25,[dbo].[ProductPermission],32,[dbo].[ProductPricePlanDimValue],28,[dbo].[ProductPropertyAsset],32,[dbo].[ProductPropertyAssetBill],29,[dbo].[ProductServiceSubType],26,[dbo].[ProductServiceType],22,[dbo].[ProductSubType],31,[dbo].[ProductSvcRatingTffType],19,[dbo].[ProductTerm],32,[dbo].[ProductTerminationReason],19,[dbo].[ProductType],19,[dbo].[PropertyDfn],24,[dbo].[PropertyDfnGroup],20,[dbo].[PropertyInst],25,[dbo].[PropertyInstGroup],30,[dbo].[PropertySupplyCapacity],19,[dbo].[PropertyTbl],27,[dbo].[PropertyTblLandlord],30,[dbo].[PropertyTblPropManager],20,[dbo].[PropertyType],32,[dbo].[PropertyTypeRelationship],16,[dbo].[Prospect],24,[dbo].[ProspectProperty],20,[dbo].[PsoLevyPrice],26,[dbo].[PsoLevyProductItem],29,[dbo].[PsoLevyProductItemDfn],23,[dbo].[PurchasingGroup],30,[dbo].[PurchasingGroupContact],30,[dbo].[PurchasingGroupDocFile],31,[dbo].[PurchasingGroupDocOffer],33,[dbo].[PurchasingGroupDocPackage],33,[dbo].[PurchasingGroupDocRequest],27,[dbo].[PurchasingGroupLock],33,[dbo].[PurchasingGroupMeterPoint],32,[dbo].[PurchasingGroupRefVolume],13,[dbo].[Quote],26,[dbo].[QuoteAcceptRequest],32,[dbo].[QuoteDocumentationCharge],17,[dbo].[QuoteFile],18,[dbo].[QuoteModel],25,[dbo].[QuoteModelMapping],21,[dbo].[QuoteMpanCost],22,[dbo].[QuoteMpanPrice],21,[dbo].[QuoteMprnCost],22,[dbo].[QuoteMprnPrice],29,[dbo].[QuoteProdBundAppendix],24,[dbo].[QuoteProductTerm],20,[dbo].[QuoteRequest],27,[dbo].[QuoteValidationHash],27,[dbo].[QuoteValidationItem],26,[dbo].[RatedEventListener],22,[dbo].[RateMetricType],16,[dbo].[RateName],21,[dbo].[RateNameGroup],31,[dbo].[ReadingWorkflowActivity],29,[dbo].[ReadingWorkflowStatus],28,[dbo].[ReaggregationRequest],24,[dbo].[RecurringItemDfn],30,[dbo].[RecurringItemDfnAmount],25,[dbo].[RecurringItemInst],31,[dbo].[RecurringItemInstAmount],29,[dbo].[RecurringItemInstBill],32,[dbo].[RecurringSchdQuietPeriod],25,[dbo].[RecurringSchedule],32,[dbo].[RecurringScheduleHistory],21,[dbo].[RecurringTask],16,[dbo].[RefTable],22,[dbo].[RefTableColumn],32,[dbo].[RegistrationAttemptCount],30,[dbo].[RegistrationWithdrawal],23,[dbo].[RemittanceGroup],27,[dbo].[RemittanceGroupItem],21,[dbo].[RenewalAction],17,[dbo].[Repayment],17,[dbo].[ReportDfn],32,[dbo].[ReportDfnDelimitedExport],31,[dbo].[ReportDfnExcelMacroRend],27,[dbo].[ReportDfnStoredProc],32,[dbo].[ReportExcelMacroTemplate],18,[dbo].[ReportFile],19,[dbo].[ReportGroup],21,[dbo].[ReportRequest],22,[dbo].[ReportSchedule],31,[dbo].[ReportScheduleParamDttm],26,[dbo].[ReportScheduleTeam],29,[dbo].[ReportScheduleUserTbl],18,[dbo].[RerateBand],21,[dbo].[RerateRequest],18,[dbo].[RibbonPage],23,[dbo].[RibbonPageGroup],27,[dbo].[RibbonPageGroupItem],26,[dbo].[ROEiiExemptionCert],22,[dbo].[RolePermission],15,[dbo].[RoleTbl],18,[dbo].[ROPassThru],21,[dbo].[ROPassThruDfn],13,[dbo].[Route],18,[dbo].[RouteGroup],23,[dbo].[RouteGroupRoute],20,[dbo].[RouteRuleSet],17,[dbo].[RouteType],15,[dbo].[RuleSet],19,[dbo].[RuleSetRule],19,[dbo].[RuleSetStep],16,[dbo].[SalesTax],20,[dbo].[SalesTaxCode],20,[dbo].[SalesTaxRate],31,[dbo].[SaveDetailedCostingDflt],24,[dbo].[SecurityQuestion],24,[dbo].[SepaDDCollection],24,[dbo].[SepaDDExportFile],24,[dbo].[SepaDDImportFile],27,[dbo].[SepaDDRejectionCode],25,[dbo].[SepaDDResponseRow],23,[dbo].[SepaDirectDebit],19,[dbo].[ServerClass],23,[dbo].[ServerException],30,[dbo].[ServerExceptionElement],23,[dbo].[ServerStatistic],21,[dbo].[ServiceRating],25,[dbo].[ServiceRatingRate],27,[dbo].[ServiceRatingTariff],31,[dbo].[ServiceRatingTariffType],33,[dbo].[ServiceRatingThreshPeriod],31,[dbo].[ServiceRatingThreshRate],33,[dbo].[SettlementGapExportRecord],25,[dbo].[SettlementService],25,[dbo].[SettlementSummary],30,[dbo].[SettlementSummaryError],29,[dbo].[SettlementSummaryWork],15,[dbo].[SicCode],29,[dbo].[SmartProdBundleFilter],19,[dbo].[SmscAddress],17,[dbo].[SmsClient],23,[dbo].[SmsClientNumber],18,[dbo].[SmsMessage],25,[dbo].[SmsMessageHistory],18,[dbo].[SmsPending],19,[dbo].[SmsTemplate],30,[dbo].[StatementOfAccountFile],33,[dbo].[StripePaymentAttemptExtra],25,[dbo].[StripePaymentCard],21,[dbo].[SwitchRuleSet],17,[dbo].[SwitchTbl],24,[dbo].[SystemPermission],14,[dbo].[Tariff],18,[dbo].[TariffBand],26,[dbo].[TariffBandBulkLoad],30,[dbo].[TariffBandBulkLoadBand],32,[dbo].[TariffBandBulkLoadTariff],22,[dbo].[TariffBandRate],24,[dbo].[TariffElementSet],21,[dbo].[TariffHistory],25,[dbo].[TariffImportBatch],24,[dbo].[TariffImportRate],27,[dbo].[TariffRateDfnPeriod],22,[dbo].[TariffTemplate],26,[dbo].[TariffTemplateBand],32,[dbo].[TariffTemplateElementSet],18,[dbo].[TariffType],12,[dbo].[Task],15,[dbo].[TaskDfn],25,[dbo].[TaskDfnDependency],24,[dbo].[TaskDfnExclusion],20,[dbo].[TaskDfnGroup],17,[dbo].[TaskError],22,[dbo].[TaskOutputFile],23,[dbo].[TaxExemptReason],27,[dbo].[TaxReturnFilingDate],12,[dbo].[Team],16,[dbo].[TeamUser],23,[dbo].[TelcoAccAccount],21,[dbo].[TelcoOperator],21,[dbo].[TelcoProdCode],24,[dbo].[TelcoRevCostCode],20,[dbo].[TelcoService],23,[dbo].[TelcoServiceDfn],16,[dbo].[TestBill],20,[dbo].[TestBillFile],31,[dbo].[TestingWhitelistedEmail],32,[dbo].[TestingWhitelistedNumber],17,[dbo].[Threshold],14,[dbo].[Ticket],26,[dbo].[TicketCancelReason],23,[dbo].[TicketComplaint],22,[dbo].[TicketDeadline],26,[dbo].[TicketDeadlineInst],24,[dbo].[TicketDefinition],33,[dbo].[TicketDefinitionEntityTbl],20,[dbo].[TicketEntity],21,[dbo].[TicketHistory],22,[dbo].[TicketPriority],18,[dbo].[TicketStep],28,[dbo].[TicketStepTransition],18,[dbo].[TicketType],23,[dbo].[TicketTypeGroup],22,[dbo].[TicketWorkflow],26,[dbo].[TimeSeriesAnalysis],32,[dbo].[TimeSeriesAnalysisAction],33,[dbo].[TimeSeriesAnalysisPackage],32,[dbo].[TimeSeriesAnalysisPkgDef],33,[dbo].[TimeSeriesAnalysisReqItem],33,[dbo].[TimeSeriesAnalysisRequest],23,[dbo].[TimeSeriesEvent],29,[dbo].[TimeSeriesEventReason],26,[dbo].[TimeSeriesPriority],33,[dbo].[TimeSeriesPriorityPackage],25,[dbo].[TimeSeriesQuality],24,[dbo].[TimeSeriesSource],19,[dbo].[TimeZoneTbl],13,[dbo].[Title],27,[dbo].[TmaRequestReference],16,[dbo].[TmaStore],27,[dbo].[TmpPartitionJoin286],20,[dbo].[TrafficGroup],23,[dbo].[TrafficScenario],28,[dbo].[TrafficScenarioClass],27,[dbo].[TrafficScenarioType],19,[dbo].[TrafficType],29,[dbo].[TransactionAllocation],19,[dbo].[Translation],27,[dbo].[TranslationOverride],14,[dbo].[UiType],20,[dbo].[UiTypeAction],25,[dbo].[UiTypeActionGroup],19,[dbo].[UiTypeLabel],23,[dbo].[UkAgentContract],32,[dbo].[UkAvgFracYrlyConsumption],33,[dbo].[UkBilledMeterReadingExtra],22,[dbo].[UkBrokerMargin],20,[dbo].[UkBsuosPrice],27,[dbo].[UkBsuosPriceVersion],32,[dbo].[UkCfdFitEiiExemptionCert],24,[dbo].[UkCfdFitPassThru],27,[dbo].[UkCfdFitPassThruDfn],33,[dbo].[UkClimateChangeAgrPercent],30,[dbo].[UkCommAccountSuspended],33,[dbo].[UkCommElecChargeBillEntry],26,[dbo].[UkCommEnrolAccount],27,[dbo].[UkCommEnrolCustomer],29,[dbo].[UkCommEnrolMeterPoint],27,[dbo].[UkCommEnrolProperty],28,[dbo].[UkCommEnrolRejection],28,[dbo].[UkCommercialCclEntry],29,[dbo].[UkCommercialEnrolment],33,[dbo].[UkCommercialMpanBillEntry],33,[dbo].[UkCommercialMprnBillEntry],24,[dbo].[UkCommercialSite],32,[dbo].[UkCommGasChargeBillEntry],30,[dbo].[UkCommGasReadBillEntry],32,[dbo].[UkCommMeterReadBillEntry],29,[dbo].[UkCommProductConstant],33,[dbo].[UkCommSingleLineBillEntry],27,[dbo].[UkCommSiteBillEntry],33,[dbo].[UkCommSiteBillParentChild],29,[dbo].[UkCommSiteGraphRecord],31,[dbo].[UkCommSiteSalesTaxEntry],33,[dbo].[UkConsumptionComponentCls],19,[dbo].[UkDccDevice],24,[dbo].[UkDccDeviceAlert],27,[dbo].[UkDccDeviceProperty],25,[dbo].[UkDccTariffUpdate],29,[dbo].[UkDccTariffUpdateRate],22,[dbo].[UkDefaultAgent],31,[dbo].[UKDirectDebitValidation],32,[dbo].[UkDistChargeClassMapping],33,[dbo].[UkDistChargeClsProfileCls],31,[dbo].[UkDistribAreaLossFactor],31,[dbo].[UkDistribAreaLossPeriod],33,[dbo].[UkDistribAreaPriceVersion],25,[dbo].[UkDistribAreaRate],31,[dbo].[UkDistribAreaRatePeriod],29,[dbo].[UkDistribAreaTimeBand],31,[dbo].[UkDistribConnectionType],30,[dbo].[UkDistribEhvLossFactor],24,[dbo].[UkDistribEhvRate],30,[dbo].[UkDistribEhvRatePeriod],33,[dbo].[UkDistribEhvSuprRedPeriod],33,[dbo].[UkDistribUnitChargePeriod],26,[dbo].[UkDistributionArea],33,[dbo].[UkDistributionChargeClass],30,[dbo].[UkDistributorDuosPrefs],33,[dbo].[UkDomAnnStatConsumpPeriod],30,[dbo].[UkDomAnnStatMeterPoint],33,[dbo].[UkDomAnnStatMeterPointTIL],33,[dbo].[UkDomesticAnnualStatement],26,[dbo].[UkDuosAvailHistory],21,[dbo].[UkDuosInvoice],25,[dbo].[UkDuosInvoiceBill],27,[dbo].[UkDuosInvoiceCharge],31,[dbo].[UkDuosInvoiceChargeType],31,[dbo].[UkDuosProductChargeType],25,[dbo].[UkDuosProductItem],28,[dbo].[UkDuosProductItemDfn],30,[dbo].[UkDuosSettlementCharge],28,[dbo].[UkDuosSettlementData],21,[dbo].[UkElecDayType],29,[dbo].[UkElecNoonTemperature],25,[dbo].[UkElecPriceMatrix],28,[dbo].[UkElecPriceMatrixDfn],31,[dbo].[UkElecPriceMatrixDfnRow],28,[dbo].[UkElecPriceMatrixRow],23,[dbo].[UkElecRotaBlock],20,[dbo].[UkElecSeason],32,[dbo].[UkElecSettlementCalendar],31,[dbo].[UkElecSettlementRunType],24,[dbo].[UkElecSunsetTime],32,[dbo].[UkElectricityOfferParams],32,[dbo].[UkElectricityQuoteParams],32,[dbo].[UkElecYearlySeasonDetail],23,[dbo].[UkEnergyTracker],33,[dbo].[UkEnergyTrackerFixedPrice],25,[dbo].[UkFlexCashOutItem],28,[dbo].[UkFlexCashOutItemDfn],32,[dbo].[UkFlexClassTradeFacility],21,[dbo].[UkFlexWapItem],24,[dbo].[UkFlexWapItemDfn],26,[dbo].[UkGasAgentContract],30,[dbo].[UkGasAnnualLoadProfile],31,[dbo].[UkGasConfigurableAqBand],17,[dbo].[UkGasCsep],23,[dbo].[UkGasCsepPeriod],30,[dbo].[UkGasDailyAdjustFactor],27,[dbo].[UkGasDailyConsCurve],25,[dbo].[UkGasDefaultAgent],26,[dbo].[UkGasDnAdminCharge],28,[dbo].[UkGasDnChargeAqBands],33,[dbo].[UkGasDnExitCapacityCharge],32,[dbo].[UkGasDnLdzCustomerCharge],32,[dbo].[UkGasDnLdzOptionalTariff],32,[dbo].[UkGasDnLdzSystemCapacity],33,[dbo].[UkGasDnLdzSystemCommodity],27,[dbo].[UkGasDnPriceVersion],25,[dbo].[UkGasDnRatePeriod],33,[dbo].[UkGasDnSharedSupplyCharge],28,[dbo].[UkGasEndUserCategory],26,[dbo].[UkGasEucLoadFactor],23,[dbo].[UkGasEucWarBand],21,[dbo].[UkGasExitZone],29,[dbo].[UkGasFlexiProductItem],32,[dbo].[UkGasFlexiProductItemDfn],32,[dbo].[UkGasFullEndUserCategory],16,[dbo].[UkGasIgt],30,[dbo].[UkGasLdzCalorificValue],29,[dbo].[UkGasLocalDistribZone],20,[dbo].[UkGasMapMprn],21,[dbo].[UkGasMapPrice],28,[dbo].[UkGasNtsPriceVersion],26,[dbo].[UkGasNtsRatePeriod],33,[dbo].[UkGasOfferTransportParams],29,[dbo].[UkGasPostcodeExitZone],24,[dbo].[UkGasPriceMatrix],27,[dbo].[UkGasPriceMatrixDfn],30,[dbo].[UkGasPriceMatrixDfnRow],27,[dbo].[UkGasPriceMatrixRow],24,[dbo].[UkGasQuoteParams],25,[dbo].[UkGasRegCanReason],26,[dbo].[UkGasScalingFactor],28,[dbo].[UkGasSettlementClass],32,[dbo].[UkGasStClassGtValidation],20,[dbo].[UkGasTapMprn],33,[dbo].[UkGasTransportChargeClass],30,[dbo].[UkGasWeatherCorrection],23,[dbo].[UkGspCorrection],30,[dbo].[UkGspCorrectionVersion],18,[dbo].[UkGspGroup],33,[dbo].[UkGspGroupCorrectScalFact],29,[dbo].[UkGspGroupDistributor],28,[dbo].[UkHhConsumptionCurve],27,[dbo].[UkHhDataCleanseItem],30,[dbo].[UkHhDataCleansePackage],21,[dbo].[UkHhDataError],26,[dbo].[UkHhErrorComponent],29,[dbo].[UkLineLossFactorClass],32,[dbo].[UkLlfcConnectTypeMapping],26,[dbo].[UkLossDataFlowCase],29,[dbo].[UkLossObjectionReason],31,[dbo].[UkMarketParticipContact],31,[dbo].[UkMarketRoleDistribArea],26,[dbo].[UkMeasurementClass],29,[dbo].[UkMeasurementQuantity],33,[dbo].[UkMeasurementQuantMapping],30,[dbo].[UkMeterTimeswitchClass],30,[dbo].[UkMtcMarketParticipant],22,[dbo].[UkMtcMeterType],24,[dbo].[UkMtcPaymentType],29,[dbo].[UkNhhDuosPassThruItem],32,[dbo].[UkNhhDuosPassThruItemDfn],32,[dbo].[UkNhhPriceMatInstRowRate],29,[dbo].[UkNhhPriceMatrixClass],27,[dbo].[UkNhhPriceMatrixDfn],30,[dbo].[UkNhhPriceMatrixDfnRow],30,[dbo].[UkNhhPriceMatrixDfnSet],28,[dbo].[UkNhhPriceMatrixInst],31,[dbo].[UkNhhPriceMatrixInstRow],31,[dbo].[UkNhhPriceMatrixReqArea],31,[dbo].[UkNhhPriceMatrixRequest],28,[dbo].[UkOfferPaymentParams],33,[dbo].[UkPostCdGrpProdBndlFilter],20,[dbo].[UkPrepayDebt],30,[dbo].[UkPrepayDebtAdjustment],33,[dbo].[UkPrepayDebtAssgnProtocol],31,[dbo].[UkPrepayDebtCollectRate],30,[dbo].[UkPrepayDebtCollectSch],32,[dbo].[UkPrepayDebtMeterTypeSch],31,[dbo].[UkPrepayDebtTransaction],25,[dbo].[UkPrepayGspLookup],26,[dbo].[UkPrepayIdentifier],32,[dbo].[UkPrepayInterimStatement],19,[dbo].[UkPrepayKey],33,[dbo].[UkPrepayMeterExchangeDebt],32,[dbo].[UkPrepayMeterpointTariff],23,[dbo].[UkPrepayPayment],32,[dbo].[UkPrePayProdBundleFilter],27,[dbo].[UkPrepayProductItem],30,[dbo].[UkPrepayProductItemDfn],22,[dbo].[UkPrepayTariff],27,[dbo].[UkPrepayTariffGroup],32,[dbo].[UkPriceChangeSuppression],20,[dbo].[UkPriceCurve],23,[dbo].[UkPriceCurveSet],31,[dbo].[UkPriceImportValidation],24,[dbo].[UkPriceMatrixSet],17,[dbo].[UkProfile],22,[dbo].[UkProfileClass],32,[dbo].[UkProfileClsReadingCycle],28,[dbo].[UkProfileCoefficient],22,[dbo].[UkProfileCurve],26,[dbo].[UkProfileCurveType],32,[dbo].[UkProfileRegressionCoeff],20,[dbo].[UkProfileSet],33,[dbo].[UkProfileSetGspAvgConsump],33,[dbo].[UkPurchGroupTradeFacility],27,[dbo].[UkQuoteBrokerMargin],29,[dbo].[UkQuoteDuosFixedPrice],29,[dbo].[UkQuoteSupplierMargin],25,[dbo].[UkQuoteValidation],25,[dbo].[UkRegDataFlowCase],31,[dbo].[UkRegDfnRateNameMapping],28,[dbo].[UkSiteVisitCheckCode],31,[dbo].[UkSmrRegisterDefinition],31,[dbo].[UkSscTeleSwitchClockMap],23,[dbo].[UkSscTprMapping],33,[dbo].[UkSscTprProfileSwitchLoad],24,[dbo].[UkSscTprUnitRate],29,[dbo].[UkStdSettlementConfig],30,[dbo].[UkSupplySwitchingPrefs],23,[dbo].[UkTamperingCode],28,[dbo].[UkTheftInvestigation],27,[dbo].[UkTimePatternRegime],26,[dbo].[UkTprClockInterval],20,[dbo].[UkTprMapping],23,[dbo].[UkTprMappingSet],31,[dbo].[UkTprMappingSetRateName],31,[dbo].[UkTprTeleSwitchClockMap],15,[dbo].[UkTrade],20,[dbo].[UkTradeBatch],20,[dbo].[UkTradeExtra],23,[dbo].[UkTradeFacility],28,[dbo].[UkTradeFacilityGroup],33,[dbo].[UkTradeFacilityGroupClose],33,[dbo].[UkTradeFacilityGroupIndex],27,[dbo].[UkTradeFacilityType],24,[dbo].[UkTradeViolation],21,[dbo].[UkTuosHistory],24,[dbo].[UkTuosLossFactor],25,[dbo].[UkTuosProductItem],28,[dbo].[UkTuosProductItemDfn],18,[dbo].[UkTuosRate],24,[dbo].[UkTuosRatePeriod],19,[dbo].[UkTuosTriad],22,[dbo].[UkTuosTriadSet],21,[dbo].[UkTuosVersion],28,[dbo].[UkTypResConsumpValue],27,[dbo].[UkValidMtcLlfcSscPc],24,[dbo].[UkVatCertificate],30,[dbo].[UkVulnCustApptPassword],27,[dbo].[UkVulnCustGasSafety],29,[dbo].[UkVulnCustInfoAcsForm],30,[dbo].[UkVulnCustIntNomScheme],33,[dbo].[UkVulnCustMovePrepayMeter],22,[dbo].[UkVulnCustomer],30,[dbo].[UkVulnCustomerTypeInst],21,[dbo].[UkVulnCustPsr],24,[dbo].[UkVulnCustPsrDfn],32,[dbo].[UkVulnCustQuartMeterRead],28,[dbo].[UkVulnCustServiceDfn],29,[dbo].[UkVulnCustServiceInst],25,[dbo].[UkVulnCustTypeDfn],29,[dbo].[UkVulnCustTypeService],20,[dbo].[UkWaterMeter],32,[dbo].[UkWaterMeterConfigPeriod],24,[dbo].[UkWaterMeterSize],22,[dbo].[UsagePartition],25,[dbo].[UsagePartitionDfn],25,[dbo].[UsageThresholdDfn],26,[dbo].[UsageThresholdInst],29,[dbo].[UsageThresholdRateDfn],30,[dbo].[UsageThresholdRateInst],18,[dbo].[UserLayout],17,[dbo].[UserLogin],22,[dbo].[UserLoginError],20,[dbo].[UserPassword],25,[dbo].[UserRolePartition],15,[dbo].[UserTbl],21,[dbo].[UtilityMarket],18,[dbo].[VersionTbl],19,[dbo].[VersionTbl2],28,[dbo].[VolumeToleranceParam],27,[dbo].[VolumeToleranceRole],15,[dbo].[WebUser],30,[dbo].[WebUserCustomerAccount],18,[dbo].[WebUserLog],20,[dbo].[WebUserToken],19,[dbo].[WorkerClass],26,[dbo].[WorkerClassTaskDfn],16,[dbo].[WriteOff],22,[dbo].[WriteOffReason],19,[dbo].[YearDayType],23,[dbo].[YearDayTypePart],16,[dbo].[YearPart],19,[dbo].[YearTypeDfn],27,[dbo].[YearTypeDfnYearPart],"
+              DropObjectsFirst="True"
+              CopyIndexes="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container - Schema Creation.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{e19a1268-d335-471d-8136-1d3867d52ac6}"
+          DTS:EvalOp="1"
+          DTS:Expression="@[User::varTableCount]==0"
+          DTS:From="Package\Sequence Container - Schema Creation\Checking the Object Exists?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Sequence Container - Schema Creation\Move all Table Schema to Staging (First Time)" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Temp Table Creation in Staging Database"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{e4f92328-366e-4c65-9b76-a0d51b689f00}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Temp Table Creation in Staging Database"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7248B6C8-3427-4D40-A57F-63F5FB9C430C}"
+          SQLTask:SqlStatementSource="Declare @Sql nVarchar(Max) = ''&#xA;Declare @crlf VARCHAR(2) = CHAR(13) + CHAR(10) ;&#xA;SELECT @Sql = @Sql + &#xA;'If Not Exists(Select 1 From sysobjects Where Xtype=''U'' and Name = ''Temp_' + TableName + ''' )&#xA; Select * into Temp_' + TableName + ' From ' + TableName + ' Where 1=2 ' +';' + @crlf&#xA;From &#xA; (&#xA; Select Distinct Table_Name as TableName From &#xA;INFORMATION_SCHEMA.VIEW_TABLE_USAGE Where VIEW_NAME like 'vw_ndm%'&#xA; ) A&#xA;Exec (@Sql)&#xA;--PRINT @Sql" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{1DF675E2-7BEF-4585-A1B8-B1D6591FCBDB}"
+      DTS:From="Package\Sequence Container - Schema Creation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Move All NDM View" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{9B8B3BB9-ACE4-435E-96DA-10757C03BECF}"
+      DTS:From="Package\Move All NDM View"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Delete Non-NDM Tables" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{2AB8A484-D9A7-4484-A365-12BCA21B01FA}"
+      DTS:From="Package\Delete Non-NDM Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Temp Table Creation in Staging Database" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="192,42"
+          Id="Package\Delete Non-NDM Tables"
+          TopLeft="412.142857142857,510" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Move All NDM View"
+          TopLeft="428.166666666667,411.071428571429" />
+        <NodeLayout
+          Size="228,42"
+          Id="Package\Sequence Container - Schema Creation\Checking the Object Exists?"
+          TopLeft="28.5,6.50000000000003" />
+        <NodeLayout
+          Size="200,51"
+          Id="Package\Sequence Container - Schema Creation\Move all Table Schema to Staging (First Time)"
+          TopLeft="38.611111111111,106.277777777778" />
+        <EdgeLayout
+          Id="Package\Sequence Container - Schema Creation.PrecedenceConstraints[Constraint 2]"
+          TopLeft="140.555555555555,48.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,57.777777777778"
+              Start="0,0"
+              End="0,50.277777777778">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.277777777778" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,17.138888888889,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="309,212"
+          Size="309,255"
+          Id="Package\Sequence Container - Schema Creation"
+          TopLeft="365.888888888889,126" />
+        <NodeLayout
+          Size="284,42"
+          Id="Package\Temp Table Creation in Staging Database"
+          TopLeft="367.571428571428,601.714285714286" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="518.277777777778,381">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,30.071428571429"
+              Start="0,0"
+              End="0,22.571428571429">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.571428571429" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="516.166666666667,453.071428571429">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-8.02380952380997,56.928571428571"
+              Start="0,0"
+              End="-8.02380952380997,49.428571428571">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.4642857142855" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.4642857142855"
+                    Point2="0,28.4642857142855"
+                    Point3="-4,28.4642857142855" />
+                  <mssgle:LineSegment
+                    End="-4.02380952380997,28.4642857142855" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4.02380952380997,28.4642857142855"
+                    Point2="-8.02380952380997,28.4642857142855"
+                    Point3="-8.02380952380997,32.4642857142855" />
+                  <mssgle:LineSegment
+                    End="-8.02380952380997,49.428571428571" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="508.857142857142,552">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,49.714285714286"
+              Start="0,0"
+              End="0,42.214285714286">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.214285714286" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Junifer Schema Creation in Staging"
+          ParentId="Package"
+          Size="307,46"
+          Id="85c4da1d-0902-4fdc-9c27-6d17a21f206c"
+          TopLeft="369,36">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="18"
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

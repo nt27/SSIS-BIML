@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/13/2018 8:27:15 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="Win2016-SQL"
+  DTS:CreatorName="cgiadmin"
+  DTS:DTSID="{D87B3B0B-C803-4633-B9B3-AAAF09673CE9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.107"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="01_02_JUN_DataMovement_to_Staging_Delta"
+  DTS:VersionGUID="{010D92C3-7420-4220-B5AB-4B6A6EFAE016}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[_01_02_JUN_DataMovement_to_Staging_Delta.Execute-01_02_1_Account]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{84A772BD-DA32-4540-90DB-69C32539C4BD}"
+      DTS:ObjectName="_01_02_JUN_DataMovement_to_Staging_Delta.Execute-01_02_1_Account">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\cgiadmin\Source\Repos\nt27\SSIS-BIML\JUN-Packages\01_02_1_Account.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute-01_02_1_Account"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:DTSID="{B39B3B7C-308E-407B-9C00-3F648B67A509}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute-01_02_1_Account"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{84A772BD-DA32-4540-90DB-69C32539C4BD}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+</DTS:Executable>

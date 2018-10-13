@@ -7,6 +7,8 @@ Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSIS-Package", "SSIS-Packag
 EndProject
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSIS-Package-Generation", "SSIS-Package-Generation\SSIS-Package-Generation.dtproj", "{FC9CACC7-ACF1-465B-A919-6E2A3A819A54}"
 EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "JUN-Packages", "JUN-Packages\JUN-Packages.dtproj", "{71B3CBF7-B64D-4066-ACEC-1A30DD950159}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Default = Development|Default
@@ -16,6 +18,8 @@ Global
 		{70F96862-77AC-4A47-8FE7-5C82304405D4}.Development|Default.Build.0 = Development
 		{FC9CACC7-ACF1-465B-A919-6E2A3A819A54}.Development|Default.ActiveCfg = Development
 		{FC9CACC7-ACF1-465B-A919-6E2A3A819A54}.Development|Default.Build.0 = Development
+		{71B3CBF7-B64D-4066-ACEC-1A30DD950159}.Development|Default.ActiveCfg = Development
+		{71B3CBF7-B64D-4066-ACEC-1A30DD950159}.Development|Default.Build.0 = Development
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
