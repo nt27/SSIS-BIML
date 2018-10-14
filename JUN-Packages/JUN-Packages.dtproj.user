@@ -4,6 +4,8 @@
     <Configuration>
       <Name>Development</Name>
       <Options>
+        <ServerName />
+        <PathOnServer />
         <StartObjectID>01_JUN_Master_Package.dtsx</StartObjectID>
         <UserIDs />
         <UserPasswords />

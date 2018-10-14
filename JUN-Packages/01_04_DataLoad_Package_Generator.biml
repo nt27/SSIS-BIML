@@ -65,7 +65,7 @@
                 iTableCount++;
                 
             #>
-            <Package Name="01_02_<#=iTableCount#>_<#=Table#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+            <Package Name="01_04_<#=iTableCount#>_<#=Table#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
 			<Tasks>
 						<ExecuteSQL Name="Execute SQL" ConnectionName="Dest">
 							<DirectInput>Truncate Table Temp_<#=Table#></DirectInput>

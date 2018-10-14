@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="10/13/2018 11:22:32 AM"
+  DTS:CreationDate="10/14/2018 10:00:42 AM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="Win2016-SQL"
   DTS:CreatorName="cgiadmin"
-  DTS:DTSID="{8EB07786-7A5E-4FEF-819A-B9C00839F85A}"
+  DTS:DTSID="{BFE2000D-71B6-4DB5-A177-56F7A2BFD30D}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.107"
   DTS:LocaleID="1033"
   DTS:ObjectName="01_02_2_AccountTransaction"
-  DTS:VersionGUID="{552E53FA-6C56-40FC-A0AC-BFEAE6656893}"
+  DTS:VersionGUID="{4B6113D0-C6BD-4276-8329-AEAF882EB207}"
   DTS:VersionMajor="0">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
@@ -18,7 +18,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Dest]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{684E5997-5CC9-49F0-87FA-471467022E91}"
+      DTS:DTSID="{FCA65815-810A-4D09-B3CB-DAD71803C27F}"
       DTS:ObjectName="Dest">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -28,7 +28,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Source]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{A4462E78-6AA9-4B22-BB39-5670D4A849B3}"
+      DTS:DTSID="{EFE14E3B-9B2E-4F42-985A-937626D8A5CD}"
       DTS:ObjectName="Source">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -41,7 +41,7 @@
     <DTS:Executable
       DTS:refId="Package\DataFlow-LoadData"
       DTS:CreationName="Microsoft.Pipeline"
-      DTS:DTSID="{12E03B47-EC17-4B53-99C1-C6C53085FCFD}"
+      DTS:DTSID="{74FBA393-7EBD-451D-BABA-5A62DB82A785}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="DataFlow-LoadData"
@@ -4599,41 +4599,8 @@
                   expressionType="Notify"
                   name="SqlCommandParam"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[AccountTransaction]) [refTable]
-                                                        where [refTable].[id] = ? 
-                                                                                                                    and [refTable].[id] = ?
-                                                                                                                    and [refTable].[accountFk] = ?
-                                                                                                                    and [refTable].[orderNo] = ?
-                                                                                                                    and [refTable].[accountTransactionTypeFk] = ?
-                                                                                                                    and [refTable].[status] = ?
-                                                                                                                    and [refTable].[description] = ?
-                                                                                                                    and [refTable].[dueDt] = ?
-                                                                                                                    and [refTable].[currencyFk] = ?
-                                                                                                                    and [refTable].[creditAmount] = ?
-                                                                                                                    and [refTable].[debitAmount] = ?
-                                                                                                                    and [refTable].[creditBalance] = ?
-                                                                                                                    and [refTable].[debitBalance] = ?
-                                                                                                                    and [refTable].[accountBalance] = ?
-                                                                                                                    and [refTable].[createdDttm] = ?
-                                                                                                                    and [refTable].[createdUserTblFk] = ?
-                                                                                                                    and [refTable].[acceptedDttm] = ?
-                                                                                                                    and [refTable].[acceptedByUserTblFk] = ?
-                                                                                                                    and [refTable].[collectionRequestDt] = ?
-                                                                                                                    and [refTable].[collectionDt] = ?
-                                                                                                                    and [refTable].[collectionScheduledFl] = ?
-                                                                                                                    and [refTable].[maxCollectionAmount] = ?
-                                                                                                                    and [refTable].[cancelledDttm] = ?
-                                                                                                                    and [refTable].[cancelledByUserTblFk] = ?
-                                                                                                                    and [refTable].[cancelAccountTransactionFk] = ?
-                                                                                                                    and [refTable].[rejectedDttm] = ?
-                                                                                                                    and [refTable].[rejectedByUserTblFk] = ?
-                                                                                                                    and [refTable].[dunningFl] = ?
-                                                                                                                    and [refTable].[authorisedByUserTblFk] = ?
-                                                                                                                    and [refTable].[authorisedDttm] = ?
-                                                                                                                    and [refTable].[reference] = ?
-                                                                                                                    and [refTable].[deleteFl] = ?
-                                                                                                                    and [refTable].[versionNo] = ?
-                                                                                                                    and [refTable].[partitionId] = ?
-                                                                                        </property>
+                                                        where [refTable].[id] = ?  and [refTable].[id] = ? and [refTable].[accountFk] = ? and [refTable].[orderNo] = ? and [refTable].[accountTransactionTypeFk] = ? and [refTable].[status] = ? and [refTable].[description] = ? and [refTable].[dueDt] = ? and [refTable].[currencyFk] = ? and [refTable].[creditAmount] = ? and [refTable].[debitAmount] = ? and [refTable].[creditBalance] = ? and [refTable].[debitBalance] = ? and [refTable].[accountBalance] = ? and [refTable].[createdDttm] = ? and [refTable].[createdUserTblFk] = ? and [refTable].[acceptedDttm] = ? and [refTable].[acceptedByUserTblFk] = ? and [refTable].[collectionRequestDt] = ? and [refTable].[collectionDt] = ? and [refTable].[collectionScheduledFl] = ? and [refTable].[maxCollectionAmount] = ? and [refTable].[cancelledDttm] = ? and [refTable].[cancelledByUserTblFk] = ? and [refTable].[cancelAccountTransactionFk] = ? and [refTable].[rejectedDttm] = ? and [refTable].[rejectedByUserTblFk] = ? and [refTable].[dunningFl] = ? and [refTable].[authorisedByUserTblFk] = ? and [refTable].[authorisedDttm] = ? and [refTable].[reference] = ? and [refTable].[deleteFl] = ? and [refTable].[versionNo] = ? and [refTable].[partitionId] = ?
+                                    </property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the type of connection used to access the reference dataset."
@@ -5382,7 +5349,7 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{CFF39747-47D0-41AD-863C-2D5042897CDD}"
+      DTS:DTSID="{71DD85D8-0BC1-45E3-AD6A-EE56C0748876}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL"
@@ -5391,14 +5358,14 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{684E5997-5CC9-49F0-87FA-471467022E91}"
+          SQLTask:Connection="{FCA65815-810A-4D09-B3CB-DAD71803C27F}"
           SQLTask:SqlStatementSource="Truncate Table Temp_AccountTransaction" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Execute SQL-Update Record"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{9843294E-2D4B-4B3C-A295-2B76D1740EC4}"
+      DTS:DTSID="{56826A17-4C57-468C-A3D4-ADF96F53EFC4}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL-Update Record"
@@ -5407,7 +5374,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{684E5997-5CC9-49F0-87FA-471467022E91}"
+          SQLTask:Connection="{FCA65815-810A-4D09-B3CB-DAD71803C27F}"
           SQLTask:SqlStatementSource="&#xA;                                           &#xA;           Update AccountTransaction Set &#xA;                                id =  B.[id],accountFk =  B.[accountFk],orderNo =  B.[orderNo],accountTransactionTypeFk =  B.[accountTransactionTypeFk],status =  B.[status],description =  B.[description],dueDt =  B.[dueDt],currencyFk =  B.[currencyFk],creditAmount =  B.[creditAmount],debitAmount =  B.[debitAmount],creditBalance =  B.[creditBalance],debitBalance =  B.[debitBalance],accountBalance =  B.[accountBalance],createdDttm =  B.[createdDttm],createdUserTblFk =  B.[createdUserTblFk],acceptedDttm =  B.[acceptedDttm],acceptedByUserTblFk =  B.[acceptedByUserTblFk],collectionRequestDt =  B.[collectionRequestDt],collectionDt =  B.[collectionDt],collectionScheduledFl =  B.[collectionScheduledFl],maxCollectionAmount =  B.[maxCollectionAmount],cancelledDttm =  B.[cancelledDttm],cancelledByUserTblFk =  B.[cancelledByUserTblFk],cancelAccountTransactionFk =  B.[cancelAccountTransactionFk],rejectedDttm =  B.[rejectedDttm],rejectedByUserTblFk =  B.[rejectedByUserTblFk],dunningFl =  B.[dunningFl],authorisedByUserTblFk =  B.[authorisedByUserTblFk],authorisedDttm =  B.[authorisedDttm],reference =  B.[reference],deleteFl =  B.[deleteFl],versionNo =  B.[versionNo],partitionId =  B.[partitionId]&#xA;                                From AccountTransaction A Inner Join Temp_AccountTransaction B&#xA;                                On  A.Id = B.ID&#xA;       " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -5416,7 +5383,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_DataFlow-LoadData_To_Execute SQL-Update Record]"
       DTS:CreationName=""
-      DTS:DTSID="{C0DE68F5-B25D-4224-ACB2-4E02B7998795}"
+      DTS:DTSID="{546D7E99-7AEA-4DD7-9830-8CB1C759317C}"
       DTS:From="Package\DataFlow-LoadData"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_DataFlow-LoadData_To_Execute SQL-Update Record"
@@ -5424,7 +5391,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_Execute SQL_To_DataFlow-LoadData]"
       DTS:CreationName=""
-      DTS:DTSID="{C350A5D2-3BA5-440F-970B-885DDFE0E5D9}"
+      DTS:DTSID="{C0EB83EE-CCF8-4C2E-91C8-36B3F344529D}"
       DTS:From="Package\Execute SQL"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_Execute SQL_To_DataFlow-LoadData"

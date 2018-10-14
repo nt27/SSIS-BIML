@@ -1,214 +1,47 @@
 <?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="10/13/2018 11:22:32 AM"
+  DTS:CreationDate="10/14/2018 8:39:45 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="Win2016-SQL"
   DTS:CreatorName="cgiadmin"
-  DTS:DTSID="{51259C28-9FAA-4BB9-BD55-8E0E51485D80}"
+  DTS:DTSID="{A7D687F4-39AC-406B-A5FB-7CD8D276D809}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.107"
   DTS:LocaleID="1033"
   DTS:ObjectName="01_02_App_DataMovement_to_Staging_Delta"
-  DTS:VersionGUID="{D529DDE6-BFF2-402F-B734-BD8540F6A3CA}"
+  DTS:VersionGUID="{61C66DF0-0693-4B8E-BB2D-A5CB37F0E1AD}"
   DTS:VersionMajor="0">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_1_Account]"
+      DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_1_AccountAgedDebtHistory]"
       DTS:CreationName="FILE"
-      DTS:DTSID="{F9E8E7A0-086D-4F7F-BBF1-0F74DA0236E5}"
-      DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_1_Account">
+      DTS:DTSID="{44BBC44C-5232-43CC-AB82-692F49AD6C88}"
+      DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_1_AccountAgedDebtHistory">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="C:\Users\cgiadmin\Source\Repos\nt27\SSIS-BIML\SSIS-Package-Generation\01_02_1_Account.dtsx" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_2_AccountTransaction]"
-      DTS:CreationName="FILE"
-      DTS:DTSID="{4131CBE7-B311-466F-8E5B-ABF09BD7E155}"
-      DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_2_AccountTransaction">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="C:\Users\cgiadmin\Source\Repos\nt27\SSIS-BIML\SSIS-Package-Generation\01_02_2_AccountTransaction.dtsx" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_3_AccountTransactionType]"
-      DTS:CreationName="FILE"
-      DTS:DTSID="{B810647D-4B14-4AFE-9709-121B307C1A50}"
-      DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_3_AccountTransactionType">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="C:\Users\cgiadmin\Source\Repos\nt27\SSIS-BIML\SSIS-Package-Generation\01_02_3_AccountTransactionType.dtsx" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_4_Customer]"
-      DTS:CreationName="FILE"
-      DTS:DTSID="{0D713442-B458-4C3B-9527-40B3E498CB0D}"
-      DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_4_Customer">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="C:\Users\cgiadmin\Source\Repos\nt27\SSIS-BIML\SSIS-Package-Generation\01_02_4_Customer.dtsx" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_5_CustomerClass]"
-      DTS:CreationName="FILE"
-      DTS:DTSID="{B5270F9D-BFBF-4294-A74F-167796EDB88C}"
-      DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_5_CustomerClass">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="C:\Users\cgiadmin\Source\Repos\nt27\SSIS-BIML\SSIS-Package-Generation\01_02_5_CustomerClass.dtsx" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_6_CustomerType]"
-      DTS:CreationName="FILE"
-      DTS:DTSID="{15097FE4-4193-4B83-8828-97CED996B504}"
-      DTS:ObjectName="_01_02_App_DataMovement_to_Staging_Delta.Execute-01_02_6_CustomerType">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="C:\Users\cgiadmin\Source\Repos\nt27\SSIS-BIML\SSIS-Package-Generation\01_02_6_CustomerType.dtsx" />
+          DTS:ConnectionString="C:\Users\cgiadmin\Source\Repos\nt27\SSIS-BIML\SSIS-Package-Generation\01_02_1_AccountAgedDebtHistory.dtsx" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Execute-01_02_1_Account"
+      DTS:refId="Package\Execute-01_02_1_AccountAgedDebtHistory"
       DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:DTSID="{BC60038A-BC0C-4D97-B249-2715A98A0D92}"
+      DTS:DTSID="{63CAFAD0-4CD4-4395-9979-0944FF7A9B7F}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute-01_02_1_Account"
+      DTS:ObjectName="Execute-01_02_1_AccountAgedDebtHistory"
       DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
-          <Connection>{F9E8E7A0-086D-4F7F-BBF1-0F74DA0236E5}</Connection>
-        </ExecutePackageTask>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute-01_02_2_AccountTransaction"
-      DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:DTSID="{D75F40DD-F926-453B-A738-F8328E99AD5F}"
-      DTS:ExecutableType="Microsoft.ExecutePackageTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute-01_02_2_AccountTransaction"
-      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <ExecutePackageTask>
-          <Connection>{4131CBE7-B311-466F-8E5B-ABF09BD7E155}</Connection>
-        </ExecutePackageTask>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute-01_02_3_AccountTransactionType"
-      DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:DTSID="{29BF295B-C240-4FCE-A55D-92058FAF0B54}"
-      DTS:ExecutableType="Microsoft.ExecutePackageTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute-01_02_3_AccountTransactionType"
-      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <ExecutePackageTask>
-          <Connection>{B810647D-4B14-4AFE-9709-121B307C1A50}</Connection>
-        </ExecutePackageTask>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute-01_02_4_Customer"
-      DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:DTSID="{599AB6C2-40C8-43D7-BDDA-D941DC1B977D}"
-      DTS:ExecutableType="Microsoft.ExecutePackageTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute-01_02_4_Customer"
-      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <ExecutePackageTask>
-          <Connection>{0D713442-B458-4C3B-9527-40B3E498CB0D}</Connection>
-        </ExecutePackageTask>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute-01_02_5_CustomerClass"
-      DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:DTSID="{03BFFDEC-3374-414D-AFDF-15E514DBA666}"
-      DTS:ExecutableType="Microsoft.ExecutePackageTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute-01_02_5_CustomerClass"
-      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <ExecutePackageTask>
-          <Connection>{B5270F9D-BFBF-4294-A74F-167796EDB88C}</Connection>
-        </ExecutePackageTask>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute-01_02_6_CustomerType"
-      DTS:CreationName="Microsoft.ExecutePackageTask"
-      DTS:DTSID="{6BB57F1C-3E06-4AA3-A63E-9DEDAA86D757}"
-      DTS:ExecutableType="Microsoft.ExecutePackageTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute-01_02_6_CustomerType"
-      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <ExecutePackageTask>
-          <Connection>{15097FE4-4193-4B83-8828-97CED996B504}</Connection>
+          <Connection>{44BBC44C-5232-43CC-AB82-692F49AD6C88}</Connection>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
-  <DTS:PrecedenceConstraints>
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint_Execute-01_02_1_Account_To_Execute-01_02_2_AccountTransaction]"
-      DTS:CreationName=""
-      DTS:DTSID="{E81EF204-D6E8-4309-A97F-5168B040734F}"
-      DTS:From="Package\Execute-01_02_1_Account"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint_Execute-01_02_1_Account_To_Execute-01_02_2_AccountTransaction"
-      DTS:To="Package\Execute-01_02_2_AccountTransaction" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint_Execute-01_02_2_AccountTransaction_To_Execute-01_02_3_AccountTransactionType]"
-      DTS:CreationName=""
-      DTS:DTSID="{17F42764-7E14-43EB-A5A0-40F3D2914FAE}"
-      DTS:From="Package\Execute-01_02_2_AccountTransaction"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint_Execute-01_02_2_AccountTransaction_To_Execute-01_02_3_AccountTransactionType"
-      DTS:To="Package\Execute-01_02_3_AccountTransactionType" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint_Execute-01_02_3_AccountTransactionType_To_Execute-01_02_4_Customer]"
-      DTS:CreationName=""
-      DTS:DTSID="{1706A1C3-BBE5-4D0D-A76C-1E41320CB847}"
-      DTS:From="Package\Execute-01_02_3_AccountTransactionType"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint_Execute-01_02_3_AccountTransactionType_To_Execute-01_02_4_Customer"
-      DTS:To="Package\Execute-01_02_4_Customer" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint_Execute-01_02_4_Customer_To_Execute-01_02_5_CustomerClass]"
-      DTS:CreationName=""
-      DTS:DTSID="{22DC8101-4CBE-4C83-A2EB-5A706BDDC03A}"
-      DTS:From="Package\Execute-01_02_4_Customer"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint_Execute-01_02_4_Customer_To_Execute-01_02_5_CustomerClass"
-      DTS:To="Package\Execute-01_02_5_CustomerClass" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint_Execute-01_02_5_CustomerClass_To_Execute-01_02_6_CustomerType]"
-      DTS:CreationName=""
-      DTS:DTSID="{A2D0C3F1-BDCC-4536-8889-AB17572AB1A5}"
-      DTS:From="Package\Execute-01_02_5_CustomerClass"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint_Execute-01_02_5_CustomerClass_To_Execute-01_02_6_CustomerType"
-      DTS:To="Package\Execute-01_02_6_CustomerType" />
-  </DTS:PrecedenceConstraints>
 </DTS:Executable>

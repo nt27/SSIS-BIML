@@ -1,0 +1,881 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DTS:Executable DTS:CreationDate="10/14/2018 20:48:05" DTS:CreationName="Microsoft.Package" DTS:CreatorComputerName="Win2016-SQL" DTS:CreatorName="cgiadmin" DTS:DTSID="{E70C40C9-3E56-42B9-9DC0-12E95FABD2A2}" DTS:ExecutableType="Microsoft.Package" DTS:LastModifiedProductVersion="" DTS:LocaleID="1033" DTS:ObjectName="01_02_7_AccountAgedDebtHistory" DTS:refId="Package" DTS:VersionBuild="0" DTS:VersionGUID="{57F4D5C6-8A26-4B14-808A-CB135FFA1459}" DTS:VersionMajor="0" xmlns:DTS="www.microsoft.com/SqlServer/Dts">
+  <DTS:Property DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager DTS:CreationName="OLEDB" DTS:DTSID="{5A8956EB-A59B-46CC-844B-E5CC75451C08}" DTS:ObjectName="Source" DTS:refId="Package.ConnectionManagers[Source]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectionString="provider=SQLNCLI11.1;data source=Win2016-SQL;initial catalog=ODS;integrated security=SSPI" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager DTS:CreationName="OLEDB" DTS:DTSID="{3ECCE88C-9A4F-40B9-85D5-B7A16A01196D}" DTS:ObjectName="Dest" DTS:refId="Package.ConnectionManagers[Dest]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectionString="provider=SQLNCLI11.1;data source=Win2016-SQL;initial catalog=STG;integrated security=SSPI" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Executables>
+    <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{3DF3C7C7-7B9D-4716-8405-0B46B78B19D1}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="Execute SQL" DTS:refId="Package\Execute SQL" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData SQLTask:Connection="Dest" SQLTask:SqlStatementSource="Truncate Table Temp_AccountAgedDebtHistory" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{711FE869-87FF-46DC-8106-42646FF5FB75}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="DataFlow-LoadData" DTS:refId="Package\DataFlow-LoadData" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1">
+          <components>
+            <component componentClassID="Microsoft.OLEDBSource" contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7" name="Dest-Table" refId="Package\DataFlow-LoadData\Dest-Table" usesDispositions="true" version="7">
+              <connections>
+                <connection connectionManagerID="{3ECCE88C-9A4F-40B9-85D5-B7A16A01196D}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Dest-Table.Connections[OleDbConnection]" />
+              </connections>
+              <outputs>
+                <output name="Output" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output]">
+                  <externalMetadataColumns isUsed="True">
+                    <externalMetadataColumn dataType="i8" name="id" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[id]" />
+                    <externalMetadataColumn dataType="i8" name="accountFk" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[accountFk]" />
+                    <externalMetadataColumn dataType="dbTimeStamp2" name="dttm" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[dttm]" scale="7" />
+                    <externalMetadataColumn dataType="numeric" name="debtAmount" precision="19" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[debtAmount]" scale="8" />
+                    <externalMetadataColumn dataType="i8" name="userTblFk" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[userTblFk]" />
+                    <externalMetadataColumn dataType="i8" name="assignedUserTblFk" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[assignedUserTblFk]" />
+                    <externalMetadataColumn dataType="wstr" length="255" name="action" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[action]" />
+                    <externalMetadataColumn dataType="nText" name="comment" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[comment]" />
+                    <externalMetadataColumn codePage="1252" dataType="str" length="1" name="customerAgreedPaymentFl" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[customerAgreedPaymentFl]" />
+                    <externalMetadataColumn dataType="wstr" length="255" name="reference" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[reference]" />
+                    <externalMetadataColumn codePage="1252" dataType="str" length="1" name="deleteFl" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[deleteFl]" />
+                    <externalMetadataColumn dataType="i4" name="versionNo" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[versionNo]" />
+                    <externalMetadataColumn dataType="i8" name="partitionId" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[partitionId]" />
+                  </externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn dataType="i8" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[id]" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[id]" name="id" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[id]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="i8" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[accountFk]" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[accountFk]" name="accountFk" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[accountFk]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="dbTimeStamp2" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[dttm]" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[dttm]" name="dttm" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[dttm]" scale="7" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="numeric" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[debtAmount]" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[debtAmount]" name="debtAmount" precision="19" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[debtAmount]" scale="8" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="i8" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[userTblFk]" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[userTblFk]" name="userTblFk" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[userTblFk]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="i8" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[assignedUserTblFk]" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[assignedUserTblFk]" name="assignedUserTblFk" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[assignedUserTblFk]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[action]" length="255" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[action]" name="action" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[action]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="nText" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[comment]" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[comment]" name="comment" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[comment]" truncationRowDisposition="FailComponent" />
+                    <outputColumn codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[customerAgreedPaymentFl]" length="1" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[customerAgreedPaymentFl]" name="customerAgreedPaymentFl" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[customerAgreedPaymentFl]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[reference]" length="255" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[reference]" name="reference" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[reference]" truncationRowDisposition="FailComponent" />
+                    <outputColumn codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[deleteFl]" length="1" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[deleteFl]" name="deleteFl" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[deleteFl]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="i4" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[versionNo]" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[versionNo]" name="versionNo" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[versionNo]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="i8" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[partitionId]" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[partitionId]" name="partitionId" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[partitionId]" truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                </output>
+                <output isErrorOut="true" name="Error" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error]">
+                  <externalMetadataColumns />
+                  <outputColumns>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[id]" name="id" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[id]" />
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[accountFk]" name="accountFk" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[accountFk]" />
+                    <outputColumn dataType="dbTimeStamp2" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[dttm]" name="dttm" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[dttm]" scale="7" />
+                    <outputColumn dataType="numeric" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[debtAmount]" name="debtAmount" precision="19" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[debtAmount]" scale="8" />
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[userTblFk]" name="userTblFk" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[userTblFk]" />
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[assignedUserTblFk]" name="assignedUserTblFk" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[assignedUserTblFk]" />
+                    <outputColumn dataType="wstr" length="255" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[action]" name="action" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[action]" />
+                    <outputColumn dataType="nText" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[comment]" name="comment" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[comment]" />
+                    <outputColumn codePage="1252" dataType="str" length="1" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[customerAgreedPaymentFl]" name="customerAgreedPaymentFl" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[customerAgreedPaymentFl]" />
+                    <outputColumn dataType="wstr" length="255" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[reference]" name="reference" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[reference]" />
+                    <outputColumn codePage="1252" dataType="str" length="1" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[deleteFl]" name="deleteFl" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[deleteFl]" />
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[versionNo]" name="versionNo" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[versionNo]" />
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[partitionId]" name="partitionId" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[partitionId]" />
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">AccountAgedDebtHistory</property>
+                <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable" />
+                <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor" />
+                <property dataType="System.String" description="The variable that contains the SQL command to be executed." name="SqlCommandVariable" />
+                <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode" typeConverter="AccessMode">0</property>
+                <property dataType="System.String" description="The mappings between the parameters in the SQL command and variables." name="ParameterMapping" />
+              </properties>
+            </component>
+            <component componentClassID="Microsoft.Sort" contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1" name="Sort-Dest" refId="Package\DataFlow-LoadData\Sort-Dest" version="1">
+              <inputs>
+                <input name="Dest-Table_Output_Sort-Dest" refId="Package\DataFlow-LoadData\Sort-Dest.Inputs[Dest-Table_Output_Sort-Dest]">
+                  <externalMetadataColumns />
+                  <inputColumns>
+                    <inputColumn cachedDataType="i8" cachedName="id" lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[id]" name="" refId="Package\DataFlow-LoadData\Sort-Dest.Inputs[Dest-Table_Output_Sort-Dest].Columns[id]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output isSorted="true" name="Output" refId="Package\DataFlow-LoadData\Sort-Dest.Outputs[Output]">
+                  <externalMetadataColumns />
+                  <outputColumns>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Sort-Dest.Outputs[Output].Columns[id]" name="id" refId="Package\DataFlow-LoadData\Sort-Dest.Outputs[Output].Columns[id]" sortKeyPosition="1">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[id]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property dataType="System.Boolean" description="Indicates whether the Sort transformation removes rows with duplicate sort values." name="EliminateDuplicates">false</property>
+                <property dataType="System.Int32" description="Specifies the maximum number of threads to use for sorting." expressionType="Notify" name="MaximumThreads">-1</property>
+              </properties>
+            </component>
+            <component componentClassID="Microsoft.OLEDBSource" contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7" name="Source-Table" refId="Package\DataFlow-LoadData\Source-Table" usesDispositions="true" version="7">
+              <connections>
+                <connection connectionManagerID="{5A8956EB-A59B-46CC-844B-E5CC75451C08}:external" connectionManagerRefId="Package.ConnectionManagers[Source]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Source-Table.Connections[OleDbConnection]" />
+              </connections>
+              <outputs>
+                <output name="Output" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output]">
+                  <externalMetadataColumns isUsed="True">
+                    <externalMetadataColumn dataType="i8" name="id" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[id]" />
+                    <externalMetadataColumn dataType="i8" name="accountFk" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[accountFk]" />
+                    <externalMetadataColumn dataType="dbTimeStamp2" name="dttm" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[dttm]" scale="7" />
+                    <externalMetadataColumn dataType="numeric" name="debtAmount" precision="19" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[debtAmount]" scale="8" />
+                    <externalMetadataColumn dataType="i8" name="userTblFk" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[userTblFk]" />
+                    <externalMetadataColumn dataType="i8" name="assignedUserTblFk" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[assignedUserTblFk]" />
+                    <externalMetadataColumn dataType="wstr" length="255" name="action" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[action]" />
+                    <externalMetadataColumn dataType="nText" name="comment" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[comment]" />
+                    <externalMetadataColumn codePage="1252" dataType="str" length="1" name="customerAgreedPaymentFl" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[customerAgreedPaymentFl]" />
+                    <externalMetadataColumn dataType="wstr" length="255" name="reference" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[reference]" />
+                    <externalMetadataColumn codePage="1252" dataType="str" length="1" name="deleteFl" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[deleteFl]" />
+                    <externalMetadataColumn dataType="i4" name="versionNo" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[versionNo]" />
+                    <externalMetadataColumn dataType="i8" name="partitionId" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[partitionId]" />
+                  </externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn dataType="i8" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[id]" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[id]" name="id" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[id]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="i8" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[accountFk]" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[accountFk]" name="accountFk" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[accountFk]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="dbTimeStamp2" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[dttm]" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[dttm]" name="dttm" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[dttm]" scale="7" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="numeric" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[debtAmount]" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[debtAmount]" name="debtAmount" precision="19" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[debtAmount]" scale="8" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="i8" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[userTblFk]" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[userTblFk]" name="userTblFk" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[userTblFk]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="i8" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[assignedUserTblFk]" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[assignedUserTblFk]" name="assignedUserTblFk" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[assignedUserTblFk]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[action]" length="255" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[action]" name="action" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[action]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="nText" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[comment]" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[comment]" name="comment" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[comment]" truncationRowDisposition="FailComponent" />
+                    <outputColumn codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[customerAgreedPaymentFl]" length="1" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[customerAgreedPaymentFl]" name="customerAgreedPaymentFl" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[customerAgreedPaymentFl]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[reference]" length="255" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[reference]" name="reference" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[reference]" truncationRowDisposition="FailComponent" />
+                    <outputColumn codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[deleteFl]" length="1" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[deleteFl]" name="deleteFl" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[deleteFl]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="i4" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[versionNo]" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[versionNo]" name="versionNo" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[versionNo]" truncationRowDisposition="FailComponent" />
+                    <outputColumn dataType="i8" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[partitionId]" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[partitionId]" name="partitionId" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[partitionId]" truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                </output>
+                <output isErrorOut="true" name="Error" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error]">
+                  <externalMetadataColumns />
+                  <outputColumns>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[id]" name="id" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[id]" />
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[accountFk]" name="accountFk" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[accountFk]" />
+                    <outputColumn dataType="dbTimeStamp2" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[dttm]" name="dttm" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[dttm]" scale="7" />
+                    <outputColumn dataType="numeric" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[debtAmount]" name="debtAmount" precision="19" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[debtAmount]" scale="8" />
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[userTblFk]" name="userTblFk" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[userTblFk]" />
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[assignedUserTblFk]" name="assignedUserTblFk" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[assignedUserTblFk]" />
+                    <outputColumn dataType="wstr" length="255" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[action]" name="action" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[action]" />
+                    <outputColumn dataType="nText" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[comment]" name="comment" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[comment]" />
+                    <outputColumn codePage="1252" dataType="str" length="1" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[customerAgreedPaymentFl]" name="customerAgreedPaymentFl" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[customerAgreedPaymentFl]" />
+                    <outputColumn dataType="wstr" length="255" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[reference]" name="reference" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[reference]" />
+                    <outputColumn codePage="1252" dataType="str" length="1" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[deleteFl]" name="deleteFl" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[deleteFl]" />
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[versionNo]" name="versionNo" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[versionNo]" />
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[partitionId]" name="partitionId" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[partitionId]" />
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">AccountAgedDebtHistory</property>
+                <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable" />
+                <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor" />
+                <property dataType="System.String" description="The variable that contains the SQL command to be executed." name="SqlCommandVariable" />
+                <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode" typeConverter="AccessMode">0</property>
+                <property dataType="System.String" description="The mappings between the parameters in the SQL command and variables." name="ParameterMapping" />
+              </properties>
+            </component>
+            <component componentClassID="Microsoft.DataConvert" contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0" name="Convetion-For-NVARCHARMAX" refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX" usesDispositions="true">
+              <inputs>
+                <input name="Source-Table_Output_Convetion-For-NVARCHARMAX" refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Inputs[Source-Table_Output_Convetion-For-NVARCHARMAX]">
+                  <externalMetadataColumns />
+                  <inputColumns>
+                    <inputColumn cachedDataType="nText" cachedName="comment" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[comment]" name="" refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Inputs[Source-Table_Output_Convetion-For-NVARCHARMAX].Columns[comment]" />
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output exclusionGroup="1" name="Output" refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output]" synchronousInputId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Inputs[Source-Table_Output_Convetion-For-NVARCHARMAX]">
+                  <externalMetadataColumns />
+                  <outputColumns>
+                    <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" length="4000" lineageId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_comment]" name="Converted_comment" refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_comment]" truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the input column used as the source of data for the conversion." name="SourceInputColumnLineageID">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[comment]}</property>
+                        <property dataType="System.Boolean" description="Indicates whether the column uses the faster, locale-neutral parsing routines." name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                </output>
+                <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Error]" synchronousInputId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Inputs[Source-Table_Output_Convetion-For-NVARCHARMAX]">
+                  <externalMetadataColumns />
+                  <outputColumns>
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                  </outputColumns>
+                </output>
+              </outputs>
+            </component>
+            <component componentClassID="Microsoft.Sort" contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1" name="Sort-Source" refId="Package\DataFlow-LoadData\Sort-Source" version="1">
+              <inputs>
+                <input name="Convetion-For-NVARCHARMAX_Output_Sort-Source" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source]">
+                  <externalMetadataColumns />
+                  <inputColumns>
+                    <inputColumn cachedDataType="wstr" cachedLength="4000" cachedName="Converted_comment" lineageId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_comment]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[Converted_comment]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="i8" cachedName="id" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[id]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[id]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="i8" cachedName="accountFk" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[accountFk]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[accountFk]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="dbTimeStamp2" cachedName="dttm" cachedScale="7" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[dttm]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[dttm]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="numeric" cachedName="debtAmount" cachedPrecision="19" cachedScale="8" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[debtAmount]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[debtAmount]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="i8" cachedName="userTblFk" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[userTblFk]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[userTblFk]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="i8" cachedName="assignedUserTblFk" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[assignedUserTblFk]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[assignedUserTblFk]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="wstr" cachedLength="255" cachedName="action" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[action]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[action]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="nText" cachedName="comment" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[comment]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[comment]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="1" cachedName="customerAgreedPaymentFl" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[customerAgreedPaymentFl]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[customerAgreedPaymentFl]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="wstr" cachedLength="255" cachedName="reference" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[reference]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[reference]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="1" cachedName="deleteFl" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[deleteFl]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[deleteFl]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="i4" cachedName="versionNo" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[versionNo]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[versionNo]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="i8" cachedName="partitionId" lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[partitionId]" name="" refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[partitionId]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output isSorted="true" name="Output" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output]">
+                  <externalMetadataColumns />
+                  <outputColumns>
+                    <outputColumn dataType="wstr" length="4000" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[Converted_comment]" name="Converted_comment" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[Converted_comment]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_comment]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[id]" name="id" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[id]" sortKeyPosition="1">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[accountFk]" name="accountFk" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[accountFk]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[accountFk]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="dbTimeStamp2" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[dttm]" name="dttm" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[dttm]" scale="7">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[dttm]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="numeric" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[debtAmount]" name="debtAmount" precision="19" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[debtAmount]" scale="8">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[debtAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[userTblFk]" name="userTblFk" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[userTblFk]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[userTblFk]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[assignedUserTblFk]" name="assignedUserTblFk" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[assignedUserTblFk]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[assignedUserTblFk]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="wstr" length="255" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[action]" name="action" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[action]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[action]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="nText" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[comment]" name="comment" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[comment]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[comment]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn codePage="1252" dataType="str" length="1" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[customerAgreedPaymentFl]" name="customerAgreedPaymentFl" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[customerAgreedPaymentFl]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[customerAgreedPaymentFl]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="wstr" length="255" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[reference]" name="reference" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[reference]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[reference]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn codePage="1252" dataType="str" length="1" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[deleteFl]" name="deleteFl" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[deleteFl]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[deleteFl]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[versionNo]" name="versionNo" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[versionNo]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[versionNo]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[partitionId]" name="partitionId" refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[partitionId]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[partitionId]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property dataType="System.Boolean" description="Indicates whether the Sort transformation removes rows with duplicate sort values." name="EliminateDuplicates">false</property>
+                <property dataType="System.Int32" description="Specifies the maximum number of threads to use for sorting." expressionType="Notify" name="MaximumThreads">-1</property>
+              </properties>
+            </component>
+            <component componentClassID="Microsoft.MergeJoin" contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1" name="Merge Join" refId="Package\DataFlow-LoadData\Merge Join" version="1">
+              <inputs>
+                <input hasSideEffects="true" name="Sort-Source_Output_Merge Join" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join]">
+                  <externalMetadataColumns />
+                  <inputColumns>
+                    <inputColumn cachedDataType="wstr" cachedLength="4000" cachedName="Converted_comment" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[Converted_comment]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[Converted_comment]" />
+                    <inputColumn cachedDataType="i8" cachedName="id" cachedSortKeyPosition="1" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[id]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[id]" />
+                    <inputColumn cachedDataType="i8" cachedName="accountFk" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[accountFk]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[accountFk]" />
+                    <inputColumn cachedDataType="dbTimeStamp2" cachedName="dttm" cachedScale="7" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[dttm]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[dttm]" />
+                    <inputColumn cachedDataType="numeric" cachedName="debtAmount" cachedPrecision="19" cachedScale="8" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[debtAmount]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[debtAmount]" />
+                    <inputColumn cachedDataType="i8" cachedName="userTblFk" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[userTblFk]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[userTblFk]" />
+                    <inputColumn cachedDataType="i8" cachedName="assignedUserTblFk" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[assignedUserTblFk]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[assignedUserTblFk]" />
+                    <inputColumn cachedDataType="wstr" cachedLength="255" cachedName="action" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[action]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[action]" />
+                    <inputColumn cachedDataType="nText" cachedName="comment" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[comment]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[comment]" />
+                    <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="1" cachedName="customerAgreedPaymentFl" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[customerAgreedPaymentFl]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[customerAgreedPaymentFl]" />
+                    <inputColumn cachedDataType="wstr" cachedLength="255" cachedName="reference" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[reference]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[reference]" />
+                    <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="1" cachedName="deleteFl" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[deleteFl]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[deleteFl]" />
+                    <inputColumn cachedDataType="i4" cachedName="versionNo" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[versionNo]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[versionNo]" />
+                    <inputColumn cachedDataType="i8" cachedName="partitionId" lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[partitionId]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[partitionId]" />
+                  </inputColumns>
+                </input>
+                <input hasSideEffects="true" name="Sort-Dest_Output_Merge Join" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Dest_Output_Merge Join]">
+                  <externalMetadataColumns />
+                  <inputColumns>
+                    <inputColumn cachedDataType="i8" cachedName="id" cachedSortKeyPosition="1" lineageId="Package\DataFlow-LoadData\Sort-Dest.Outputs[Output].Columns[id]" name="" refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Dest_Output_Merge Join].Columns[id]" />
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output isSorted="true" name="Output" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output]">
+                  <externalMetadataColumns />
+                  <outputColumns>
+                    <outputColumn dataType="wstr" length="4000" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Converted_comment]" name="Converted_comment" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Converted_comment]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[Converted_comment]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id]" name="id" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id]" sortKeyPosition="1">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[accountFk]" name="accountFk" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[accountFk]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[accountFk]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="dbTimeStamp2" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[dttm]" name="dttm" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[dttm]" scale="7">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[dttm]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="numeric" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[debtAmount]" name="debtAmount" precision="19" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[debtAmount]" scale="8">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[debtAmount]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[userTblFk]" name="userTblFk" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[userTblFk]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[userTblFk]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[assignedUserTblFk]" name="assignedUserTblFk" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[assignedUserTblFk]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[assignedUserTblFk]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="wstr" length="255" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[action]" name="action" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[action]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[action]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="nText" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[comment]" name="comment" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[comment]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[comment]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn codePage="1252" dataType="str" length="1" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[customerAgreedPaymentFl]" name="customerAgreedPaymentFl" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[customerAgreedPaymentFl]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[customerAgreedPaymentFl]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="wstr" length="255" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[reference]" name="reference" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[reference]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[reference]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn codePage="1252" dataType="str" length="1" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[deleteFl]" name="deleteFl" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[deleteFl]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[deleteFl]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[versionNo]" name="versionNo" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[versionNo]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[versionNo]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[partitionId]" name="partitionId" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[partitionId]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[partitionId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn dataType="i8" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id2]" name="id2" refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id2]">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Dest_Output_Merge Join].Columns[id]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property dataType="System.Int32" description="Specifies the type of join to perform." name="JoinType" typeConverter="JoinType">0</property>
+                <property dataType="System.Int32" description="Specifies the number of columns in the ordering key." name="NumKeyColumns">1</property>
+                <property dataType="System.Boolean" description="Indicates whether the null values are treated as equal values." name="TreatNullsAsEqual">true</property>
+                <property dataType="System.Int32" description="Indicates the requested maximum buffers per input before blocking." name="MaxBuffersPerInput">5</property>
+              </properties>
+            </component>
+            <component componentClassID="Microsoft.ConditionalSplit" contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0" name="Conditional-Split" refId="Package\DataFlow-LoadData\Conditional-Split" usesDispositions="true">
+              <inputs>
+                <input name="Merge Join_Output_Conditional-Split" refId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]">
+                  <externalMetadataColumns />
+                  <inputColumns>
+                    <inputColumn cachedDataType="i8" cachedName="id" cachedSortKeyPosition="1" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id]" name="" refId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split].Columns[id]" />
+                    <inputColumn cachedDataType="i8" cachedName="id2" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id2]" name="" refId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split].Columns[id2]" />
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" exclusionGroup="1" name="New-Record" refId="Package\DataFlow-LoadData\Conditional-Split.Outputs[New-Record]" synchronousInputId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]" truncationRowDisposition="FailComponent">
+                  <externalMetadataColumns />
+                  <properties>
+                    <property containsID="true" dataType="System.String" name="Expression">!ISNULL(#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id]}) &amp;&amp; ISNULL(#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id2]})</property>
+                    <property containsID="true" dataType="System.String" expressionType="Notify" name="FriendlyExpression">!ISNULL([id]) &amp;&amp; ISNULL([id2])</property>
+                    <property dataType="System.Int32" name="EvaluationOrder">0</property>
+                  </properties>
+                </output>
+                <output errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" exclusionGroup="1" name="Delete-Record" refId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Delete-Record]" synchronousInputId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]" truncationRowDisposition="FailComponent">
+                  <externalMetadataColumns />
+                  <properties>
+                    <property containsID="true" dataType="System.String" name="Expression">ISNULL(#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id]}) &amp;&amp; !ISNULL(#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id2]})</property>
+                    <property containsID="true" dataType="System.String" expressionType="Notify" name="FriendlyExpression">ISNULL([id]) &amp;&amp; !ISNULL([id2])</property>
+                    <property dataType="System.Int32" name="EvaluationOrder">1</property>
+                  </properties>
+                </output>
+                <output exclusionGroup="1" name="Default" refId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Default]" synchronousInputId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]">
+                  <externalMetadataColumns />
+                  <properties>
+                    <property dataType="System.Boolean" name="IsDefaultOut">true</property>
+                  </properties>
+                </output>
+                <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Error]" synchronousInputId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]">
+                  <externalMetadataColumns />
+                  <outputColumns>
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                  </outputColumns>
+                </output>
+              </outputs>
+            </component>
+            <component componentClassID="Microsoft.Lookup" contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6" name="Update-Lookup" refId="Package\DataFlow-LoadData\Update-Lookup" usesDispositions="true" version="6">
+              <connections>
+                <connection connectionManagerID="{3ECCE88C-9A4F-40B9-85D5-B7A16A01196D}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="Connection manager used to access lookup data." name="OleDbConnection" refId="Package\DataFlow-LoadData\Update-Lookup.Connections[OleDbConnection]" />
+              </connections>
+              <inputs>
+                <input name="Conditional-Split_Default_Update-Lookup" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup]">
+                  <externalMetadataColumns />
+                  <inputColumns>
+                    <inputColumn cachedDataType="wstr" cachedLength="4000" cachedName="Converted_comment" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Converted_comment]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[Converted_comment]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">comment</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="i8" cachedName="id" cachedSortKeyPosition="1" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[id]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">id</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="i8" cachedName="accountFk" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[accountFk]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[accountFk]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">accountFk</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="dbTimeStamp2" cachedName="dttm" cachedScale="7" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[dttm]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[dttm]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">dttm</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="numeric" cachedName="debtAmount" cachedPrecision="19" cachedScale="8" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[debtAmount]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[debtAmount]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">debtAmount</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="i8" cachedName="userTblFk" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[userTblFk]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[userTblFk]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">userTblFk</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="i8" cachedName="assignedUserTblFk" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[assignedUserTblFk]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[assignedUserTblFk]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">assignedUserTblFk</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="wstr" cachedLength="255" cachedName="action" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[action]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[action]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">action</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="1" cachedName="customerAgreedPaymentFl" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[customerAgreedPaymentFl]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[customerAgreedPaymentFl]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">customerAgreedPaymentFl</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="wstr" cachedLength="255" cachedName="reference" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[reference]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[reference]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">reference</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="1" cachedName="deleteFl" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[deleteFl]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[deleteFl]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">deleteFl</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="i4" cachedName="versionNo" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[versionNo]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[versionNo]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">versionNo</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn cachedDataType="i8" cachedName="partitionId" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[partitionId]" name="" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[partitionId]">
+                      <properties>
+                        <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">partitionId</property>
+                        <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output errorOrTruncationOperation="Lookup" exclusionGroup="1" name="Match" refId="Package\DataFlow-LoadData\Update-Lookup.Outputs[Match]" synchronousInputId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup]">
+                  <externalMetadataColumns />
+                </output>
+                <output description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;" exclusionGroup="1" name="NoMatch" refId="Package\DataFlow-LoadData\Update-Lookup.Outputs[NoMatch]" synchronousInputId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup]">
+                  <externalMetadataColumns />
+                </output>
+                <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\DataFlow-LoadData\Update-Lookup.Outputs[Error]" synchronousInputId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup]">
+                  <externalMetadataColumns />
+                  <outputColumns>
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Update-Lookup.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\DataFlow-LoadData\Update-Lookup.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Update-Lookup.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\DataFlow-LoadData\Update-Lookup.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property dataType="System.String" description="Specifies the SQL statement that generates the lookup table." expressionType="Notify" name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select [id],[accountFk],[dttm],[debtAmount],[userTblFk],[assignedUserTblFk],[action], Cast([comment] as NVarchar(4000)) as comment,[customerAgreedPaymentFl],[reference],[deleteFl],[versionNo],[partitionId] from [dbo].[AccountAgedDebtHistory]</property>
+                <property dataType="System.String" description="Specifies a SQL statement that uses parameters to generate the lookup table." expressionType="Notify" name="SqlCommandParam" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[AccountAgedDebtHistory]) [refTable]
+                                                        where [refTable].[id] = ?  and [refTable].[id] = ? and [refTable].[accountFk] = ? and [refTable].[dttm] = ? and [refTable].[debtAmount] = ? and [refTable].[userTblFk] = ? and [refTable].[assignedUserTblFk] = ? and [refTable].[action] = ? and [refTable].[comment] = ? and [refTable].[customerAgreedPaymentFl] = ? and [refTable].[reference] = ? and [refTable].[deleteFl] = ? and [refTable].[versionNo] = ? and [refTable].[partitionId] = ?
+                                    </property>
+                <property dataType="System.Int32" description="Specifies the type of connection used to access the reference dataset." name="ConnectionType" typeConverter="LookupConnectionType">0</property>
+                <property dataType="System.Int32" description="Specifies the cache type of the lookup table." name="CacheType" typeConverter="CacheType">0</property>
+                <property dataType="System.Int32" description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set." name="NoMatchBehavior" typeConverter="LookupNoMatchBehavior">1</property>
+                <property dataType="System.Int32" description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset." name="NoMatchCachePercentage">0</property>
+                <property dataType="System.Int32" description="Maximum Memory Usage for Reference Cache on a 32 bit platform." name="MaxMemoryUsage">25</property>
+                <property dataType="System.Int64" description="Maximum Memory Usage for Reference Cache on a 64 bit platform." name="MaxMemoryUsage64">25</property>
+                <property dataType="System.String" description="Indicates whether to reference metadata in an XML format." name="ReferenceMetadataXml">&lt;referenceMetadata&gt;
+  &lt;referenceColumns&gt;
+    &lt;referenceColumn name="id" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="accountFk" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="dttm" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="7" codePage="0" /&gt;
+    &lt;referenceColumn name="debtAmount" dataType="DT_NUMERIC" length="0" precision="19" scale="8" codePage="0" /&gt;
+    &lt;referenceColumn name="userTblFk" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="assignedUserTblFk" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="action" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="comment" dataType="DT_WSTR" length="4000" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="customerAgreedPaymentFl" dataType="DT_STR" length="1" precision="0" scale="0" codePage="1252" /&gt;
+    &lt;referenceColumn name="reference" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="deleteFl" dataType="DT_STR" length="1" precision="0" scale="0" codePage="1252" /&gt;
+    &lt;referenceColumn name="versionNo" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="partitionId" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0" /&gt;
+  &lt;/referenceColumns&gt;
+&lt;/referenceMetadata&gt;</property>
+                <property containsID="true" dataType="System.String" description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons." name="ParameterMap">#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[accountFk]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[dttm]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[debtAmount]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[userTblFk]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[assignedUserTblFk]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[action]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[comment]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[customerAgreedPaymentFl]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[reference]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[deleteFl]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[versionNo]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[partitionId]};</property>
+                <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                <property dataType="System.Boolean" description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used." name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+            </component>
+            <component componentClassID="Microsoft.OLEDBDestination" contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4" name="Insert-Update-Record" refId="Package\DataFlow-LoadData\Insert-Update-Record" usesDispositions="true" version="4">
+              <connections>
+                <connection connectionManagerID="{3ECCE88C-9A4F-40B9-85D5-B7A16A01196D}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Insert-Update-Record.Connections[OleDbConnection]" />
+              </connections>
+              <inputs>
+                <input errorOrTruncationOperation="Insert" errorRowDisposition="FailComponent" hasSideEffects="true" name="Update-Lookup_NoMatch_Insert-Update-Record" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record]">
+                  <externalMetadataColumns isUsed="True">
+                    <externalMetadataColumn dataType="i8" name="id" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[id]" />
+                    <externalMetadataColumn dataType="i8" name="accountFk" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[accountFk]" />
+                    <externalMetadataColumn dataType="dbTimeStamp2" name="dttm" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[dttm]" scale="7" />
+                    <externalMetadataColumn dataType="numeric" name="debtAmount" precision="19" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[debtAmount]" scale="8" />
+                    <externalMetadataColumn dataType="i8" name="userTblFk" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[userTblFk]" />
+                    <externalMetadataColumn dataType="i8" name="assignedUserTblFk" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[assignedUserTblFk]" />
+                    <externalMetadataColumn dataType="wstr" length="255" name="action" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[action]" />
+                    <externalMetadataColumn dataType="nText" name="comment" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[comment]" />
+                    <externalMetadataColumn codePage="1252" dataType="str" length="1" name="customerAgreedPaymentFl" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[customerAgreedPaymentFl]" />
+                    <externalMetadataColumn dataType="wstr" length="255" name="reference" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[reference]" />
+                    <externalMetadataColumn codePage="1252" dataType="str" length="1" name="deleteFl" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[deleteFl]" />
+                    <externalMetadataColumn dataType="i4" name="versionNo" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[versionNo]" />
+                    <externalMetadataColumn dataType="i8" name="partitionId" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[partitionId]" />
+                  </externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn cachedDataType="i8" cachedName="id" cachedSortKeyPosition="1" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[id]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[id]" />
+                    <inputColumn cachedDataType="i8" cachedName="accountFk" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[accountFk]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[accountFk]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[accountFk]" />
+                    <inputColumn cachedDataType="dbTimeStamp2" cachedName="dttm" cachedScale="7" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[dttm]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[dttm]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[dttm]" />
+                    <inputColumn cachedDataType="numeric" cachedName="debtAmount" cachedPrecision="19" cachedScale="8" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[debtAmount]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[debtAmount]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[debtAmount]" />
+                    <inputColumn cachedDataType="i8" cachedName="userTblFk" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[userTblFk]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[userTblFk]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[userTblFk]" />
+                    <inputColumn cachedDataType="i8" cachedName="assignedUserTblFk" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[assignedUserTblFk]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[assignedUserTblFk]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[assignedUserTblFk]" />
+                    <inputColumn cachedDataType="wstr" cachedLength="255" cachedName="action" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[action]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[action]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[action]" />
+                    <inputColumn cachedDataType="nText" cachedName="comment" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[comment]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[comment]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[comment]" />
+                    <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="1" cachedName="customerAgreedPaymentFl" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[customerAgreedPaymentFl]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[customerAgreedPaymentFl]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[customerAgreedPaymentFl]" />
+                    <inputColumn cachedDataType="wstr" cachedLength="255" cachedName="reference" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[reference]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[reference]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[reference]" />
+                    <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="1" cachedName="deleteFl" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[deleteFl]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[deleteFl]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[deleteFl]" />
+                    <inputColumn cachedDataType="i4" cachedName="versionNo" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[versionNo]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[versionNo]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[versionNo]" />
+                    <inputColumn cachedDataType="i8" cachedName="partitionId" externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[partitionId]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[partitionId]" name="" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[partitionId]" />
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error]" synchronousInputId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record]">
+                  <externalMetadataColumns />
+                  <outputColumns>
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">[dbo].[Temp_AccountAgedDebtHistory]</property>
+                <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable" />
+                <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor" />
+                <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode">3</property>
+                <property dataType="System.Boolean" description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on." name="FastLoadKeepIdentity">false</property>
+                <property dataType="System.Boolean" description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on." name="FastLoadKeepNulls">false</property>
+                <property dataType="System.String" description="Specifies options to be used with fast load.  Applies only if fast load is turned on." name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property dataType="System.Int32" description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on." name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+            </component>
+            <component componentClassID="Microsoft.OLEDBCommand" contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2" name="Delete" refId="Package\DataFlow-LoadData\Delete" usesDispositions="true" version="2">
+              <connections>
+                <connection connectionManagerID="{3ECCE88C-9A4F-40B9-85D5-B7A16A01196D}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Delete.Connections[OleDbConnection]" />
+              </connections>
+              <inputs>
+                <input errorOrTruncationOperation="Command Execution" errorRowDisposition="FailComponent" hasSideEffects="true" name="Conditional-Split_Delete-Record_Delete" refId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete]">
+                  <externalMetadataColumns isUsed="True">
+                    <externalMetadataColumn dataType="i4" name="Param_0" refId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete].ExternalColumns[Param_0]">
+                      <properties>
+                        <property dataType="System.Int32" description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values." name="DBParamInfoFlags">17</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn cachedDataType="i8" cachedName="id2" externalMetadataColumnId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete].ExternalColumns[Param_0]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id2]" name="" refId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete].Columns[id2]" />
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output exclusionGroup="1" name="Output" refId="Package\DataFlow-LoadData\Delete.Outputs[Output]" synchronousInputId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete]">
+                  <externalMetadataColumns />
+                </output>
+                <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\DataFlow-LoadData\Delete.Outputs[Error]" synchronousInputId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete]">
+                  <externalMetadataColumns />
+                  <outputColumns>
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Delete.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\DataFlow-LoadData\Delete.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Delete.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\DataFlow-LoadData\Delete.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                <property dataType="System.String" description="The SQL command to be executed." expressionType="Notify" name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Delete from AccountAgedDebtHistory Where Id = ?</property>
+                <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+              </properties>
+            </component>
+            <component componentClassID="Microsoft.OLEDBDestination" contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4" name="Insert" refId="Package\DataFlow-LoadData\Insert" usesDispositions="true" version="4">
+              <connections>
+                <connection connectionManagerID="{3ECCE88C-9A4F-40B9-85D5-B7A16A01196D}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Insert.Connections[OleDbConnection]" />
+              </connections>
+              <inputs>
+                <input errorOrTruncationOperation="Insert" errorRowDisposition="FailComponent" hasSideEffects="true" name="Conditional-Split_New-Record_Insert" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert]">
+                  <externalMetadataColumns isUsed="True">
+                    <externalMetadataColumn dataType="i8" name="id" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[id]" />
+                    <externalMetadataColumn dataType="i8" name="accountFk" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[accountFk]" />
+                    <externalMetadataColumn dataType="dbTimeStamp2" name="dttm" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[dttm]" scale="7" />
+                    <externalMetadataColumn dataType="numeric" name="debtAmount" precision="19" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[debtAmount]" scale="8" />
+                    <externalMetadataColumn dataType="i8" name="userTblFk" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[userTblFk]" />
+                    <externalMetadataColumn dataType="i8" name="assignedUserTblFk" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[assignedUserTblFk]" />
+                    <externalMetadataColumn dataType="wstr" length="255" name="action" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[action]" />
+                    <externalMetadataColumn dataType="nText" name="comment" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[comment]" />
+                    <externalMetadataColumn codePage="1252" dataType="str" length="1" name="customerAgreedPaymentFl" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[customerAgreedPaymentFl]" />
+                    <externalMetadataColumn dataType="wstr" length="255" name="reference" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[reference]" />
+                    <externalMetadataColumn codePage="1252" dataType="str" length="1" name="deleteFl" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[deleteFl]" />
+                    <externalMetadataColumn dataType="i4" name="versionNo" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[versionNo]" />
+                    <externalMetadataColumn dataType="i8" name="partitionId" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[partitionId]" />
+                  </externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn cachedDataType="i8" cachedName="id" cachedSortKeyPosition="1" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[id]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[id]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[id]" />
+                    <inputColumn cachedDataType="i8" cachedName="accountFk" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[accountFk]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[accountFk]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[accountFk]" />
+                    <inputColumn cachedDataType="dbTimeStamp2" cachedName="dttm" cachedScale="7" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[dttm]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[dttm]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[dttm]" />
+                    <inputColumn cachedDataType="numeric" cachedName="debtAmount" cachedPrecision="19" cachedScale="8" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[debtAmount]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[debtAmount]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[debtAmount]" />
+                    <inputColumn cachedDataType="i8" cachedName="userTblFk" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[userTblFk]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[userTblFk]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[userTblFk]" />
+                    <inputColumn cachedDataType="i8" cachedName="assignedUserTblFk" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[assignedUserTblFk]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[assignedUserTblFk]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[assignedUserTblFk]" />
+                    <inputColumn cachedDataType="wstr" cachedLength="255" cachedName="action" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[action]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[action]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[action]" />
+                    <inputColumn cachedDataType="nText" cachedName="comment" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[comment]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[comment]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[comment]" />
+                    <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="1" cachedName="customerAgreedPaymentFl" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[customerAgreedPaymentFl]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[customerAgreedPaymentFl]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[customerAgreedPaymentFl]" />
+                    <inputColumn cachedDataType="wstr" cachedLength="255" cachedName="reference" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[reference]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[reference]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[reference]" />
+                    <inputColumn cachedCodepage="1252" cachedDataType="str" cachedLength="1" cachedName="deleteFl" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[deleteFl]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[deleteFl]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[deleteFl]" />
+                    <inputColumn cachedDataType="i4" cachedName="versionNo" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[versionNo]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[versionNo]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[versionNo]" />
+                    <inputColumn cachedDataType="i8" cachedName="partitionId" externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[partitionId]" lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[partitionId]" name="" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[partitionId]" />
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\DataFlow-LoadData\Insert.Outputs[Error]" synchronousInputId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert]">
+                  <externalMetadataColumns />
+                  <outputColumns>
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Insert.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\DataFlow-LoadData\Insert.Outputs[Error].Columns[ErrorCode]" specialFlags="1" />
+                    <outputColumn dataType="i4" lineageId="Package\DataFlow-LoadData\Insert.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\DataFlow-LoadData\Insert.Outputs[Error].Columns[ErrorColumn]" specialFlags="2" />
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">[dbo].[AccountAgedDebtHistory]</property>
+                <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable" />
+                <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor" />
+                <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode">3</property>
+                <property dataType="System.Boolean" description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on." name="FastLoadKeepIdentity">false</property>
+                <property dataType="System.Boolean" description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on." name="FastLoadKeepNulls">false</property>
+                <property dataType="System.String" description="Specifies options to be used with fast load.  Applies only if fast load is turned on." name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property dataType="System.Int32" description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on." name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+            </component>
+          </components>
+          <paths>
+            <path endId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Inputs[Source-Table_Output_Convetion-For-NVARCHARMAX]" name="Source-Table_Output_Convetion-For-NVARCHARMAX" refId="Package\DataFlow-LoadData.Paths[Source-Table_Output_Convetion-For-NVARCHARMAX]" startId="Package\DataFlow-LoadData\Source-Table.Outputs[Output]" />
+            <path endId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source]" name="Convetion-For-NVARCHARMAX_Output_Sort-Source" refId="Package\DataFlow-LoadData.Paths[Convetion-For-NVARCHARMAX_Output_Sort-Source]" startId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output]" />
+            <path endId="Package\DataFlow-LoadData\Sort-Dest.Inputs[Dest-Table_Output_Sort-Dest]" name="Dest-Table_Output_Sort-Dest" refId="Package\DataFlow-LoadData.Paths[Dest-Table_Output_Sort-Dest]" startId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output]" />
+            <path endId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join]" name="Sort-Source_Output_Merge Join" refId="Package\DataFlow-LoadData.Paths[Sort-Source_Output_Merge Join]" startId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output]" />
+            <path endId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Dest_Output_Merge Join]" name="Sort-Dest_Output_Merge Join" refId="Package\DataFlow-LoadData.Paths[Sort-Dest_Output_Merge Join]" startId="Package\DataFlow-LoadData\Sort-Dest.Outputs[Output]" />
+            <path endId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]" name="Merge Join_Output_Conditional-Split" refId="Package\DataFlow-LoadData.Paths[Merge Join_Output_Conditional-Split]" startId="Package\DataFlow-LoadData\Merge Join.Outputs[Output]" />
+            <path endId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup]" name="Conditional-Split_Default_Update-Lookup" refId="Package\DataFlow-LoadData.Paths[Conditional-Split_Default_Update-Lookup]" startId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Default]" />
+            <path endId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record]" name="Update-Lookup_NoMatch_Insert-Update-Record" refId="Package\DataFlow-LoadData.Paths[Update-Lookup_NoMatch_Insert-Update-Record]" startId="Package\DataFlow-LoadData\Update-Lookup.Outputs[NoMatch]" />
+            <path endId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert]" name="Conditional-Split_New-Record_Insert" refId="Package\DataFlow-LoadData.Paths[Conditional-Split_New-Record_Insert]" startId="Package\DataFlow-LoadData\Conditional-Split.Outputs[New-Record]" />
+            <path endId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete]" name="Conditional-Split_Delete-Record_Delete" refId="Package\DataFlow-LoadData.Paths[Conditional-Split_Delete-Record_Delete]" startId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Delete-Record]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{34E3EFFB-BE66-42FA-8B75-F6CA51016B19}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="Execute SQL-Update Record" DTS:refId="Package\Execute SQL-Update Record" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData SQLTask:Connection="Dest" SQLTask:SqlStatementSource="&#xA;                                           &#xA;           Update AccountAgedDebtHistory Set &#xA;                                id =  B.[id],accountFk =  B.[accountFk],dttm =  B.[dttm],debtAmount =  B.[debtAmount],userTblFk =  B.[userTblFk],assignedUserTblFk =  B.[assignedUserTblFk],action =  B.[action],comment =  B.[comment],customerAgreedPaymentFl =  B.[customerAgreedPaymentFl],reference =  B.[reference],deleteFl =  B.[deleteFl],versionNo =  B.[versionNo],partitionId =  B.[partitionId]&#xA;                                From AccountAgedDebtHistory A Inner Join Temp_AccountAgedDebtHistory B&#xA;                                On  A.Id = B.ID&#xA;       " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{7305E65B-77AA-4B1A-91EC-9FF8A0466F73}" DTS:From="Package\Execute SQL" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_Execute SQL_To_DataFlow-LoadData" DTS:refId="Package.PrecedenceConstraints[Constraint_Execute SQL_To_DataFlow-LoadData]" DTS:To="Package\DataFlow-LoadData" />
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{4F164284-BAC8-4AD5-A89D-5171416F3C0F}" DTS:From="Package\DataFlow-LoadData" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_DataFlow-LoadData_To_Execute SQL-Update Record" DTS:refId="Package.PrecedenceConstraints[Constraint_DataFlow-LoadData_To_Execute SQL-Update Record]" DTS:To="Package\Execute SQL-Update Record" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

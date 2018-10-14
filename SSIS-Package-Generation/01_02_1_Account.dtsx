@@ -1,31 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DTS:Executable DTS:CreationDate="10/13/2018 20:27:15" DTS:CreationName="Microsoft.Package" DTS:CreatorComputerName="Win2016-SQL" DTS:CreatorName="cgiadmin" DTS:DTSID="{D7A5201C-5FF8-4BA2-B776-FC811470440F}" DTS:ExecutableType="Microsoft.Package" DTS:LastModifiedProductVersion="" DTS:LocaleID="1033" DTS:ObjectName="01_02_1_Account" DTS:refId="Package" DTS:VersionBuild="0" DTS:VersionGUID="{C071E43F-EFD8-4289-9848-D3A78709CF1C}" DTS:VersionMajor="0" xmlns:DTS="www.microsoft.com/SqlServer/Dts">
+<DTS:Executable DTS:CreationDate="10/14/2018 20:48:05" DTS:CreationName="Microsoft.Package" DTS:CreatorComputerName="Win2016-SQL" DTS:CreatorName="cgiadmin" DTS:DTSID="{9768B015-BC9A-4A04-B467-C28DDF9B5914}" DTS:ExecutableType="Microsoft.Package" DTS:LastModifiedProductVersion="" DTS:LocaleID="1033" DTS:ObjectName="01_02_1_Account" DTS:refId="Package" DTS:VersionBuild="0" DTS:VersionGUID="{1C1D2017-F089-4309-B231-85B539949ED8}" DTS:VersionMajor="0" xmlns:DTS="www.microsoft.com/SqlServer/Dts">
   <DTS:Property DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
-    <DTS:ConnectionManager DTS:CreationName="OLEDB" DTS:DTSID="{6FDF8072-57ED-418A-805F-C6DDAE656589}" DTS:ObjectName="Source" DTS:refId="Package.ConnectionManagers[Source]">
+    <DTS:ConnectionManager DTS:CreationName="OLEDB" DTS:DTSID="{A858376E-E341-4275-8BD8-52736BB5B196}" DTS:ObjectName="Source" DTS:refId="Package.ConnectionManagers[Source]">
       <DTS:ObjectData>
-        <DTS:ConnectionManager DTS:ConnectionString="provider=SQLNCLI11.1;data source=Win2016-SQL;initial catalog=JUN_ODS;integrated security=SSPI" />
+        <DTS:ConnectionManager DTS:ConnectionString="provider=SQLNCLI11.1;data source=Win2016-SQL;initial catalog=ODS;integrated security=SSPI" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
-    <DTS:ConnectionManager DTS:CreationName="OLEDB" DTS:DTSID="{44186107-8C0C-4500-9D13-6C767D55F07D}" DTS:ObjectName="Dest" DTS:refId="Package.ConnectionManagers[Dest]">
+    <DTS:ConnectionManager DTS:CreationName="OLEDB" DTS:DTSID="{0F0553AB-7FC9-46AA-8CFB-C267DF85274E}" DTS:ObjectName="Dest" DTS:refId="Package.ConnectionManagers[Dest]">
       <DTS:ObjectData>
-        <DTS:ConnectionManager DTS:ConnectionString="provider=SQLNCLI11.1;data source=Win2016-SQL;initial catalog=JUN_STG;integrated security=SSPI" />
+        <DTS:ConnectionManager DTS:ConnectionString="provider=SQLNCLI11.1;data source=Win2016-SQL;initial catalog=STG;integrated security=SSPI" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Executables>
-    <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{40F6F374-7FDA-43E6-888F-726591AFF118}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="Execute SQL" DTS:refId="Package\Execute SQL" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+    <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{FFED5E2B-9CA8-4CDB-8B45-3FD0976EEB9D}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="Execute SQL" DTS:refId="Package\Execute SQL" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:ObjectData>
         <SQLTask:SqlTaskData SQLTask:Connection="Dest" SQLTask:SqlStatementSource="Truncate Table Temp_Account" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
-    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{5649C91B-841E-410B-A7EF-D94514BD8BCE}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="DataFlow-LoadData" DTS:refId="Package\DataFlow-LoadData" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+    <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{C17D9AFD-9739-43FE-8678-4C7C6519DC96}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="DataFlow-LoadData" DTS:refId="Package\DataFlow-LoadData" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:ObjectData>
         <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" name="pipelineXml" version="1">
           <components>
             <component componentClassID="Microsoft.OLEDBSource" contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7" name="Dest-Table" refId="Package\DataFlow-LoadData\Dest-Table" usesDispositions="true" version="7">
               <connections>
-                <connection connectionManagerID="{44186107-8C0C-4500-9D13-6C767D55F07D}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Dest-Table.Connections[OleDbConnection]" />
+                <connection connectionManagerID="{0F0553AB-7FC9-46AA-8CFB-C267DF85274E}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Dest-Table.Connections[OleDbConnection]" />
               </connections>
               <outputs>
                 <output name="Output" refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output]">
@@ -189,7 +189,7 @@
             </component>
             <component componentClassID="Microsoft.OLEDBSource" contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7" name="Source-Table" refId="Package\DataFlow-LoadData\Source-Table" usesDispositions="true" version="7">
               <connections>
-                <connection connectionManagerID="{6FDF8072-57ED-418A-805F-C6DDAE656589}:external" connectionManagerRefId="Package.ConnectionManagers[Source]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Source-Table.Connections[OleDbConnection]" />
+                <connection connectionManagerID="{A858376E-E341-4275-8BD8-52736BB5B196}:external" connectionManagerRefId="Package.ConnectionManagers[Source]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Source-Table.Connections[OleDbConnection]" />
               </connections>
               <outputs>
                 <output name="Output" refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output]">
@@ -995,7 +995,7 @@
             </component>
             <component componentClassID="Microsoft.Lookup" contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6" name="Update-Lookup" refId="Package\DataFlow-LoadData\Update-Lookup" usesDispositions="true" version="6">
               <connections>
-                <connection connectionManagerID="{44186107-8C0C-4500-9D13-6C767D55F07D}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="Connection manager used to access lookup data." name="OleDbConnection" refId="Package\DataFlow-LoadData\Update-Lookup.Connections[OleDbConnection]" />
+                <connection connectionManagerID="{0F0553AB-7FC9-46AA-8CFB-C267DF85274E}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="Connection manager used to access lookup data." name="OleDbConnection" refId="Package\DataFlow-LoadData\Update-Lookup.Connections[OleDbConnection]" />
               </connections>
               <inputs>
                 <input name="Conditional-Split_Default_Update-Lookup" refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup]">
@@ -1224,9 +1224,9 @@
                 </output>
               </outputs>
               <properties>
-                <property dataType="System.String" description="Specifies the SQL statement that generates the lookup table." expressionType="Notify" name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Account]</property>
+                <property dataType="System.String" description="Specifies the SQL statement that generates the lookup table." expressionType="Notify" name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select [id],[billingEntityFk],[parentAccountFk],[customerFk],[accountTypeFk],[number],[name],[createdDttm],[createdUserTblFk],[fromDttm],[toDttm],[terminatedUserTblFk],[closedDttm],[currencyFk],[languageTblFk],[dunningPackageFk],[billPackageFk],[billingCycleFk],[billingAlignDttm],[initialBillStatus],[paymentTermFk],[payPointLocation],[salesTaxExemptFl],[lastAccountTransactionFk],[cancelFl],[cancelledDttm],[cancelledUserTblFk],[terminatedDttm],[parentOverridesChildFl],[overrideAllocateCreditOnRebill],[reference],[deleteFl],[versionNo],[partitionId] from [dbo].[Account]</property>
                 <property dataType="System.String" description="Specifies a SQL statement that uses parameters to generate the lookup table." expressionType="Notify" name="SqlCommandParam" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Account]) [refTable]
-                                                        where  [refTable].[id] = ? and [refTable].[billingEntityFk] = ? and [refTable].[parentAccountFk] = ? and [refTable].[customerFk] = ? and [refTable].[accountTypeFk] = ? and [refTable].[number] = ? and [refTable].[name] = ? and [refTable].[createdDttm] = ? and [refTable].[createdUserTblFk] = ? and [refTable].[fromDttm] = ? and [refTable].[toDttm] = ? and [refTable].[terminatedUserTblFk] = ? and [refTable].[closedDttm] = ? and [refTable].[currencyFk] = ? and [refTable].[languageTblFk] = ? and [refTable].[dunningPackageFk] = ? and [refTable].[billPackageFk] = ? and [refTable].[billingCycleFk] = ? and [refTable].[billingAlignDttm] = ? and [refTable].[initialBillStatus] = ? and [refTable].[paymentTermFk] = ? and [refTable].[payPointLocation] = ? and [refTable].[salesTaxExemptFl] = ? and [refTable].[lastAccountTransactionFk] = ? and [refTable].[cancelFl] = ? and [refTable].[cancelledDttm] = ? and [refTable].[cancelledUserTblFk] = ? and [refTable].[terminatedDttm] = ? and [refTable].[parentOverridesChildFl] = ? and [refTable].[overrideAllocateCreditOnRebill] = ? and [refTable].[reference] = ? and [refTable].[deleteFl] = ? and [refTable].[versionNo] = ? and [refTable].[partitionId] = ? 
+                                                        where [refTable].[id] = ?  and [refTable].[id] = ? and [refTable].[billingEntityFk] = ? and [refTable].[parentAccountFk] = ? and [refTable].[customerFk] = ? and [refTable].[accountTypeFk] = ? and [refTable].[number] = ? and [refTable].[name] = ? and [refTable].[createdDttm] = ? and [refTable].[createdUserTblFk] = ? and [refTable].[fromDttm] = ? and [refTable].[toDttm] = ? and [refTable].[terminatedUserTblFk] = ? and [refTable].[closedDttm] = ? and [refTable].[currencyFk] = ? and [refTable].[languageTblFk] = ? and [refTable].[dunningPackageFk] = ? and [refTable].[billPackageFk] = ? and [refTable].[billingCycleFk] = ? and [refTable].[billingAlignDttm] = ? and [refTable].[initialBillStatus] = ? and [refTable].[paymentTermFk] = ? and [refTable].[payPointLocation] = ? and [refTable].[salesTaxExemptFl] = ? and [refTable].[lastAccountTransactionFk] = ? and [refTable].[cancelFl] = ? and [refTable].[cancelledDttm] = ? and [refTable].[cancelledUserTblFk] = ? and [refTable].[terminatedDttm] = ? and [refTable].[parentOverridesChildFl] = ? and [refTable].[overrideAllocateCreditOnRebill] = ? and [refTable].[reference] = ? and [refTable].[deleteFl] = ? and [refTable].[versionNo] = ? and [refTable].[partitionId] = ?
                                     </property>
                 <property dataType="System.Int32" description="Specifies the type of connection used to access the reference dataset." name="ConnectionType" typeConverter="LookupConnectionType">0</property>
                 <property dataType="System.Int32" description="Specifies the cache type of the lookup table." name="CacheType" typeConverter="CacheType">0</property>
@@ -1279,7 +1279,7 @@
             </component>
             <component componentClassID="Microsoft.OLEDBDestination" contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4" name="Insert-Update-Record" refId="Package\DataFlow-LoadData\Insert-Update-Record" usesDispositions="true" version="4">
               <connections>
-                <connection connectionManagerID="{44186107-8C0C-4500-9D13-6C767D55F07D}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Insert-Update-Record.Connections[OleDbConnection]" />
+                <connection connectionManagerID="{0F0553AB-7FC9-46AA-8CFB-C267DF85274E}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Insert-Update-Record.Connections[OleDbConnection]" />
               </connections>
               <inputs>
                 <input errorOrTruncationOperation="Insert" errorRowDisposition="FailComponent" hasSideEffects="true" name="Update-Lookup_NoMatch_Insert-Update-Record" refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record]">
@@ -1382,7 +1382,7 @@
             </component>
             <component componentClassID="Microsoft.OLEDBCommand" contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2" name="Delete" refId="Package\DataFlow-LoadData\Delete" usesDispositions="true" version="2">
               <connections>
-                <connection connectionManagerID="{44186107-8C0C-4500-9D13-6C767D55F07D}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Delete.Connections[OleDbConnection]" />
+                <connection connectionManagerID="{0F0553AB-7FC9-46AA-8CFB-C267DF85274E}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Delete.Connections[OleDbConnection]" />
               </connections>
               <inputs>
                 <input errorOrTruncationOperation="Command Execution" errorRowDisposition="FailComponent" hasSideEffects="true" name="Conditional-Split_Delete-Record_Delete" refId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete]">
@@ -1418,7 +1418,7 @@
             </component>
             <component componentClassID="Microsoft.OLEDBDestination" contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4" name="Insert" refId="Package\DataFlow-LoadData\Insert" usesDispositions="true" version="4">
               <connections>
-                <connection connectionManagerID="{44186107-8C0C-4500-9D13-6C767D55F07D}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Insert.Connections[OleDbConnection]" />
+                <connection connectionManagerID="{0F0553AB-7FC9-46AA-8CFB-C267DF85274E}:external" connectionManagerRefId="Package.ConnectionManagers[Dest]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\DataFlow-LoadData\Insert.Connections[OleDbConnection]" />
               </connections>
               <inputs>
                 <input errorOrTruncationOperation="Insert" errorRowDisposition="FailComponent" hasSideEffects="true" name="Conditional-Split_New-Record_Insert" refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert]">
@@ -1534,14 +1534,14 @@
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
-    <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{EE520000-97A6-4F11-AF14-86CB62BB451D}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="Execute SQL-Update Record" DTS:refId="Package\Execute SQL-Update Record" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+    <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{126ABD6E-BA93-4743-BF39-3031E5355D8D}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="Execute SQL-Update Record" DTS:refId="Package\Execute SQL-Update Record" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:ObjectData>
         <SQLTask:SqlTaskData SQLTask:Connection="Dest" SQLTask:SqlStatementSource="&#xA;                                           &#xA;           Update Account Set &#xA;                                id =  B.[id],billingEntityFk =  B.[billingEntityFk],parentAccountFk =  B.[parentAccountFk],customerFk =  B.[customerFk],accountTypeFk =  B.[accountTypeFk],number =  B.[number],name =  B.[name],createdDttm =  B.[createdDttm],createdUserTblFk =  B.[createdUserTblFk],fromDttm =  B.[fromDttm],toDttm =  B.[toDttm],terminatedUserTblFk =  B.[terminatedUserTblFk],closedDttm =  B.[closedDttm],currencyFk =  B.[currencyFk],languageTblFk =  B.[languageTblFk],dunningPackageFk =  B.[dunningPackageFk],billPackageFk =  B.[billPackageFk],billingCycleFk =  B.[billingCycleFk],billingAlignDttm =  B.[billingAlignDttm],initialBillStatus =  B.[initialBillStatus],paymentTermFk =  B.[paymentTermFk],payPointLocation =  B.[payPointLocation],salesTaxExemptFl =  B.[salesTaxExemptFl],lastAccountTransactionFk =  B.[lastAccountTransactionFk],cancelFl =  B.[cancelFl],cancelledDttm =  B.[cancelledDttm],cancelledUserTblFk =  B.[cancelledUserTblFk],terminatedDttm =  B.[terminatedDttm],parentOverridesChildFl =  B.[parentOverridesChildFl],overrideAllocateCreditOnRebill =  B.[overrideAllocateCreditOnRebill],reference =  B.[reference],deleteFl =  B.[deleteFl],versionNo =  B.[versionNo],partitionId =  B.[partitionId]&#xA;                                From Account A Inner Join Temp_Account B&#xA;                                On  A.Id = B.ID&#xA;       " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
-    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{21F8CE22-238B-4AD4-A773-147DAB4B62F5}" DTS:From="Package\Execute SQL" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_Execute SQL_To_DataFlow-LoadData" DTS:refId="Package.PrecedenceConstraints[Constraint_Execute SQL_To_DataFlow-LoadData]" DTS:To="Package\DataFlow-LoadData" />
-    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{709C5413-CFB3-4299-8AFF-147FECE68868}" DTS:From="Package\DataFlow-LoadData" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_DataFlow-LoadData_To_Execute SQL-Update Record" DTS:refId="Package.PrecedenceConstraints[Constraint_DataFlow-LoadData_To_Execute SQL-Update Record]" DTS:To="Package\Execute SQL-Update Record" />
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{B0AC4649-9ABB-489B-8F79-2757EA73DE80}" DTS:From="Package\Execute SQL" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_Execute SQL_To_DataFlow-LoadData" DTS:refId="Package.PrecedenceConstraints[Constraint_Execute SQL_To_DataFlow-LoadData]" DTS:To="Package\DataFlow-LoadData" />
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{C078F691-180B-4DEF-AEA8-8DDDB2EC5C3C}" DTS:From="Package\DataFlow-LoadData" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_DataFlow-LoadData_To_Execute SQL-Update Record" DTS:refId="Package.PrecedenceConstraints[Constraint_DataFlow-LoadData_To_Execute SQL-Update Record]" DTS:To="Package\Execute SQL-Update Record" />
   </DTS:PrecedenceConstraints>
 </DTS:Executable>

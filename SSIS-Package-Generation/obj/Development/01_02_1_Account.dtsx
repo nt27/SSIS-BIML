@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="10/13/2018 11:22:31 AM"
+  DTS:CreationDate="10/14/2018 10:00:42 AM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="Win2016-SQL"
   DTS:CreatorName="cgiadmin"
-  DTS:DTSID="{4ED1BDB6-3F20-4441-A71B-D71046299173}"
+  DTS:DTSID="{57E9FC67-6005-48BE-9F81-73B4D12CAEEC}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.107"
   DTS:LocaleID="1033"
   DTS:ObjectName="01_02_1_Account"
-  DTS:VersionGUID="{3C771EE9-8A68-4DA8-A796-287367DA8635}"
+  DTS:VersionGUID="{2821BFD1-7A42-4657-BFF4-DF3CECAF551F}"
   DTS:VersionMajor="0">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
@@ -18,7 +18,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Dest]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{5370FFA2-F2AF-493E-9FA9-A979C948F3C6}"
+      DTS:DTSID="{B781095E-F27E-441A-966B-00C18062AE7C}"
       DTS:ObjectName="Dest">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -28,7 +28,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Source]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{6D78D633-47E1-40E3-90ED-F9688732A1B2}"
+      DTS:DTSID="{41382A51-AAB8-487A-B806-EA494A2C5A24}"
       DTS:ObjectName="Source">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -41,7 +41,7 @@
     <DTS:Executable
       DTS:refId="Package\DataFlow-LoadData"
       DTS:CreationName="Microsoft.Pipeline"
-      DTS:DTSID="{87395009-D200-479B-96FE-59208C1474CF}"
+      DTS:DTSID="{AA1A912D-3D91-4CBC-82D9-CB7497EF601B}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="DataFlow-LoadData"
@@ -4632,42 +4632,8 @@
                   expressionType="Notify"
                   name="SqlCommandParam"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Account]) [refTable]
-                                                        where [refTable].[id] = ? 
-                                                                                                                    and [refTable].[id] = ?
-                                                                                                                    and [refTable].[billingEntityFk] = ?
-                                                                                                                    and [refTable].[parentAccountFk] = ?
-                                                                                                                    and [refTable].[customerFk] = ?
-                                                                                                                    and [refTable].[accountTypeFk] = ?
-                                                                                                                    and [refTable].[number] = ?
-                                                                                                                    and [refTable].[name] = ?
-                                                                                                                    and [refTable].[createdDttm] = ?
-                                                                                                                    and [refTable].[createdUserTblFk] = ?
-                                                                                                                    and [refTable].[fromDttm] = ?
-                                                                                                                    and [refTable].[toDttm] = ?
-                                                                                                                    and [refTable].[terminatedUserTblFk] = ?
-                                                                                                                    and [refTable].[closedDttm] = ?
-                                                                                                                    and [refTable].[currencyFk] = ?
-                                                                                                                    and [refTable].[languageTblFk] = ?
-                                                                                                                    and [refTable].[dunningPackageFk] = ?
-                                                                                                                    and [refTable].[billPackageFk] = ?
-                                                                                                                    and [refTable].[billingCycleFk] = ?
-                                                                                                                    and [refTable].[billingAlignDttm] = ?
-                                                                                                                    and [refTable].[initialBillStatus] = ?
-                                                                                                                    and [refTable].[paymentTermFk] = ?
-                                                                                                                    and [refTable].[payPointLocation] = ?
-                                                                                                                    and [refTable].[salesTaxExemptFl] = ?
-                                                                                                                    and [refTable].[lastAccountTransactionFk] = ?
-                                                                                                                    and [refTable].[cancelFl] = ?
-                                                                                                                    and [refTable].[cancelledDttm] = ?
-                                                                                                                    and [refTable].[cancelledUserTblFk] = ?
-                                                                                                                    and [refTable].[terminatedDttm] = ?
-                                                                                                                    and [refTable].[parentOverridesChildFl] = ?
-                                                                                                                    and [refTable].[overrideAllocateCreditOnRebill] = ?
-                                                                                                                    and [refTable].[reference] = ?
-                                                                                                                    and [refTable].[deleteFl] = ?
-                                                                                                                    and [refTable].[versionNo] = ?
-                                                                                                                    and [refTable].[partitionId] = ?
-                                                                                        </property>
+                                                        where [refTable].[id] = ?  and [refTable].[id] = ? and [refTable].[billingEntityFk] = ? and [refTable].[parentAccountFk] = ? and [refTable].[customerFk] = ? and [refTable].[accountTypeFk] = ? and [refTable].[number] = ? and [refTable].[name] = ? and [refTable].[createdDttm] = ? and [refTable].[createdUserTblFk] = ? and [refTable].[fromDttm] = ? and [refTable].[toDttm] = ? and [refTable].[terminatedUserTblFk] = ? and [refTable].[closedDttm] = ? and [refTable].[currencyFk] = ? and [refTable].[languageTblFk] = ? and [refTable].[dunningPackageFk] = ? and [refTable].[billPackageFk] = ? and [refTable].[billingCycleFk] = ? and [refTable].[billingAlignDttm] = ? and [refTable].[initialBillStatus] = ? and [refTable].[paymentTermFk] = ? and [refTable].[payPointLocation] = ? and [refTable].[salesTaxExemptFl] = ? and [refTable].[lastAccountTransactionFk] = ? and [refTable].[cancelFl] = ? and [refTable].[cancelledDttm] = ? and [refTable].[cancelledUserTblFk] = ? and [refTable].[terminatedDttm] = ? and [refTable].[parentOverridesChildFl] = ? and [refTable].[overrideAllocateCreditOnRebill] = ? and [refTable].[reference] = ? and [refTable].[deleteFl] = ? and [refTable].[versionNo] = ? and [refTable].[partitionId] = ?
+                                    </property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the type of connection used to access the reference dataset."
@@ -5428,7 +5394,7 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{D428E880-E445-44CF-A43E-89C18815286D}"
+      DTS:DTSID="{0141703C-9FE9-42A0-90C0-1EB52AB281ED}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL"
@@ -5437,14 +5403,14 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{5370FFA2-F2AF-493E-9FA9-A979C948F3C6}"
+          SQLTask:Connection="{B781095E-F27E-441A-966B-00C18062AE7C}"
           SQLTask:SqlStatementSource="Truncate Table Temp_Account" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Execute SQL-Update Record"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{297341E9-6EC1-4874-B9B1-B294EE44FBD4}"
+      DTS:DTSID="{6245B0FF-BAC2-4B2F-8127-4E5B6C02E034}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL-Update Record"
@@ -5453,7 +5419,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{5370FFA2-F2AF-493E-9FA9-A979C948F3C6}"
+          SQLTask:Connection="{B781095E-F27E-441A-966B-00C18062AE7C}"
           SQLTask:SqlStatementSource="&#xA;                                           &#xA;           Update Account Set &#xA;                                id =  B.[id],billingEntityFk =  B.[billingEntityFk],parentAccountFk =  B.[parentAccountFk],customerFk =  B.[customerFk],accountTypeFk =  B.[accountTypeFk],number =  B.[number],name =  B.[name],createdDttm =  B.[createdDttm],createdUserTblFk =  B.[createdUserTblFk],fromDttm =  B.[fromDttm],toDttm =  B.[toDttm],terminatedUserTblFk =  B.[terminatedUserTblFk],closedDttm =  B.[closedDttm],currencyFk =  B.[currencyFk],languageTblFk =  B.[languageTblFk],dunningPackageFk =  B.[dunningPackageFk],billPackageFk =  B.[billPackageFk],billingCycleFk =  B.[billingCycleFk],billingAlignDttm =  B.[billingAlignDttm],initialBillStatus =  B.[initialBillStatus],paymentTermFk =  B.[paymentTermFk],payPointLocation =  B.[payPointLocation],salesTaxExemptFl =  B.[salesTaxExemptFl],lastAccountTransactionFk =  B.[lastAccountTransactionFk],cancelFl =  B.[cancelFl],cancelledDttm =  B.[cancelledDttm],cancelledUserTblFk =  B.[cancelledUserTblFk],terminatedDttm =  B.[terminatedDttm],parentOverridesChildFl =  B.[parentOverridesChildFl],overrideAllocateCreditOnRebill =  B.[overrideAllocateCreditOnRebill],reference =  B.[reference],deleteFl =  B.[deleteFl],versionNo =  B.[versionNo],partitionId =  B.[partitionId]&#xA;                                From Account A Inner Join Temp_Account B&#xA;                                On  A.Id = B.ID&#xA;       " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -5462,7 +5428,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_DataFlow-LoadData_To_Execute SQL-Update Record]"
       DTS:CreationName=""
-      DTS:DTSID="{42554D7F-CDE4-480F-B38D-86B043DB69A0}"
+      DTS:DTSID="{8E23DB74-29EC-44DB-8753-09A2D54FAAEB}"
       DTS:From="Package\DataFlow-LoadData"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_DataFlow-LoadData_To_Execute SQL-Update Record"
@@ -5470,7 +5436,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_Execute SQL_To_DataFlow-LoadData]"
       DTS:CreationName=""
-      DTS:DTSID="{55ED418D-72A4-4949-A357-ED77EAEE5A7A}"
+      DTS:DTSID="{8E92689C-16E3-43EF-9EE1-06CAD1B7F427}"
       DTS:From="Package\Execute SQL"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_Execute SQL_To_DataFlow-LoadData"

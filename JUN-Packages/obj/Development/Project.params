@@ -121,7 +121,7 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">WIN2016-SQL</SSIS:Property>
+        SSIS:Name="Value">WIN2016-SQL\BDL,1440</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
@@ -163,7 +163,7 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">WIN2016-SQL</SSIS:Property>
+        SSIS:Name="Value">WIN2016-SQL\BDL,1440</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
@@ -248,6 +248,27 @@
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
         SSIS:Name="Value">Modern12345</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="DataType">18</SSIS:Property>
+    </SSIS:Properties>
+  </SSIS:Parameter>
+  <SSIS:Parameter
+    SSIS:Name="Junifer_Linked_ServerName">
+    <SSIS:Properties>
+      <SSIS:Property
+        SSIS:Name="ID">{b7938cba-7fb1-42ea-b0ff-236d784eb5ed}</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="CreationName"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Description"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Required">1</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Sensitive">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Value">WIN2016-SQL</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>

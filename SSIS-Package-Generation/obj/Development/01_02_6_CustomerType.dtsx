@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="10/13/2018 11:22:32 AM"
+  DTS:CreationDate="10/14/2018 10:00:43 AM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="Win2016-SQL"
   DTS:CreatorName="cgiadmin"
-  DTS:DTSID="{3CB68BD7-C312-47E0-A73F-6937B1C66617}"
+  DTS:DTSID="{DBE3BDCD-B3B3-460E-8C69-9708A8B9A9C7}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.107"
   DTS:LocaleID="1033"
   DTS:ObjectName="01_02_6_CustomerType"
-  DTS:VersionGUID="{B9081D67-60CC-42BB-95A4-BC89ACEE7961}"
+  DTS:VersionGUID="{3587D4D5-34A3-4218-938F-8E4E3EDE7C6B}"
   DTS:VersionMajor="0">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
@@ -18,7 +18,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Dest]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{8CD49D2A-2670-45DF-B48F-EEF52B20F62C}"
+      DTS:DTSID="{016FDA89-888F-4F8F-969E-A1BAE4D5C844}"
       DTS:ObjectName="Dest">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -28,7 +28,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Source]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{C0B64F64-1459-48CE-93CD-78B44F042FC9}"
+      DTS:DTSID="{618A179C-A09A-4FA5-A61D-60C46F8ABC15}"
       DTS:ObjectName="Source">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -41,7 +41,7 @@
     <DTS:Executable
       DTS:refId="Package\DataFlow-LoadData"
       DTS:CreationName="Microsoft.Pipeline"
-      DTS:DTSID="{2890E219-9C09-44E8-98EE-D727C0774BE2}"
+      DTS:DTSID="{22E6FFE5-DBBB-4798-8195-3A61AF278D0B}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="DataFlow-LoadData"
@@ -1847,17 +1847,8 @@
                   expressionType="Notify"
                   name="SqlCommandParam"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[CustomerType]) [refTable]
-                                                        where [refTable].[id] = ? 
-                                                                                                                    and [refTable].[id] = ?
-                                                                                                                    and [refTable].[customerClassFk] = ?
-                                                                                                                    and [refTable].[category] = ?
-                                                                                                                    and [refTable].[internalKey] = ?
-                                                                                                                    and [refTable].[languageKey] = ?
-                                                                                                                    and [refTable].[reference] = ?
-                                                                                                                    and [refTable].[deleteFl] = ?
-                                                                                                                    and [refTable].[versionNo] = ?
-                                                                                                                    and [refTable].[partitionId] = ?
-                                                                                        </property>
+                                                        where [refTable].[id] = ?  and [refTable].[id] = ? and [refTable].[customerClassFk] = ? and [refTable].[category] = ? and [refTable].[internalKey] = ? and [refTable].[languageKey] = ? and [refTable].[reference] = ? and [refTable].[deleteFl] = ? and [refTable].[versionNo] = ? and [refTable].[partitionId] = ?
+                                    </property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the type of connection used to access the reference dataset."
@@ -2178,7 +2169,7 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{21544F64-AAD3-4911-ACA0-DCF1387D8F4D}"
+      DTS:DTSID="{B3836C8C-DCA3-4016-B08D-F2A98F054DB3}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL"
@@ -2187,14 +2178,14 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{8CD49D2A-2670-45DF-B48F-EEF52B20F62C}"
+          SQLTask:Connection="{016FDA89-888F-4F8F-969E-A1BAE4D5C844}"
           SQLTask:SqlStatementSource="Truncate Table Temp_CustomerType" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Execute SQL-Update Record"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{912C6C44-A120-4B2E-A595-DD1752817608}"
+      DTS:DTSID="{2BE8F5CB-BF03-4F7E-834B-C927CF91F6F8}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL-Update Record"
@@ -2203,7 +2194,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{8CD49D2A-2670-45DF-B48F-EEF52B20F62C}"
+          SQLTask:Connection="{016FDA89-888F-4F8F-969E-A1BAE4D5C844}"
           SQLTask:SqlStatementSource="&#xA;                                           &#xA;           Update CustomerType Set &#xA;                                id =  B.[id],customerClassFk =  B.[customerClassFk],category =  B.[category],internalKey =  B.[internalKey],languageKey =  B.[languageKey],reference =  B.[reference],deleteFl =  B.[deleteFl],versionNo =  B.[versionNo],partitionId =  B.[partitionId]&#xA;                                From CustomerType A Inner Join Temp_CustomerType B&#xA;                                On  A.Id = B.ID&#xA;       " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -2212,7 +2203,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_DataFlow-LoadData_To_Execute SQL-Update Record]"
       DTS:CreationName=""
-      DTS:DTSID="{8AFA4ADC-B2BA-4174-9D4C-F2C5D2C520E9}"
+      DTS:DTSID="{39BD637F-37BC-4059-A75E-69F3086587EE}"
       DTS:From="Package\DataFlow-LoadData"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_DataFlow-LoadData_To_Execute SQL-Update Record"
@@ -2220,7 +2211,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_Execute SQL_To_DataFlow-LoadData]"
       DTS:CreationName=""
-      DTS:DTSID="{9E6464BE-20AC-4609-83BB-21240DE134D9}"
+      DTS:DTSID="{3A96F3D6-F59E-4909-8025-C60A26CDD980}"
       DTS:From="Package\Execute SQL"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_Execute SQL_To_DataFlow-LoadData"

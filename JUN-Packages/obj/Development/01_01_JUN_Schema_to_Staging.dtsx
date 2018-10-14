@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="01_01_Junifer_Schema_to_Staging"
   DTS:PackageType="5"
-  DTS:VersionBuild="40"
-  DTS:VersionGUID="{05D6BAFE-5415-484D-B220-8FEBFAB506DE}">
+  DTS:VersionBuild="45"
+  DTS:VersionGUID="{2B54E1A0-5595-48D5-BA8C-2E48930F8BD2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -31,11 +31,11 @@
         DTS:Name="UserName">@[$Project::Junifer_STG_UserName]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=WIN2016-SQL;User ID=ssis-release-user;Initial Catalog=JUN_STG;Provider=SQLNCLI11.1;">
+          DTS:ConnectionString="Data Source=WIN2016-SQL\BDL,1440;User ID=ssis-release-user;Initial Catalog=JUN_STG;Provider=SQLNCLI11.1;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAdIJVJlH4d8gPejvZ2MDAP1N2v+5O5M6js6qFO+U3yWAAAAAAOgAAAAAIAACAAAADNOqu4alQIGv/mkIMJxRNwJC4gGnEDYXR7D/8WoSdWuCAAAAC6mkKK2Rh9i1fkVFtkSw43dnacCYgHdZXN4FpBN3JszEAAAAASDl/dZLEnUl1pYJDAXhYjBWk2OYjvrRh9nUY4au2wlZO4juDEpX30q5Araugao9dG/3qoJWC8G+5n+ZxhhaLp</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADqiJRyi+Keya7RLuOJd22pJ90pQM/U4GGiAAhYO7PbkAAAAAAOgAAAAAIAACAAAAAg0SPELPQYDecvIybwW/ol6f+jdmf5Rw33cuuGZbNboiAAAAAqVFOuDeyub5Gl5W2h3xn1umV34DlxKQSJFoL8QQ0TBUAAAACBT2/r41Qe54/qIwMXg51Uct7PPMztqUBAKFIfpqXbsVfSwPmQl6JcXnP8K982MlfjhldpfeGPYOVxK+YO4Nup</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -59,7 +59,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADJBxo7apxKUPj0ZY/Zj2WAhBHSg6vX0Vd8rq459J7OewAAAAAOgAAAAAIAACAAAAAKFNXOBhSzb2hPu143rYEDME9bIYv0Mn9JNnONCroLdCAAAAAtR1l5QmIcg6l7cPKeA5yghEjHsibADdhPK0YxPq8/PUAAAACePUMlHh4cpqI4T+KO6jVDEwnKd2nw4Nng3buH8q52dugWyIMkj0rvpEXilWHBbtcF6OjXIAeAqImAasR0NjRg</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAApznReeR8Td716kMX+x20yEe3euVR7fV6n4XUSW84z9gAAAAAOgAAAAAIAACAAAAA4gezgK02dGOhtaT8UtaejlXO3/NAwsBXDfiZccmv7diAAAAAtjeaGluk/DIJvrGj0N3OQm2Mh6gu/wHTC1S2JW39R2EAAAAB4AebiFPmHhUVPESqh5sfSBWKMRsMw2ILGORtvnehgHjLSB/isdvZ69mhUMjfqkqe1+9/2YvZxZ4l3WpJOIlGN</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -79,7 +79,7 @@
           ConnectionString="SqlServerName=WIN2016-SQL;UseWindowsAuthentication=False;UserName=ssis-release-user;">
           <PassWord
             Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADIdrAORmdcqDnbjSp5vwu58USVt/bclj+YW3yaKcipQAAAAAAOgAAAAAIAACAAAAA9k/0dBeyGEAAi43zBosvxfkwlLCfzOvSFjfekN+nN/yAAAADBMvQSbRWDAQAEbgDgISnbAKvd4bB1hezPMjTQI/cmKUAAAACRGlk/B1LMx4u1D6F1DoEBlNwOUP910K8Hb6/WwHux5X70JpUQFp5ylTbywLCM45XzoKh9ovCr++NEJ0KWgHdA</PassWord>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAA1O7d1wyDN4FL48fg79Av3Zt3SwyY3D824B6wJMdAnjwAAAAAOgAAAAAIAACAAAADEpbcCvk1uSnMPnblWDx/ZgzpqaXFGuW/mK/EcwbglRyAAAACVRImR+tGXGzneMzxZws9HAO3Jv6tyRXhBh2VVpLR8BUAAAACVfDGCsRWFprrI2fChYCXeQpZSJHYC3HMY0BZeN1LcG02zdOVgUd07aNTmxvbA4se2oJkgI2Rs+wgPvY76EFCv</PassWord>
         </SMOServerConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -96,10 +96,10 @@
         DTS:Name="UserName">@[$Project::Junifer_STG_UserName]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <SMOServerConnectionManager
-          ConnectionString="SqlServerName=WIN2016-SQL;UseWindowsAuthentication=False;UserName=ssis-release-user;">
+          ConnectionString="SqlServerName=WIN2016-SQL\BDL,1440;UseWindowsAuthentication=False;UserName=ssis-release-user;">
           <PassWord
             Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB23lXqodwgnXyhuj2EUgkTKJSY+pLCGIrf3uvdy8hzeAAAAAAOgAAAAAIAACAAAABnmyIAAfm7NEK/QHdS/In0l2a4c/hy1UqhIIU/uwwlziAAAAD+5LRFGBgm5Z3pjCY4xxqY5CE1m/Z9SfpY+dMZvmJ1qEAAAACbDYlxqekegs+z/NA0TSK22TfStxTQGAZ5HRQ8Goz6WciWZMBRYsJsjyNiKjoOnXWWDpPD5wYxzxzc/3/CJuiG</PassWord>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADl3kt1FubIXK8AEF2YZkhSl1sjnzX4eP7BpcRtljKchAAAAAAOgAAAAAIAACAAAACl2cSklgU/LrhzWE9wEeTVgL70W/fbULxdnf1IawrU6iAAAABYf8yoNm/jxVedxO1rORlGGCmC0El6bnSF5r1R/us0nEAAAADhfmRVUdPRIMO+U5WeaCsByExFsNZ7NmcLm8EJz3Pj5aTMngPCxjUHfKenv60+917WEqsOOBrAGPboML9f50dS</PassWord>
         </SMOServerConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>

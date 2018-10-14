@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="10/13/2018 11:22:32 AM"
+  DTS:CreationDate="10/14/2018 10:00:43 AM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="Win2016-SQL"
   DTS:CreatorName="cgiadmin"
-  DTS:DTSID="{79F62D5A-C6F9-48B7-B6CF-CA04FD2DE365}"
+  DTS:DTSID="{6BD39544-5622-4A3B-A2FC-0461ED10FB2F}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.107"
   DTS:LocaleID="1033"
   DTS:ObjectName="01_02_3_AccountTransactionType"
-  DTS:VersionGUID="{B9F96605-226B-42F6-927A-5374715B90F9}"
+  DTS:VersionGUID="{1ED9C948-4BFA-47A1-8E68-2D517FFDB97A}"
   DTS:VersionMajor="0">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
@@ -18,7 +18,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Dest]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{2BDFD20B-CB80-43ED-860A-18EE9C9ED1A6}"
+      DTS:DTSID="{39743F64-E7ED-495A-9538-9955A33FB690}"
       DTS:ObjectName="Dest">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -28,7 +28,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Source]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{FAA23D84-B7E9-4892-8BB7-E9B9441683C1}"
+      DTS:DTSID="{67522F55-13FE-4487-9BF1-101A4AECED24}"
       DTS:ObjectName="Source">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -41,7 +41,7 @@
     <DTS:Executable
       DTS:refId="Package\DataFlow-LoadData"
       DTS:CreationName="Microsoft.Pipeline"
-      DTS:DTSID="{2DD6071A-6B43-4B1F-AEE8-EAC1E78E258D}"
+      DTS:DTSID="{A1540F8E-EC21-4E82-B4BD-1D67E9A5DE9C}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="DataFlow-LoadData"
@@ -2240,20 +2240,8 @@
                   expressionType="Notify"
                   name="SqlCommandParam"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[AccountTransactionType]) [refTable]
-                                                        where [refTable].[id] = ? 
-                                                                                                                    and [refTable].[id] = ?
-                                                                                                                    and [refTable].[internalKey] = ?
-                                                                                                                    and [refTable].[languageKey] = ?
-                                                                                                                    and [refTable].[transactionClass] = ?
-                                                                                                                    and [refTable].[allowNegativeAmountFl] = ?
-                                                                                                                    and [refTable].[componentFk] = ?
-                                                                                                                    and [refTable].[requireAuthorisationFl] = ?
-                                                                                                                    and [refTable].[creatorCanAuthoriseFl] = ?
-                                                                                                                    and [refTable].[reference] = ?
-                                                                                                                    and [refTable].[deleteFl] = ?
-                                                                                                                    and [refTable].[versionNo] = ?
-                                                                                                                    and [refTable].[partitionId] = ?
-                                                                                        </property>
+                                                        where [refTable].[id] = ?  and [refTable].[id] = ? and [refTable].[internalKey] = ? and [refTable].[languageKey] = ? and [refTable].[transactionClass] = ? and [refTable].[allowNegativeAmountFl] = ? and [refTable].[componentFk] = ? and [refTable].[requireAuthorisationFl] = ? and [refTable].[creatorCanAuthoriseFl] = ? and [refTable].[reference] = ? and [refTable].[deleteFl] = ? and [refTable].[versionNo] = ? and [refTable].[partitionId] = ?
+                                    </property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the type of connection used to access the reference dataset."
@@ -2631,7 +2619,7 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{09A10223-8043-434D-958C-75B97F9B109F}"
+      DTS:DTSID="{3DD3C564-8EF0-45D8-83BF-521DE6B01D69}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL"
@@ -2640,14 +2628,14 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{2BDFD20B-CB80-43ED-860A-18EE9C9ED1A6}"
+          SQLTask:Connection="{39743F64-E7ED-495A-9538-9955A33FB690}"
           SQLTask:SqlStatementSource="Truncate Table Temp_AccountTransactionType" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Execute SQL-Update Record"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{38E34EC9-B91F-49B1-BDEF-54D9E76F6833}"
+      DTS:DTSID="{316C4DB2-8D31-4E32-A704-BA2DD7B057FF}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL-Update Record"
@@ -2656,7 +2644,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{2BDFD20B-CB80-43ED-860A-18EE9C9ED1A6}"
+          SQLTask:Connection="{39743F64-E7ED-495A-9538-9955A33FB690}"
           SQLTask:SqlStatementSource="&#xA;                                           &#xA;           Update AccountTransactionType Set &#xA;                                id =  B.[id],internalKey =  B.[internalKey],languageKey =  B.[languageKey],transactionClass =  B.[transactionClass],allowNegativeAmountFl =  B.[allowNegativeAmountFl],componentFk =  B.[componentFk],requireAuthorisationFl =  B.[requireAuthorisationFl],creatorCanAuthoriseFl =  B.[creatorCanAuthoriseFl],reference =  B.[reference],deleteFl =  B.[deleteFl],versionNo =  B.[versionNo],partitionId =  B.[partitionId]&#xA;                                From AccountTransactionType A Inner Join Temp_AccountTransactionType B&#xA;                                On  A.Id = B.ID&#xA;       " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -2665,7 +2653,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_DataFlow-LoadData_To_Execute SQL-Update Record]"
       DTS:CreationName=""
-      DTS:DTSID="{48021AD9-CADC-4ACC-A858-27A20D14CC59}"
+      DTS:DTSID="{6ABF4439-7AAF-4810-9297-F9081DC1B477}"
       DTS:From="Package\DataFlow-LoadData"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_DataFlow-LoadData_To_Execute SQL-Update Record"
@@ -2673,7 +2661,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_Execute SQL_To_DataFlow-LoadData]"
       DTS:CreationName=""
-      DTS:DTSID="{7CB1CC70-614F-48F1-AE62-DF0E4973017C}"
+      DTS:DTSID="{BD486E61-F6CA-433C-A4E5-747B247F0752}"
       DTS:From="Package\Execute SQL"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_Execute SQL_To_DataFlow-LoadData"

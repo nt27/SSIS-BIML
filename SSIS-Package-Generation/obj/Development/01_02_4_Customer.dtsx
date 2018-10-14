@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="10/13/2018 11:22:32 AM"
+  DTS:CreationDate="10/14/2018 10:00:43 AM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="Win2016-SQL"
   DTS:CreatorName="cgiadmin"
-  DTS:DTSID="{E653CBBF-BD19-4234-8EE7-5E404138003B}"
+  DTS:DTSID="{21FBD1F5-985F-4417-8A6C-A56CE57B0C26}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.107"
   DTS:LocaleID="1033"
   DTS:ObjectName="01_02_4_Customer"
-  DTS:VersionGUID="{025F5436-0259-424A-B67D-409B57ADC876}"
+  DTS:VersionGUID="{39C4D0C1-24B9-4398-9804-A894F45ADFEF}"
   DTS:VersionMajor="0">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
@@ -18,7 +18,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Dest]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{C424527F-988C-45FE-B374-CD02089DBFB5}"
+      DTS:DTSID="{15C411E8-7266-4E8B-A43D-4AF9F822C931}"
       DTS:ObjectName="Dest">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -28,7 +28,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Source]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{CB47E728-AA2D-47B7-8CF1-8EEA2180D4C1}"
+      DTS:DTSID="{6BC646BD-5854-42E6-B722-D7CFE34C9505}"
       DTS:ObjectName="Source">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -41,7 +41,7 @@
     <DTS:Executable
       DTS:refId="Package\DataFlow-LoadData"
       DTS:CreationName="Microsoft.Pipeline"
-      DTS:DTSID="{616751C6-2138-408E-AB0A-5CD49D43A315}"
+      DTS:DTSID="{EC941EE1-AFEE-4AE0-98D6-A66A71F8E70B}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="DataFlow-LoadData"
@@ -3298,30 +3298,8 @@
                   expressionType="Notify"
                   name="SqlCommandParam"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Customer]) [refTable]
-                                                        where [refTable].[id] = ? 
-                                                                                                                    and [refTable].[id] = ?
-                                                                                                                    and [refTable].[billingEntityFk] = ?
-                                                                                                                    and [refTable].[customerClassFk] = ?
-                                                                                                                    and [refTable].[customerTypeFk] = ?
-                                                                                                                    and [refTable].[number] = ?
-                                                                                                                    and [refTable].[name] = ?
-                                                                                                                    and [refTable].[companyName] = ?
-                                                                                                                    and [refTable].[companyNo] = ?
-                                                                                                                    and [refTable].[companyRegAddressFk] = ?
-                                                                                                                    and [refTable].[titleFk] = ?
-                                                                                                                    and [refTable].[forename] = ?
-                                                                                                                    and [refTable].[surname] = ?
-                                                                                                                    and [refTable].[state] = ?
-                                                                                                                    and [refTable].[managerUserTblFk] = ?
-                                                                                                                    and [refTable].[marketingOptOutFl] = ?
-                                                                                                                    and [refTable].[creditScore] = ?
-                                                                                                                    and [refTable].[deceasedFl] = ?
-                                                                                                                    and [refTable].[taxExemptReasonFk] = ?
-                                                                                                                    and [refTable].[reference] = ?
-                                                                                                                    and [refTable].[deleteFl] = ?
-                                                                                                                    and [refTable].[versionNo] = ?
-                                                                                                                    and [refTable].[partitionId] = ?
-                                                                                        </property>
+                                                        where [refTable].[id] = ?  and [refTable].[id] = ? and [refTable].[billingEntityFk] = ? and [refTable].[customerClassFk] = ? and [refTable].[customerTypeFk] = ? and [refTable].[number] = ? and [refTable].[name] = ? and [refTable].[companyName] = ? and [refTable].[companyNo] = ? and [refTable].[companyRegAddressFk] = ? and [refTable].[titleFk] = ? and [refTable].[forename] = ? and [refTable].[surname] = ? and [refTable].[state] = ? and [refTable].[managerUserTblFk] = ? and [refTable].[marketingOptOutFl] = ? and [refTable].[creditScore] = ? and [refTable].[deceasedFl] = ? and [refTable].[taxExemptReasonFk] = ? and [refTable].[reference] = ? and [refTable].[deleteFl] = ? and [refTable].[versionNo] = ? and [refTable].[partitionId] = ?
+                                    </property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the type of connection used to access the reference dataset."
@@ -3871,7 +3849,7 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{32FE6BC1-39D4-4B9A-93FD-10721A65C097}"
+      DTS:DTSID="{4F1315C1-D803-4AD8-A72E-46D3DD0F0499}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL"
@@ -3880,14 +3858,14 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{C424527F-988C-45FE-B374-CD02089DBFB5}"
+          SQLTask:Connection="{15C411E8-7266-4E8B-A43D-4AF9F822C931}"
           SQLTask:SqlStatementSource="Truncate Table Temp_Customer" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Execute SQL-Update Record"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{74C46FC3-7BB4-49BF-AA53-46ED8FAA968B}"
+      DTS:DTSID="{E90E35D5-0F57-4A5C-B6A2-20A1E3B09818}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL-Update Record"
@@ -3896,7 +3874,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{C424527F-988C-45FE-B374-CD02089DBFB5}"
+          SQLTask:Connection="{15C411E8-7266-4E8B-A43D-4AF9F822C931}"
           SQLTask:SqlStatementSource="&#xA;                                           &#xA;           Update Customer Set &#xA;                                id =  B.[id],billingEntityFk =  B.[billingEntityFk],customerClassFk =  B.[customerClassFk],customerTypeFk =  B.[customerTypeFk],number =  B.[number],name =  B.[name],companyName =  B.[companyName],companyNo =  B.[companyNo],companyRegAddressFk =  B.[companyRegAddressFk],titleFk =  B.[titleFk],forename =  B.[forename],surname =  B.[surname],state =  B.[state],managerUserTblFk =  B.[managerUserTblFk],marketingOptOutFl =  B.[marketingOptOutFl],creditScore =  B.[creditScore],deceasedFl =  B.[deceasedFl],taxExemptReasonFk =  B.[taxExemptReasonFk],reference =  B.[reference],deleteFl =  B.[deleteFl],versionNo =  B.[versionNo],partitionId =  B.[partitionId]&#xA;                                From Customer A Inner Join Temp_Customer B&#xA;                                On  A.Id = B.ID&#xA;       " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3905,7 +3883,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_DataFlow-LoadData_To_Execute SQL-Update Record]"
       DTS:CreationName=""
-      DTS:DTSID="{18658423-0272-4B54-9D8A-10C02CF8C748}"
+      DTS:DTSID="{369B8629-96BC-4AFD-8D17-C01B33BAB5D1}"
       DTS:From="Package\DataFlow-LoadData"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_DataFlow-LoadData_To_Execute SQL-Update Record"
@@ -3913,7 +3891,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_Execute SQL_To_DataFlow-LoadData]"
       DTS:CreationName=""
-      DTS:DTSID="{54E8BF63-ABA2-4A7D-8CB3-7E445FB41A77}"
+      DTS:DTSID="{986EE21A-9277-4340-8A44-F2EF39F8CBBE}"
       DTS:From="Package\Execute SQL"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_Execute SQL_To_DataFlow-LoadData"

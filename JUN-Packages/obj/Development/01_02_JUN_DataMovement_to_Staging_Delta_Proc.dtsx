@@ -1,0 +1,303 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/13/2018 11:19:05 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NPWMGT-LVW-CTX2"
+  DTS:CreatorName="PAVEMENT\cgi-thangarajn"
+  DTS:DTSID="{F4B797CE-1459-4BF4-8EBB-F9E9E3E94580}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.107"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="01_02_JUN_DataMovement_to_Staging_Delta_Proc"
+  DTS:PackageType="5"
+  DTS:VersionBuild="53"
+  DTS:VersionGUID="{FD148A8B-E70B-455E-932D-F9F23E72B295}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_Junifer_STG]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{AC35E20B-D3BE-493C-AD46-C9FDAC8A0A72}"
+      DTS:ObjectName="OLEDB_Junifer_STG">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[$Project::Junifer_STG_DatabaseName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Password">@[$Project::Junifer_STG_Password]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Project::Junifer_STG_ServerName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="UserName">@[$Project::Junifer_STG_UserName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=WIN2016-SQL\BDL,1440;User ID=ssis-release-user;Initial Catalog=JUN_STG;Provider=SQLNCLI11.1;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAA3Z05A/a9suJlOEeucSWhADS6crOKEAEfVKFw2glhZ+AAAAAAOgAAAAAIAACAAAAAetQsFL6YETI265z8H+2WWtsv+tOFmovprWXS6DSntjyAAAABobu095XErkx7a4Ttu+/3yKroVc3+u1aQ4zclxMjYHvkAAAAD9G3iFO8ogfcYLBeWjvOUfuP17sNkSFMBvD+rswg9rWYlEaYzSRtY4V7CoasKoBBoBwN2jSV/g0RLrDf29UiTF</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLED_Junifer_ODS]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{6EE60E74-EDBC-469D-9DC7-2A9F06C933AB}"
+      DTS:ObjectName="OLED_Junifer_ODS">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[$Project::Junifer_ODS_DatabaseName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Password">@[$Project::Junifer_ODS_Password]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Project::Junifer_ODS_ServerName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="UserName">@[$Project::Junifer_ODS_UserName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=WIN2016-SQL;User ID=ssis-release-user;Initial Catalog=JUN_ODS;Provider=SQLNCLI11.1;Persist Security Info=True;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADZR09kAQ/D1m6uwr2aLgXCnjRihBvqVmMd6PRI7Hvd6wAAAAAOgAAAAAIAACAAAADbBrvZN5p4iUVPBhI+XXWopFfior4I5YS4bGQtnlYJOSAAAABWS1d0s50TfXyLAKRmXiUqCpIrilUQ6rHzdo4spd/KVkAAAAAgKZj4SkJj+81VLjpeU5RYqclcVTxm0ob7zDTc/GtRJsiV2xadp7yMJTYGBTduWFJL7LKEF988McSQHWjr3JPe</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMO_Junifer_ODS]"
+      DTS:CreationName="SMOServer"
+      DTS:DTSID="{138B300D-4A37-449C-A6A5-A7BEB49EAC43}"
+      DTS:ObjectName="SMO_Junifer_ODS">
+      <DTS:PropertyExpression
+        DTS:Name="Password">@[$Project::Junifer_ODS_Password]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="SqlServerName">@[$Project::Junifer_ODS_ServerName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="UserName">@[$Project::Junifer_ODS_UserName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SMOServerConnectionManager
+          ConnectionString="SqlServerName=WIN2016-SQL;UseWindowsAuthentication=False;UserName=ssis-release-user;">
+          <PassWord
+            Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAmau5q6IEE2OlY691wHvAMvIPRRZDGiEf99paOZR5iIAAAAAAOgAAAAAIAACAAAADnmQyCUMbcu7VMjNC1d1EUS8LYdVFRiFVlJ5Qjq8yciyAAAAAJfEI3e+hFd4qjhY+cVLFw69g6SaUxbbyqYlDO6zKVn0AAAAA5FTsU3nzH5FAlThidArwns2R1R2YUiLYT15Avj54LNfIZfzIcgK6FNNqW25FxUadLrtAHpQkSaYdEAtb5xroh</PassWord>
+        </SMOServerConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMO_Junifer_STG]"
+      DTS:CreationName="SMOServer"
+      DTS:DTSID="{2D468605-E1C2-460F-B8C8-F7B328B05FFF}"
+      DTS:ObjectName="SMO_Junifer_STG">
+      <DTS:PropertyExpression
+        DTS:Name="Password">@[$Project::Junifer_STG_Password]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="SqlServerName">@[$Project::Junifer_STG_ServerName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="UserName">@[$Project::Junifer_STG_UserName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SMOServerConnectionManager
+          ConnectionString="SqlServerName=WIN2016-SQL\BDL,1440;UseWindowsAuthentication=False;UserName=ssis-release-user;">
+          <PassWord
+            Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAgYLGsSRh5WhhNHCC13rCHmIwnaGHINwetEN1e9U30OQAAAAAOgAAAAAIAACAAAAAUTnl0OozCQ2joC1/78g46N2H32N/dKqDpID4R0y84eCAAAAAmN8MFQZVZhw/YQn+DVxm6eLZLfz38fFEpQBynscvs0UAAAADzhT0PQgFdchVbLuwvjRpJhdYpj8hYNngfY5M2uajgdvPf7Hdd9KVP5OIqrhLiXRbkHiYHTm4anwQ3HIDyPx17</PassWord>
+        </SMOServerConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F52D0026-92ED-4C27-89CC-0BDCB0EB34A5}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="NDMTables">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{48DF0B55-7B9B-4A97-90D9-C0A6AABAFF22}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BC445ABB-EF6A-4952-B21B-758C55BC199A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varTableCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{4EFC559D-27C1-4988-BC15-520369417A5A}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{8D3841E7-FFC0-4D0C-B3C4-A0D1FDD11D7A}"
+        DTS:ObjectName="{8D3841E7-FFC0-4D0C-B3C4-A0D1FDD11D7A}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::NDMTables" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Execute Stored Procedure"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{3D299599-6685-4095-86C8-819BB98F83AE}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute Stored Procedure"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{AC35E20B-D3BE-493C-AD46-C9FDAC8A0A72}"
+              SQLTask:SqlStatementSource="sp_DataTransfer @TableName = ?, &#xA;@SourceDatabaseName =?,&#xA;@TargetDatabaseName =?,&#xA;@LinkedServerName = ?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::TableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="$Project::Junifer_ODS_DatabaseName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="$Project::Junifer_STG_DatabaseName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="$Project::Junifer_Linked_ServerName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{809D5573-ADA1-451B-B354-F3487D25E64C}"
+          DTS:ObjectName="{809D5573-ADA1-451B-B354-F3487D25E64C}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::TableName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get All NDM Tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{720EE850-A0CC-4D5B-84FB-B8C1CAF8FD91}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get All NDM Tables"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6EE60E74-EDBC-469D-9DC7-2A9F06C933AB}"
+          SQLTask:SqlStatementSource="SELECT Distinct TABLE_NAME as TableName From INFORMATION_SCHEMA.VIEW_TABLE_USAGE Where VIEW_NAME like 'vw_ndm_%'&#xA;Union All Select 'CustomerType'"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::NDMTables" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C3492FE9-0070-4970-8ADE-1878C8FD2AEC}"
+      DTS:From="Package\Get All NDM Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Get All NDM Tables"
+          TopLeft="215,27" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\Foreach Loop Container\Execute Stored Procedure"
+          TopLeft="63,40" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="325,159"
+          Size="325,202"
+          Id="Package\Foreach Loop Container"
+          TopLeft="143,140" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="304.25,69">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71"
+              Start="0,0"
+              End="0,63.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

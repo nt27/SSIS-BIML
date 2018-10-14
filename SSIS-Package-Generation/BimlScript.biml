@@ -1,0 +1,131 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Connections>
+        <Connection Name="Dest" ConnectionString="data source=Win2016-SQL;initial catalog=STG;provider=SQLNCLI11.1;integrated security=SSPI;" />
+        <Connection Name="Source" ConnectionString="data source=Win2016-SQL;initial catalog=ODS;provider=SQLNCLI11.1;integrated security=SSPI;" />
+    </Connections>
+    <Packages>
+        <Package Name="01_02_1_AccountAgedDebtHistory1" Language="None" ConstraintMode="LinearOnSuccess" ProtectionLevel="EncryptSensitiveWithUserKey">
+            <Annotations>
+                <Annotation Tag="Varigence.Biml.SsisImporter.OriginalName">01_02_1_AccountAgedDebtHistory</Annotation>
+            </Annotations>
+            <Tasks>
+                <ExecuteSQL Name="Execute SQL" ConnectionName="Dest">
+                    <DirectInput>Truncate Table Temp_AccountAgedDebtHistory</DirectInput>
+                </ExecuteSQL>
+                <Dataflow Name="DataFlow-LoadData">
+                    <Transformations>
+                        <OleDbSource Name="Dest-Table" ConnectionName="Dest">
+                            <ExternalTableInput Table="AccountAgedDebtHistory" />
+                        </OleDbSource>
+                        <Sort Name="Sort-Dest" AutoPassThrough="false" />
+                        <MergeJoin Name="Merge Join" JoinType="FullOuterJoin">
+                            <LeftInputPath OutputPathName="Sort-Source.Output">
+                                <Columns>
+                                    <Column SourceColumn="Converted_comment" IsUsed="false" />
+                                    <Column SourceColumn="id" IsUsed="false" />
+                                    <Column SourceColumn="accountFk" IsUsed="false" />
+                                    <Column SourceColumn="dttm" IsUsed="false" />
+                                    <Column SourceColumn="debtAmount" IsUsed="false" />
+                                    <Column SourceColumn="userTblFk" IsUsed="false" />
+                                    <Column SourceColumn="assignedUserTblFk" IsUsed="false" />
+                                    <Column SourceColumn="action" IsUsed="false" />
+                                    <Column SourceColumn="comment" IsUsed="false" />
+                                    <Column SourceColumn="customerAgreedPaymentFl" IsUsed="false" />
+                                    <Column SourceColumn="reference" IsUsed="false" />
+                                    <Column SourceColumn="deleteFl" IsUsed="false" />
+                                    <Column SourceColumn="versionNo" IsUsed="false" />
+                                    <Column SourceColumn="partitionId" IsUsed="false" />
+                                </Columns>
+                            </LeftInputPath>
+                            <RightInputPath OutputPathName="Sort-Dest.Output">
+                                <Columns>
+                                    <Column SourceColumn="id" IsUsed="false" />
+                                </Columns>
+                            </RightInputPath>
+                        </MergeJoin>
+                        <ConditionalSplit Name="Conditional-Split">
+                            <OutputPaths>
+                                <OutputPath Name="New-Record">
+                                    <Expression>!ISNULL([id]) &amp;&amp; ISNULL([id2])</Expression>
+                                </OutputPath>
+                                <OutputPath Name="Delete-Record">
+                                    <Expression>ISNULL([id]) &amp;&amp; !ISNULL([id2])</Expression>
+                                </OutputPath>
+                            </OutputPaths>
+                        </ConditionalSplit>
+                        <Lookup Name="Update-Lookup" OleDbConnectionName="Dest" NoMatchBehavior="RedirectRowsToNoMatchOutput">
+                            <Parameters>
+                                <Parameter SourceColumn="Converted_comment" />
+                                <Parameter SourceColumn="id" />
+                                <Parameter SourceColumn="accountFk" />
+                                <Parameter SourceColumn="dttm" />
+                                <Parameter SourceColumn="debtAmount" />
+                                <Parameter SourceColumn="userTblFk" />
+                                <Parameter SourceColumn="assignedUserTblFk" />
+                                <Parameter SourceColumn="action" />
+                                <Parameter SourceColumn="customerAgreedPaymentFl" />
+                                <Parameter SourceColumn="reference" />
+                                <Parameter SourceColumn="deleteFl" />
+                                <Parameter SourceColumn="versionNo" />
+                                <Parameter SourceColumn="partitionId" />
+                            </Parameters>
+                            <Inputs>
+                                <Column SourceColumn="id" TargetColumn="id" />
+                                <Column SourceColumn="accountFk" TargetColumn="accountFk" />
+                                <Column SourceColumn="dttm" TargetColumn="dttm" />
+                                <Column SourceColumn="debtAmount" TargetColumn="debtAmount" />
+                                <Column SourceColumn="userTblFk" TargetColumn="userTblFk" />
+                                <Column SourceColumn="assignedUserTblFk" TargetColumn="assignedUserTblFk" />
+                                <Column SourceColumn="action" TargetColumn="action" />
+                                <Column SourceColumn="customerAgreedPaymentFl" TargetColumn="customerAgreedPaymentFl" />
+                                <Column SourceColumn="reference" TargetColumn="reference" />
+                                <Column SourceColumn="deleteFl" TargetColumn="deleteFl" />
+                                <Column SourceColumn="versionNo" TargetColumn="versionNo" />
+                                <Column SourceColumn="partitionId" TargetColumn="partitionId" />
+                                <Column SourceColumn="Converted_comment" TargetColumn="comment" />
+                            </Inputs>
+                            <DirectInput>SELECT        id, accountFk, dttm, debtAmount, userTblFk, assignedUserTblFk, [action], CAST(comment AS nvarchar(4000)) AS comment, customerAgreedPaymentFl, reference, deleteFl, versionNo, partitionId
+FROM            AccountAgedDebtHistory</DirectInput>
+                            <ParameterizedQuery>select * from (SELECT        id, accountFk, dttm, debtAmount, userTblFk, assignedUserTblFk, [action], CAST(comment AS nvarchar(4000)) AS comment, customerAgreedPaymentFl, reference, deleteFl, versionNo, partitionId
+FROM            AccountAgedDebtHistory) [refTable]
+where [refTable].[comment] = ? and [refTable].[id] = ? and [refTable].[accountFk] = ? and [refTable].[dttm] = ? and [refTable].[debtAmount] = ? and [refTable].[userTblFk] = ? and [refTable].[assignedUserTblFk] = ? and [refTable].[action] = ? and [refTable].[customerAgreedPaymentFl] = ? and [refTable].[reference] = ? and [refTable].[deleteFl] = ? and [refTable].[versionNo] = ? and [refTable].[partitionId] = ?</ParameterizedQuery>
+                        </Lookup>
+                        <OleDbDestination Name="Insert-Update-Record" ConnectionName="Dest">
+                            <InputPath OutputPathName="Update-Lookup.NoMatch" />
+                            <ExternalTableOutput Table="[dbo].[Temp_AccountAgedDebtHistory]" />
+                        </OleDbDestination>
+                        <OleDbDestination Name="Insert" ConnectionName="Dest">
+                            <InputPath OutputPathName="Conditional-Split.New-Record" />
+                            <ExternalTableOutput Table="[dbo].[AccountAgedDebtHistory]" />
+                        </OleDbDestination>
+                        <OleDbCommand Name="Delete" ConnectionName="Dest">
+                            <InputPath OutputPathName="Conditional-Split.Delete-Record" />
+                            <Parameters>
+                                <Parameter SourceColumn="id2" TargetColumn="Param_0" DataType="Int32" />
+                            </Parameters>
+                            <DirectInput>Delete from AccountAgedDebtHistory Where Id = ?</DirectInput>
+                        </OleDbCommand>
+                        <OleDbSource Name="Source-Table" ConnectionName="Source">
+                            <ExternalTableInput Table="AccountAgedDebtHistory" />
+                        </OleDbSource>
+                        <DataConversion Name="Convetion-For-NVARCHARMAX">
+                            <Columns>
+                                <Column SourceColumn="comment" TargetColumn="Converted_comment" DataType="String" Length="4000" />
+                            </Columns>
+                        </DataConversion>
+                        <Sort Name="Sort-Source" AutoPassThrough="false" />
+                    </Transformations>
+                </Dataflow>
+                <ExecuteSQL Name="Execute SQL-Update Record" ConnectionName="Dest">
+                    <DirectInput>
+                                           
+           Update AccountAgedDebtHistory Set 
+                                id =  B.[id],accountFk =  B.[accountFk],dttm =  B.[dttm],debtAmount =  B.[debtAmount],userTblFk =  B.[userTblFk],assignedUserTblFk =  B.[assignedUserTblFk],action =  B.[action],customerAgreedPaymentFl =  B.[customerAgreedPaymentFl],reference =  B.[reference],deleteFl =  B.[deleteFl],versionNo =  B.[versionNo],partitionId =  B.[partitionId]
+                                From AccountAgedDebtHistory A Inner Join Temp_AccountAgedDebtHistory B
+                                On  A.Id = B.ID
+       </DirectInput>
+                </ExecuteSQL>
+            </Tasks>
+        </Package>
+    </Packages>
+</Biml>

@@ -4,6 +4,7 @@
 	xmlns="http://schemas.varigence.com/biml.xsd">
 	<Packages>
 	        <#
+	        
 	        int i=0;
 	        string strConnectionString = "Server=localhost;Initial Catalog=ODS;Integrated Security=SSPI;";
             List<string> Tables  = new List<string>();
@@ -11,7 +12,7 @@
             var sqlConnection  = new System.Data.SqlClient.SqlConnection(connectionStringBuilder.ConnectionString);
             sqlConnection.Open();
         
-            string strSql = "Select Name as TableName from Sys.tables Where Name='Account'";
+            string strSql = "Select Name as TableName from Sys.tables --Where Name='AccountAgedDebtHistory'";
             System.Data.SqlClient.SqlCommand sqlCmdTable = new System.Data.SqlClient.SqlCommand(strSql,sqlConnection);
             using(System.Data.SqlClient.SqlDataReader sqlReaderTable = sqlCmdTable.ExecuteReader())
             {
@@ -20,20 +21,47 @@
                     Tables.Add(sqlReaderTable["TableName"].ToString());
                 }
             }
+            
            int iTableCount =0;
            foreach(var Table in Tables) 
             { 
                 //Fetch Table Columns
-                List<string> TableColumns = new List<string>();
-                strSql = "Select Column_Name From INFORMATION_SCHEMA.COLUMNS Where TABLE_NAME='"+ Table +"'";
+                bool IsNVarcharMaxTypeTable=false;
+                System.Data.DataTable dtTableColumns = new System.Data.DataTable();
+                strSql = "Select Column_Name, DATA_TYPE, ISNull(CHARACTER_MAXIMUM_LENGTH,0) as MaxCharLength From INFORMATION_SCHEMA.COLUMNS Where TABLE_NAME='"+ Table +"'";
                 System.Data.SqlClient.SqlCommand sqlCmdColumn = new System.Data.SqlClient.SqlCommand(strSql,sqlConnection);
-                using(System.Data.SqlClient.SqlDataReader sqlReaderColumn = sqlCmdColumn.ExecuteReader())
+                System.Data.SqlClient.SqlDataAdapter sqlDAP = new System.Data.SqlClient.SqlDataAdapter(sqlCmdColumn);
+                sqlDAP.Fill(dtTableColumns);
+                
+                foreach(System.Data.DataRow dtRow in dtTableColumns.Rows)
                 {
-                    while(sqlReaderColumn.Read())
-                    {
-                        TableColumns.Add(sqlReaderColumn["Column_Name"].ToString());
-                    }
+                    if (dtRow["MaxCharLength"].ToString() == "-1")
+                        IsNVarcharMaxTypeTable = true;
                 }
+                
+              //  for (int j = dtTableColumns.Rows.Count - 1; j >= 0; j--) 
+            //    {
+             //   if (dtTableColumns.Rows[j]["MaxCharLength"].ToString() == "-1")
+              //  {
+        //        dtTableColumns.Rows[j].Delete();
+          ///      }
+             //   }
+              //  dtTableColumns.AcceptChanges();
+                
+                
+    
+               
+               ///* using(System.Data.SqlClient.SqlDataReader sqlReaderColumn = sqlCmdColumn.ExecuteReader())
+                //{
+                 //   while(sqlReaderColumn.Read())
+                   // {
+                     //   TableColumns.Add(sqlReaderColumn["Column_Name"].ToString());
+                      //  string strColumnType="Normal";
+                        //if(sqlReaderColumn["MaxCharLength"].ToString() == "-1")
+                          //  strColumnType = "NVARCHAR_MAX";
+                        //TableColumnType.Add(strColumnType);
+                //    }
+                //}*/
                 
                 iTableCount++;
                 
@@ -48,6 +76,23 @@
 								<OleDbSource Name="Source-Table" ConnectionName="Source">
 									<ExternalTableInput Table="<#=Table#>"/>
 								</OleDbSource>
+								<#if(IsNVarcharMaxTypeTable) {#>
+								<DataConversion Name="Convetion-For-NVARCHARMAX">
+								    <Columns>
+								        <#
+				                foreach(System.Data.DataRow dtRow in dtTableColumns.Rows)
+                                    {
+                                     if (dtRow["MaxCharLength"].ToString() == "-1")
+                                        {
+                                    #>
+                    <Column SourceColumn="<#=dtRow["Column_Name"]#>" DataType="StringFixedLength" Length="4000" TargetColumn="Converted_<#=dtRow["Column_Name"]#>"/>
+								        <#}}
+								        
+									        
+								        #>
+								    </Columns>
+								</DataConversion>
+								<#}#>
 								<Sort Name="Sort-Source" AutoPassThrough="true">
 									<Columns>
 										<Column SourceColumn="id" IsUsed="true" Sort="true" SortOrder="Asc" SortKeyPosition="1"/>
@@ -66,11 +111,13 @@
 										<Columns>
 											<# 
                                             i=1;
-											foreach(var Column in TableColumns) {#>
-											<Column SourceColumn="<#=Column#>" TargetColumn="<#=Column#>" IsUsed="true" SortKeyPosition="<#=i#>"/>
-											<#
-											    i++;
-											}#>
+                                             foreach(System.Data.DataRow dtRow in dtTableColumns.Rows)
+                                            {#>
+                    	                    <Column SourceColumn="<#=dtRow["Column_Name"]#>" TargetColumn="<#=dtRow["Column_Name"]#>" IsUsed="true" SortKeyPosition="<#=i#>"/>
+										    <#i++;
+                                            }#>
+										
+
 									</Columns>
 									</LeftInputPath>
 									<RightInputPath  OutputPathName="Sort-Dest.Output">
@@ -94,27 +141,50 @@
 								</ConditionalSplit>
 								<Lookup Name="Update-Lookup" OleDbConnectionName="Dest" NoMatchBehavior="RedirectRowsToNoMatchOutput">
 									<Parameters>
-									    	<# 
+									        <# 
                                             i=1;
-											foreach(var Column in TableColumns) {#>
-											<Parameter SourceColumn="<#=Column#>" />
-											<#
-											    i++;
-											}#>
+                                             foreach(System.Data.DataRow dtRow in dtTableColumns.Rows)
+                                            {#>
+                                            <Parameter SourceColumn="<#=dtRow["Column_Name"]#>" />
+										    <#i++;
+                                            }#>
+                                                
 									</Parameters>
 									<Inputs>
-									    	<# 
-                                            foreach(var Column in TableColumns) {#>
-											<Column SourceColumn="<#=Column#>" TargetColumn="<#=Column#>"/>
-											<#
-											}#>
+											 <# 
+                                            i=1;
+                                             foreach(System.Data.DataRow dtRow in dtTableColumns.Rows)
+                                            {
+                                                  if (dtRow["MaxCharLength"].ToString() == "-1"){#>
+                                                  <Column SourceColumn="<#= "Converted_" + dtRow["Column_Name"]#>" TargetColumn="<#=dtRow["Column_Name"]#>"/>
+                                              <#} else {#>
+                                            
+                                                <Column SourceColumn="<#=dtRow["Column_Name"]#>" TargetColumn="<#=dtRow["Column_Name"]#>"/>
+                                            <#} i++;
+                                            }#>
+											    
 									</Inputs>
-									<DirectInput>select * from [dbo].[<#=Table#>]</DirectInput>
+									<#
+									string strDirectInputSelectColumns = "";
+									string strDirectInputQuery = "";
+									
+									foreach(System.Data.DataRow dtRow in dtTableColumns.Rows)
+                                    {
+                                        if (dtRow["MaxCharLength"].ToString() == "-1")
+                                            strDirectInputSelectColumns += " Cast([" + dtRow["Column_Name"] + "] as NVarchar(4000)) as "+ dtRow["Column_Name"] +",";
+                                        else
+                                            strDirectInputSelectColumns += "[" + dtRow["Column_Name"] + "],";
+                                    }
+                                    strDirectInputSelectColumns = strDirectInputSelectColumns.Substring(0, strDirectInputSelectColumns.Length - 1);  
+                                    
+                                    strDirectInputQuery = "Select " + strDirectInputSelectColumns + " from [dbo].[" + Table + "]";
+									#>
+									<DirectInput><#=strDirectInputQuery#></DirectInput>
 									<#
 									string strReferenceColumns = "";
-                                    foreach(var Column in TableColumns) 
+									foreach(System.Data.DataRow dtRow in dtTableColumns.Rows)
                                     {
-                                        strReferenceColumns += " and [refTable].[" + Column + "] = ?";
+                                        strReferenceColumns += " and [refTable].[" + dtRow["Column_Name"] + "] = ?";
                                     }
                                     #>
 									<ParameterizedQuery>select * from (select * from [dbo].[<#=Table#>]) [refTable]
@@ -142,9 +212,9 @@
 							<DirectInput>
                                 <#
                                 string strQuery = "";
-                                foreach(var Column in TableColumns)
+                                foreach(System.Data.DataRow dtRow in dtTableColumns.Rows)
                                 {
-                                    strQuery += Column + " =  B.[" + Column + "],";
+                                    strQuery += dtRow["Column_Name"] + " =  B.[" + dtRow["Column_Name"] + "],";
                                 }
                                 strQuery = strQuery.Substring(0, strQuery.Length - 1);  
                                 #>
