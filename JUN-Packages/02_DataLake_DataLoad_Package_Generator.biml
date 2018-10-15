@@ -1,33 +1,32 @@
-﻿<#@template tier="1"#>
+﻿<#@template tier="4"#>
 
 <Biml
 	xmlns="http://schemas.varigence.com/biml.xsd">
 	<Packages>
 	        <#
-	        int i=0;
-	        string strConnectionString = "Server=localhost;Initial Catalog=JUN_ODS;Integrated Security=SSPI;";
-            List<string> Tables  = new List<string>();
+            int i=0;
+            string strConnectionString = "Server=localhost;Initial Catalog=JUN_STG;Integrated Security=SSPI;";
             var connectionStringBuilder = new System.Data.SqlClient.SqlConnectionStringBuilder(strConnectionString);
             var sqlConnection  = new System.Data.SqlClient.SqlConnection(connectionStringBuilder.ConnectionString);
             sqlConnection.Open();
-        
-            string strSql = "SELECT Distinct TABLE_NAME as TableName From INFORMATION_SCHEMA.VIEW_TABLE_USAGE Where VIEW_NAME like 'vw_ndm_%' --and TABLE_NAME Not in (select Distinct Table_Name from INFORMATION_SCHEMA.COLUMNS where CHARACTER_MAXIMUM_LENGTH =-1 )Order by TABLE_NAME";
+            
+            System.Data.DataTable dtTables = new System.Data.DataTable();        
+            string strSql = "Select Name as SourceTableName, Replace(Name,'vw_','') as TargetTableName From sys.views Where NAME like 'vw_ndm_%' and Name Not in ('Vw_ndm_mpanEAC','vw_ndm_mprnAQ') Order by Name";
             System.Data.SqlClient.SqlCommand sqlCmdTable = new System.Data.SqlClient.SqlCommand(strSql,sqlConnection);
-            using(System.Data.SqlClient.SqlDataReader sqlReaderTable = sqlCmdTable.ExecuteReader())
-            {
-                while(sqlReaderTable.Read())
-                {
-                    Tables.Add(sqlReaderTable["TableName"].ToString());
-                }
-            }
+            System.Data.SqlClient.SqlDataAdapter sqlDAPTable = new System.Data.SqlClient.SqlDataAdapter(sqlCmdTable);
+            sqlDAPTable.Fill(dtTables);
+
            
            int iTableCount =0;
-           foreach(var Table in Tables) 
+           foreach(System.Data.DataRow dtTableRow in dtTables.Rows ) 
             { 
                 //Fetch Table Columns
                 bool IsNVarcharMaxTypeTable=false;
+                string strSourceTableName = dtTableRow["SourceTableName"].ToString();
+                string strTargetTableName = dtTableRow["TargetTableName"].ToString();
+                
                 System.Data.DataTable dtTableColumns = new System.Data.DataTable();
-                strSql = "Select Column_Name, DATA_TYPE, ISNull(CHARACTER_MAXIMUM_LENGTH,0) as MaxCharLength From INFORMATION_SCHEMA.COLUMNS Where TABLE_NAME='"+ Table +"'";
+                strSql = "Select Column_Name, DATA_TYPE, ISNull(CHARACTER_MAXIMUM_LENGTH,0) as MaxCharLength From INFORMATION_SCHEMA.COLUMNS Where TABLE_NAME='"+ strSourceTableName +"'";
                 System.Data.SqlClient.SqlCommand sqlCmdColumn = new System.Data.SqlClient.SqlCommand(strSql,sqlConnection);
                 System.Data.SqlClient.SqlDataAdapter sqlDAP = new System.Data.SqlClient.SqlDataAdapter(sqlCmdColumn);
                 sqlDAP.Fill(dtTableColumns);
@@ -37,43 +36,22 @@
                     if (dtRow["MaxCharLength"].ToString() == "-1")
                         IsNVarcharMaxTypeTable = true;
                 }
-                
-              //  for (int j = dtTableColumns.Rows.Count - 1; j >= 0; j--) 
-            //    {
-             //   if (dtTableColumns.Rows[j]["MaxCharLength"].ToString() == "-1")
-              //  {
-        //        dtTableColumns.Rows[j].Delete();
-          ///      }
-             //   }
-              //  dtTableColumns.AcceptChanges();
-                
-                
-    
-               
-               ///* using(System.Data.SqlClient.SqlDataReader sqlReaderColumn = sqlCmdColumn.ExecuteReader())
-                //{
-                 //   while(sqlReaderColumn.Read())
-                   // {
-                     //   TableColumns.Add(sqlReaderColumn["Column_Name"].ToString());
-                      //  string strColumnType="Normal";
-                        //if(sqlReaderColumn["MaxCharLength"].ToString() == "-1")
-                          //  strColumnType = "NVARCHAR_MAX";
-                        //TableColumnType.Add(strColumnType);
-                //    }
-                //}*/
-                
                 iTableCount++;
                 
+                string strSourceTableKeyColumn = dtTableColumns.Rows[0]["Column_Name"].ToString();
+                //string strTargetTableKeyColumn = "";
+                
+                
             #>
-            <Package Name="01_02_<#=iTableCount#>_<#=Table#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+            <Package Name="_BDL_<#=iTableCount#>_<#=strTargetTableName#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
 			<Tasks>
-						<ExecuteSQL Name="Execute SQL" ConnectionName="Dest">
-							<DirectInput>Truncate Table Temp_<#=Table#></DirectInput>
+						<ExecuteSQL Name="Truncate Temp Table" ConnectionName="BDL">
+							<DirectInput>Truncate Table Temp_<#=strTargetTableName#></DirectInput>
 						</ExecuteSQL>
 						<Dataflow Name="DataFlow-LoadData">
 							<Transformations>
-								<OleDbSource Name="Source-Table" ConnectionName="Source">
-									<ExternalTableInput Table="<#=Table#>"/>
+								<OleDbSource Name="Source-Table" ConnectionName="STG">
+									<ExternalTableInput Table="<#=strSourceTableName#>"/>
 								</OleDbSource>
 								<#if(IsNVarcharMaxTypeTable) {#>
 								<DataConversion Name="Convetion-For-NVARCHARMAX">
@@ -94,15 +72,15 @@
 								<#}#>
 								<Sort Name="Sort-Source" AutoPassThrough="true">
 									<Columns>
-										<Column SourceColumn="id" IsUsed="true" Sort="true" SortOrder="Asc" SortKeyPosition="1"/>
+										<Column SourceColumn="<#=strSourceTableKeyColumn#>" IsUsed="true" Sort="true" SortOrder="Asc" SortKeyPosition="1"/>
 									</Columns>
 								</Sort>
-								<OleDbSource Name="Dest-Table" ConnectionName="Dest">
-									<ExternalTableInput Table="<#=Table#>"/>
+								<OleDbSource Name="Dest-Table" ConnectionName="BDL">
+									<ExternalTableInput Table="<#=strTargetTableName#>"/>
 								</OleDbSource>
 								<Sort Name="Sort-Dest" AutoPassThrough="false">
 									<Columns>
-										<Column SourceColumn="id" IsUsed="true" Sort="true" SortOrder="Asc" SortKeyPosition="1"/>
+										<Column SourceColumn="<#=strSourceTableKeyColumn#>" IsUsed="true" Sort="true" SortOrder="Asc" SortKeyPosition="1"/>
 									</Columns>
 								</Sort>
 								<MergeJoin Name="Merge Join" JoinType="FullOuterJoin">
@@ -121,24 +99,24 @@
 									</LeftInputPath>
 									<RightInputPath  OutputPathName="Sort-Dest.Output">
 										<Columns>
-											<Column SourceColumn="id" TargetColumn="id2" IsUsed="true" SortKeyPosition="1" />
+											<Column SourceColumn="<#=strSourceTableKeyColumn#>" TargetColumn="<#=strSourceTableKeyColumn#>2" IsUsed="true" SortKeyPosition="1" />
 										</Columns>
 									</RightInputPath>
 									<JoinKeys>
-										<JoinKey LeftColumn="id" RightColumn="id2"/>
+										<JoinKey LeftColumn="<#=strSourceTableKeyColumn#>" RightColumn="<#=strSourceTableKeyColumn#>2"/>
 									</JoinKeys>
 								</MergeJoin>
 								<ConditionalSplit Name="Conditional-Split" >
 									<OutputPaths>
 										<OutputPath Name="New-Record">
-											<Expression>!ISNULL([id]) &amp;&amp; ISNULL([id2])</Expression>
+											<Expression>!ISNULL([<#=strSourceTableKeyColumn#>]) &amp;&amp; ISNULL([<#=strSourceTableKeyColumn#>2])</Expression>
 										</OutputPath>
 										<OutputPath Name="Delete-Record">
-											<Expression>ISNULL([id]) &amp;&amp; !ISNULL([id2])</Expression>
+											<Expression>ISNULL([<#=strSourceTableKeyColumn#>]) &amp;&amp; !ISNULL([<#=strSourceTableKeyColumn#>2])</Expression>
 										</OutputPath>
 									</OutputPaths>
 								</ConditionalSplit>
-								<Lookup Name="Update-Lookup" OleDbConnectionName="Dest" NoMatchBehavior="RedirectRowsToNoMatchOutput">
+								<Lookup Name="Update-Lookup" OleDbConnectionName="BDL" NoMatchBehavior="RedirectRowsToNoMatchOutput">
 									<Parameters>
 									        <# 
                                             i=1;
@@ -176,7 +154,7 @@
                                     }
                                     strDirectInputSelectColumns = strDirectInputSelectColumns.Substring(0, strDirectInputSelectColumns.Length - 1);  
                                     
-                                    strDirectInputQuery = "Select " + strDirectInputSelectColumns + " from [dbo].[" + Table + "]";
+                                    strDirectInputQuery = "Select " + strDirectInputSelectColumns + " from [dbo].[" + strTargetTableName + "]";
 									#>
 									<DirectInput><#=strDirectInputQuery#></DirectInput>
 									<#
@@ -186,28 +164,28 @@
                                         strReferenceColumns += " and [refTable].[" + dtRow["Column_Name"] + "] = ?";
                                     }
                                     #>
-									<ParameterizedQuery>select * from (select * from [dbo].[<#=Table#>]) [refTable]
-                                                        where [refTable].[id] = ? <#=strReferenceColumns#>
+									<ParameterizedQuery>select * from (select * from [dbo].[<#=strTargetTableName#>]) [refTable]
+                                                        where [refTable].[<#=strSourceTableKeyColumn#>] = ? <#=strReferenceColumns#>
                                     </ParameterizedQuery>
 								</Lookup>
-								<OleDbDestination Name="Insert-Update-Record" ConnectionName="Dest">
+								<OleDbDestination Name="Insert-Update-Record" ConnectionName="BDL">
 								<InputPath OutputPathName="Update-Lookup.NoMatch" />
-								<ExternalTableOutput Table="[dbo].[Temp_<#=Table#>]" />
+								<ExternalTableOutput Table="[dbo].[Temp_<#=strTargetTableName#>]" />
 							</OleDbDestination>
-								<OleDbDestination Name="Insert" ConnectionName="Dest">
+								<OleDbDestination Name="Insert" ConnectionName="BDL">
 									<InputPath OutputPathName="Conditional-Split.New-Record" />
-									<ExternalTableOutput Table="[dbo].[<#=Table#>]" />
+									<ExternalTableOutput Table="[dbo].[<#=strTargetTableName#>]" />
 								</OleDbDestination>
-								<OleDbCommand Name="Delete" ConnectionName="Dest">
+								<OleDbCommand Name="Delete" ConnectionName="BDL">
 									<InputPath OutputPathName="Conditional-Split.Delete-Record" />
 									<Parameters>
-										<Parameter SourceColumn="id2" TargetColumn="Param_0" DataType="Int32" />
+										<Parameter SourceColumn="<#=strSourceTableKeyColumn#>2" TargetColumn="Param_0" DataType="Int32" />
 									</Parameters>
-									<DirectInput>Delete from <#=Table#> Where Id = ?</DirectInput>
+									<DirectInput>Delete from <#=strTargetTableName#> Where <#=strSourceTableKeyColumn#> = ?</DirectInput>
 								</OleDbCommand>
 							</Transformations>
 						</Dataflow>
-						<ExecuteSQL Name="Execute SQL-Update Record" ConnectionName="Dest">
+						<ExecuteSQL Name="Execute SQL-Update Record" ConnectionName="BDL">
 							<DirectInput>
                                 <#
                                 string strQuery = "";
@@ -218,10 +196,10 @@
                                 strQuery = strQuery.Substring(0, strQuery.Length - 1);  
                                 #>
 							    
-							    Update <#=Table#> Set 
+							    Update <#=strTargetTableName#> Set 
                                 <#=strQuery#>
-                                From <#=Table#> A Inner Join Temp_<#=Table#> B
-                                On  A.Id = B.ID
+                                From <#=strTargetTableName#> A Inner Join Temp_<#=strTargetTableName#> B
+                                On  A.<#=strSourceTableKeyColumn#> = B.<#=strSourceTableKeyColumn#>
 							</DirectInput>
 						</ExecuteSQL>
 			</Tasks>

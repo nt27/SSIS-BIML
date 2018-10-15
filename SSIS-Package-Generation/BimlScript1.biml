@@ -1,0 +1,194 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Connections>
+        <Connection Name="Dest" ConnectionString="data source=Win2016-SQL;User ID=;initial catalog=STG;provider=SQLNCLI11.1;integrated security=SSPI;" />
+        <Connection Name="Source" ConnectionString="data source=Win2016-SQL;initial catalog=ODS;provider=SQLNCLI11.1;integrated security=SSPI;" />
+    </Connections>
+    <Packages>
+        <Package Name="01_02_1_Account" Language="None" ConstraintMode="LinearOnSuccess" ProtectionLevel="EncryptSensitiveWithUserKey">
+            <Tasks>
+                <ExecuteSQL Name="Execute SQL" ConnectionName="Dest">
+                    <DirectInput>Truncate Table Temp_Account</DirectInput>
+                </ExecuteSQL>
+                <Dataflow Name="DataFlow-LoadData">
+                    <Transformations>
+                        <OleDbSource Name="Dest-Table" ConnectionName="Dest">
+                            <ExternalTableInput Table="Account" />
+                        </OleDbSource>
+                        <Sort Name="Sort-Dest" AutoPassThrough="false" />
+                        <MergeJoin Name="Merge Join" JoinType="FullOuterJoin">
+                            <LeftInputPath OutputPathName="Sort-Source.Output">
+                                <Columns>
+                                    <Column SourceColumn="id" IsUsed="false" />
+                                    <Column SourceColumn="billingEntityFk" IsUsed="false" />
+                                    <Column SourceColumn="parentAccountFk" IsUsed="false" />
+                                    <Column SourceColumn="customerFk" IsUsed="false" />
+                                    <Column SourceColumn="accountTypeFk" IsUsed="false" />
+                                    <Column SourceColumn="number" IsUsed="false" />
+                                    <Column SourceColumn="name" IsUsed="false" />
+                                    <Column SourceColumn="createdDttm" IsUsed="false" />
+                                    <Column SourceColumn="createdUserTblFk" IsUsed="false" />
+                                    <Column SourceColumn="fromDttm" IsUsed="false" />
+                                    <Column SourceColumn="toDttm" IsUsed="false" />
+                                    <Column SourceColumn="terminatedUserTblFk" IsUsed="false" />
+                                    <Column SourceColumn="closedDttm" IsUsed="false" />
+                                    <Column SourceColumn="currencyFk" IsUsed="false" />
+                                    <Column SourceColumn="languageTblFk" IsUsed="false" />
+                                    <Column SourceColumn="dunningPackageFk" IsUsed="false" />
+                                    <Column SourceColumn="billPackageFk" IsUsed="false" />
+                                    <Column SourceColumn="billingCycleFk" IsUsed="false" />
+                                    <Column SourceColumn="billingAlignDttm" IsUsed="false" />
+                                    <Column SourceColumn="initialBillStatus" IsUsed="false" />
+                                    <Column SourceColumn="paymentTermFk" IsUsed="false" />
+                                    <Column SourceColumn="payPointLocation" IsUsed="false" />
+                                    <Column SourceColumn="salesTaxExemptFl" IsUsed="false" />
+                                    <Column SourceColumn="lastAccountTransactionFk" IsUsed="false" />
+                                    <Column SourceColumn="cancelFl" IsUsed="false" />
+                                    <Column SourceColumn="cancelledDttm" IsUsed="false" />
+                                    <Column SourceColumn="cancelledUserTblFk" IsUsed="false" />
+                                    <Column SourceColumn="terminatedDttm" IsUsed="false" />
+                                    <Column SourceColumn="parentOverridesChildFl" IsUsed="false" />
+                                    <Column SourceColumn="overrideAllocateCreditOnRebill" IsUsed="false" />
+                                    <Column SourceColumn="reference" IsUsed="false" />
+                                    <Column SourceColumn="deleteFl" IsUsed="false" />
+                                    <Column SourceColumn="versionNo" IsUsed="false" />
+                                    <Column SourceColumn="partitionId" IsUsed="false" />
+                                </Columns>
+                            </LeftInputPath>
+                            <RightInputPath OutputPathName="Sort-Dest.Output">
+                                <Columns>
+                                    <Column SourceColumn="id" IsUsed="false" />
+                                </Columns>
+                            </RightInputPath>
+                        </MergeJoin>
+                        <ConditionalSplit Name="Conditional-Split">
+                            <OutputPaths>
+                                <OutputPath Name="New-Record">
+                                    <Expression>!ISNULL([id]) &amp;&amp; ISNULL([id2])</Expression>
+                                </OutputPath>
+                                <OutputPath Name="Delete-Record">
+                                    <Expression>ISNULL([id]) &amp;&amp; !ISNULL([id2])</Expression>
+                                </OutputPath>
+                            </OutputPaths>
+                        </ConditionalSplit>
+                        <Lookup Name="Update-Lookup" OleDbConnectionName="Dest" NoMatchBehavior="RedirectRowsToNoMatchOutput">
+                            <Parameters>
+                                <Parameter SourceColumn="id" />
+                                <Parameter SourceColumn="billingEntityFk" />
+                                <Parameter SourceColumn="parentAccountFk" />
+                                <Parameter SourceColumn="customerFk" />
+                                <Parameter SourceColumn="accountTypeFk" />
+                                <Parameter SourceColumn="number" />
+                                <Parameter SourceColumn="name" />
+                                <Parameter SourceColumn="createdDttm" />
+                                <Parameter SourceColumn="createdUserTblFk" />
+                                <Parameter SourceColumn="fromDttm" />
+                                <Parameter SourceColumn="toDttm" />
+                                <Parameter SourceColumn="terminatedUserTblFk" />
+                                <Parameter SourceColumn="closedDttm" />
+                                <Parameter SourceColumn="currencyFk" />
+                                <Parameter SourceColumn="languageTblFk" />
+                                <Parameter SourceColumn="dunningPackageFk" />
+                                <Parameter SourceColumn="billPackageFk" />
+                                <Parameter SourceColumn="billingCycleFk" />
+                                <Parameter SourceColumn="billingAlignDttm" />
+                                <Parameter SourceColumn="initialBillStatus" />
+                                <Parameter SourceColumn="paymentTermFk" />
+                                <Parameter SourceColumn="payPointLocation" />
+                                <Parameter SourceColumn="salesTaxExemptFl" />
+                                <Parameter SourceColumn="lastAccountTransactionFk" />
+                                <Parameter SourceColumn="cancelFl" />
+                                <Parameter SourceColumn="cancelledDttm" />
+                                <Parameter SourceColumn="cancelledUserTblFk" />
+                                <Parameter SourceColumn="terminatedDttm" />
+                                <Parameter SourceColumn="parentOverridesChildFl" />
+                                <Parameter SourceColumn="overrideAllocateCreditOnRebill" />
+                                <Parameter SourceColumn="reference" />
+                                <Parameter SourceColumn="deleteFl" />
+                                <Parameter SourceColumn="versionNo" />
+                                <Parameter SourceColumn="partitionId" />
+                            </Parameters>
+                            <Inputs>
+                                <Column SourceColumn="id" TargetColumn="id" />
+                                <Column SourceColumn="billingEntityFk" TargetColumn="billingEntityFk" />
+                                <Column SourceColumn="parentAccountFk" TargetColumn="parentAccountFk" />
+                                <Column SourceColumn="customerFk" TargetColumn="customerFk" />
+                                <Column SourceColumn="accountTypeFk" TargetColumn="accountTypeFk" />
+                                <Column SourceColumn="number" TargetColumn="number" />
+                                <Column SourceColumn="name" TargetColumn="name" />
+                                <Column SourceColumn="createdDttm" TargetColumn="createdDttm" />
+                                <Column SourceColumn="createdUserTblFk" TargetColumn="createdUserTblFk" />
+                                <Column SourceColumn="fromDttm" TargetColumn="fromDttm" />
+                                <Column SourceColumn="toDttm" TargetColumn="toDttm" />
+                                <Column SourceColumn="terminatedUserTblFk" TargetColumn="terminatedUserTblFk" />
+                                <Column SourceColumn="closedDttm" TargetColumn="closedDttm" />
+                                <Column SourceColumn="currencyFk" TargetColumn="currencyFk" />
+                                <Column SourceColumn="languageTblFk" TargetColumn="languageTblFk" />
+                                <Column SourceColumn="dunningPackageFk" TargetColumn="dunningPackageFk" />
+                                <Column SourceColumn="billPackageFk" TargetColumn="billPackageFk" />
+                                <Column SourceColumn="billingCycleFk" TargetColumn="billingCycleFk" />
+                                <Column SourceColumn="billingAlignDttm" TargetColumn="billingAlignDttm" />
+                                <Column SourceColumn="initialBillStatus" TargetColumn="initialBillStatus" />
+                                <Column SourceColumn="paymentTermFk" TargetColumn="paymentTermFk" />
+                                <Column SourceColumn="payPointLocation" TargetColumn="payPointLocation" />
+                                <Column SourceColumn="salesTaxExemptFl" TargetColumn="salesTaxExemptFl" />
+                                <Column SourceColumn="lastAccountTransactionFk" TargetColumn="lastAccountTransactionFk" />
+                                <Column SourceColumn="cancelFl" TargetColumn="cancelFl" />
+                                <Column SourceColumn="cancelledDttm" TargetColumn="cancelledDttm" />
+                                <Column SourceColumn="cancelledUserTblFk" TargetColumn="cancelledUserTblFk" />
+                                <Column SourceColumn="terminatedDttm" TargetColumn="terminatedDttm" />
+                                <Column SourceColumn="parentOverridesChildFl" TargetColumn="parentOverridesChildFl" />
+                                <Column SourceColumn="overrideAllocateCreditOnRebill" TargetColumn="overrideAllocateCreditOnRebill" />
+                                <Column SourceColumn="reference" TargetColumn="reference" />
+                                <Column SourceColumn="deleteFl" TargetColumn="deleteFl" />
+                                <Column SourceColumn="versionNo" TargetColumn="versionNo" />
+                                <Column SourceColumn="partitionId" TargetColumn="partitionId" />
+                            </Inputs>
+                            <DirectInput>Select [id],[billingEntityFk],[parentAccountFk],[customerFk],[accountTypeFk],[number],[name],[createdDttm],[createdUserTblFk],[fromDttm],[toDttm],[terminatedUserTblFk],[closedDttm],[currencyFk],[languageTblFk],[dunningPackageFk],[billPackageFk],[billingCycleFk],[billingAlignDttm],[initialBillStatus],[paymentTermFk],[payPointLocation],[salesTaxExemptFl],[lastAccountTransactionFk],[cancelFl],[cancelledDttm],[cancelledUserTblFk],[terminatedDttm],[parentOverridesChildFl],[overrideAllocateCreditOnRebill],[reference],[deleteFl],[versionNo],[partitionId] from [dbo].[Account]</DirectInput>
+                            <ParameterizedQuery>select * from (select * from [dbo].[Account]) [refTable]
+                                                        where [refTable].[id] = ?  and [refTable].[id] = ? and [refTable].[billingEntityFk] = ? and [refTable].[parentAccountFk] = ? and [refTable].[customerFk] = ? and [refTable].[accountTypeFk] = ? and [refTable].[number] = ? and [refTable].[name] = ? and [refTable].[createdDttm] = ? and [refTable].[createdUserTblFk] = ? and [refTable].[fromDttm] = ? and [refTable].[toDttm] = ? and [refTable].[terminatedUserTblFk] = ? and [refTable].[closedDttm] = ? and [refTable].[currencyFk] = ? and [refTable].[languageTblFk] = ? and [refTable].[dunningPackageFk] = ? and [refTable].[billPackageFk] = ? and [refTable].[billingCycleFk] = ? and [refTable].[billingAlignDttm] = ? and [refTable].[initialBillStatus] = ? and [refTable].[paymentTermFk] = ? and [refTable].[payPointLocation] = ? and [refTable].[salesTaxExemptFl] = ? and [refTable].[lastAccountTransactionFk] = ? and [refTable].[cancelFl] = ? and [refTable].[cancelledDttm] = ? and [refTable].[cancelledUserTblFk] = ? and [refTable].[terminatedDttm] = ? and [refTable].[parentOverridesChildFl] = ? and [refTable].[overrideAllocateCreditOnRebill] = ? and [refTable].[reference] = ? and [refTable].[deleteFl] = ? and [refTable].[versionNo] = ? and [refTable].[partitionId] = ?
+                                    </ParameterizedQuery>
+                        </Lookup>
+                        <OleDbDestination Name="Insert-Update-Record" ConnectionName="Dest">
+                            <InputPath OutputPathName="Update-Lookup.NoMatch" />
+                            <ExternalTableOutput Table="[dbo].[Temp_Account]" />
+                        </OleDbDestination>
+                        <OleDbDestination Name="Insert" ConnectionName="Dest">
+                            <InputPath OutputPathName="Conditional-Split.New-Record" />
+                            <ExternalTableOutput Table="[dbo].[Account]" />
+                        </OleDbDestination>
+                        <OleDbCommand Name="Delete" ConnectionName="Dest">
+                            <InputPath OutputPathName="Conditional-Split.Delete-Record" />
+                            <Parameters>
+                                <Parameter SourceColumn="id2" TargetColumn="Param_0" DataType="Int32" />
+                            </Parameters>
+                            <DirectInput>Delete from Account Where Id = ?</DirectInput>
+                        </OleDbCommand>
+                        <OleDbSource Name="Source-Table" ConnectionName="Source">
+                            <ExternalTableInput Table="Account" />
+                        </OleDbSource>
+                        <Sort Name="Sort-Source" AutoPassThrough="false" />
+                    </Transformations>
+                </Dataflow>
+                <ExecuteSQL Name="Execute SQL-Update Record" ConnectionName="Dest">
+                    <DirectInput>
+                                           
+           Update Account Set 
+                                id =  B.[id],billingEntityFk =  B.[billingEntityFk],parentAccountFk =  B.[parentAccountFk],customerFk =  B.[customerFk],accountTypeFk =  B.[accountTypeFk],number =  B.[number],name =  B.[name],createdDttm =  B.[createdDttm],createdUserTblFk =  B.[createdUserTblFk],fromDttm =  B.[fromDttm],toDttm =  B.[toDttm],terminatedUserTblFk =  B.[terminatedUserTblFk],closedDttm =  B.[closedDttm],currencyFk =  B.[currencyFk],languageTblFk =  B.[languageTblFk],dunningPackageFk =  B.[dunningPackageFk],billPackageFk =  B.[billPackageFk],billingCycleFk =  B.[billingCycleFk],billingAlignDttm =  B.[billingAlignDttm],initialBillStatus =  B.[initialBillStatus],paymentTermFk =  B.[paymentTermFk],payPointLocation =  B.[payPointLocation],salesTaxExemptFl =  B.[salesTaxExemptFl],lastAccountTransactionFk =  B.[lastAccountTransactionFk],cancelFl =  B.[cancelFl],cancelledDttm =  B.[cancelledDttm],cancelledUserTblFk =  B.[cancelledUserTblFk],terminatedDttm =  B.[terminatedDttm],parentOverridesChildFl =  B.[parentOverridesChildFl],overrideAllocateCreditOnRebill =  B.[overrideAllocateCreditOnRebill],reference =  B.[reference],deleteFl =  B.[deleteFl],versionNo =  B.[versionNo],partitionId =  B.[partitionId]
+                                From Account A Inner Join Temp_Account B
+                                On  A.Id = B.ID
+       </DirectInput>
+                </ExecuteSQL>
+            </Tasks>
+            <Connections>
+                <Connection ConnectionName="Dest">
+                    <Expressions>
+                        <Expression ExternalProperty="InitialCatalog">@[$Project::Dest_InitialCatalog]</Expression>
+                        <Expression ExternalProperty="Password">@[$Project::Dest_Password]</Expression>
+                        <Expression ExternalProperty="ServerName">@[$Project::Dest_ServerName]</Expression>
+                        <Expression ExternalProperty="UserName">@[$Project::Dest_UserName]</Expression>
+                    </Expressions>
+                </Connection>
+            </Connections>
+        </Package>
+    </Packages>
+</Biml>

@@ -2,48 +2,53 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>SSIS-Package-Generation</Name>
-    <LastWriteTime>2018-10-14T20:40:17.4239013Z</LastWriteTime>
+    <LastWriteTime>2018-10-15T17:01:16.641907Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>01_02_1_Account.dtsx</Name>
-      <LastWriteTime>2018-10-14T10:00:46.0958279Z</LastWriteTime>
+      <LastWriteTime>2018-10-15T15:19:13.4710705Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>01_02_App_DataMovement_to_Staging_Delta.dtsx</Name>
-      <LastWriteTime>2018-10-14T20:39:47.3293802Z</LastWriteTime>
+      <LastWriteTime>2018-10-14T20:48:08.5707213Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>01_02_2_AccountTransaction.dtsx</Name>
-      <LastWriteTime>2018-10-14T10:00:46.002828Z</LastWriteTime>
+      <LastWriteTime>2018-10-14T20:48:08.4417213Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>01_02_3_AccountTransactionType.dtsx</Name>
-      <LastWriteTime>2018-10-14T10:00:46.0188249Z</LastWriteTime>
+      <LastWriteTime>2018-10-14T20:48:08.4667218Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>01_02_4_Customer.dtsx</Name>
-      <LastWriteTime>2018-10-14T10:00:46.0368304Z</LastWriteTime>
+      <LastWriteTime>2018-10-14T20:48:08.4957216Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>01_02_5_CustomerClass.dtsx</Name>
-      <LastWriteTime>2018-10-14T10:00:46.0598288Z</LastWriteTime>
+      <LastWriteTime>2018-10-14T20:48:08.5207222Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>01_02_6_CustomerType.dtsx</Name>
-      <LastWriteTime>2018-10-14T10:00:46.0748283Z</LastWriteTime>
+      <LastWriteTime>2018-10-14T20:48:08.5427221Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>01_02_1_AccountAgedDebtHistory.dtsx</Name>
       <LastWriteTime>2018-10-14T20:39:47.3153496Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>01_02_7_AccountAgedDebtHistory.dtsx</Name>
+      <LastWriteTime>2018-10-14T20:48:08.3347218Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

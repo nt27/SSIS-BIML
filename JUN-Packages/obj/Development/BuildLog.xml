@@ -2,13 +2,13 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>JUN-Packages</Name>
-    <LastWriteTime>2018-10-14T16:03:59.0030612Z</LastWriteTime>
+    <LastWriteTime>2018-10-15T17:01:44.3460894Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>01_JUN_Master_Package.dtsx</Name>
-      <LastWriteTime>2018-10-13T17:42:47.2298Z</LastWriteTime>
+      <LastWriteTime>2018-10-15T13:56:55.5289653Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -18,7 +18,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>01_02_JUN_DataMovement_to_Staging_Delta.dtsx</Name>
-      <LastWriteTime>2018-10-14T13:46:06.1798653Z</LastWriteTime>
+      <LastWriteTime>2018-10-15T16:43:11.6511743Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -28,12 +28,12 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>01_04_JUN_DataMovement_to_DataLake_Delta.dtsx</Name>
-      <LastWriteTime>2018-10-13T17:42:49.5658018Z</LastWriteTime>
+      <LastWriteTime>2018-10-15T16:43:11.6571768Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>01_02_JUN_DataMovement_to_Staging_Delta_Proc.dtsx</Name>
-      <LastWriteTime>2018-10-14T16:11:23.9920026Z</LastWriteTime>
+      <LastWriteTime>2018-10-14T16:12:20.3941929Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

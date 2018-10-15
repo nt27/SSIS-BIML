@@ -1,28 +1,4 @@
-<?xml version="1.0"?>
-<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
-  DTS:refId="Package"
-  DTS:CreationDate="10/13/2018 2:31:27 PM"
-  DTS:CreationName="Microsoft.Package"
-  DTS:CreatorComputerName="Win2016-SQL"
-  DTS:CreatorName="Win2016-SQL\cgiadmin"
-  DTS:DTSID="{0DB93206-A1BD-40D3-92E4-D22D519E990A}"
-  DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="14.0.3002.107"
-  DTS:LocaleID="1033"
-  DTS:ObjectName="01_04_JUN_DataMovement_to_DataLake_Delta"
-  DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{F24C892B-5D24-4D0C-AEB2-E9BBFA8BD9E3}">
-  <DTS:Property
-    DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:Variables />
-  <DTS:Executables />
-  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
-<!--If you manually edit this section and make a mistake, you can delete it. -->
-<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
-<Objects
-  Version="8">
-  <!--Each node below will contain properties that do not affect runtime behavior.-->
-</Objects>]]></DTS:DesignTimeProperties>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DTS:Executable DTS:CreationDate="10/15/2018 16:42:56" DTS:CreationName="Microsoft.Package" DTS:CreatorComputerName="Win2016-SQL" DTS:CreatorName="cgiadmin" DTS:DTSID="{9A53B821-CDC7-4135-BE48-0F57FCDBAE5D}" DTS:ExecutableType="Microsoft.Package" DTS:LastModifiedProductVersion="" DTS:LocaleID="1033" DTS:ObjectName="01_04_JUN_DataMovement_to_DataLake_Delta" DTS:refId="Package" DTS:VersionBuild="0" DTS:VersionGUID="{565D3175-304A-4288-8975-3C0E0A57009C}" DTS:VersionMajor="0" xmlns:DTS="www.microsoft.com/SqlServer/Dts">
+  <DTS:Property DTS:Name="PackageFormatVersion">8</DTS:Property>
 </DTS:Executable>

@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">Win2016-SQL</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAACAAAAAAAQZgAAAAEAACAAAACD7LREC2ZQA1iqQ/YtXnneCxDkSWuv1vWQ1hNE8jh30QAAAAAOgAAAAAIAACAAAACtNB3PgLS1rnFs2B8G49WOe2xbnKvKbGyLIvPt2IaKLJAAAACRfPvddahszFLEhHeVSSlvgGZMqrRFcB4E5rHkSLsoGVCyVLrZ5jZNsprFQeh8Ys4sEOu5M2JPZJ9doGeA9sfqik/t4D3BJsGDiag0dJfYZ0AicJEr07V/q0ajIDzLEFcj7iW+J5Qa957xXlsNAtse6BJRfkDqn7MPNWGzB4HGlI+EdbeBdAYRMaedPEIkcI9AAAAAcLnAQjITAJP6wEev4RpeYCWhNqzgbVETHdoCFpzzUFBIfROTitX38B7WiquRdIC4X3wQOhf4egwkUNHNAv/Efg==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAACAAAAAAAQZgAAAAEAACAAAAB1jAKxZu41uSaK8Dhkt3Yl9Fb3I4KenFK8RQqAU4VIzgAAAAAOgAAAAAIAACAAAADCtU0VrEaQNUM+KOD4pfdxID1lhi6bHIbJf8MS8JpkxpAAAABkKxTBxit5DdztWcpItDlMlwT4ZYlpPNgMqNh3YCMVzy8qXirusSFBmZIWPYCl3tYJOkFGmSxvEujg3MjEqf4Yi+h4DC9glwOj0Pc+P/mbOF81jDQaXSrH04junIc5y4+hVsojr+ikMaLASB3d1iIIVgZ5m5HMKhnWiJdfbNIEVRiYokDULmmJAG7bniGH4LxAAAAAzXC6KuuhDK6YPGJtRH7g4asJFAcV/Hnb6JIUiMCgBEXL6bvSnOaRd0dvWw9RRL0SIglJXq8o9gpNG9soPuUIqQ==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -46,14 +46,14 @@
           <SSIS:PackageInfo>
             <SSIS:PackageMetaData SSIS:Name="01_02_1_Account.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{57E9FC67-6005-48BE-9F81-73B4D12CAEEC}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{9768B015-BC9A-4A04-B467-C28DDF9B5914}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">01_02_1_Account</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{2821BFD1-7A42-4657-BFF4-DF3CECAF551F}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{D04A37FF-FDB8-41C0-93BF-3A8A04940804}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -71,36 +71,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">data source=Win2016-SQL;initial catalog=STG;provider=SQLNCLI11.1;integrated security=SSPI;</SSIS:Property>
-                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
-                  </SSIS:Properties>
-                </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.Dest.InitialCatalog">
-                  <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="CreationName">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="Description">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">STG</SSIS:Property>
-                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
-                  </SSIS:Properties>
-                </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.Dest.Password">
-                  <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="CreationName">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="Description">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Sensitive">1</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">data source=Win2016-SQL;User ID=;initial catalog=STG;provider=SQLNCLI11.1;integrated security=SSPI;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -117,35 +88,6 @@
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Value">false</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
-                  </SSIS:Properties>
-                </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.Dest.ServerName">
-                  <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="CreationName">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="Description">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Win2016-SQL</SSIS:Property>
-                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
-                  </SSIS:Properties>
-                </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.Dest.UserName">
-                  <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="CreationName">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="Description">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
                 <SSIS:Parameter SSIS:Name="CM.Source.ConnectionString">
@@ -1726,6 +1668,10 @@
     <ProjectItem>
       <Name>BimlScript.biml</Name>
       <FullPath>BimlScript.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>BimlScript1.biml</Name>
+      <FullPath>BimlScript1.biml</FullPath>
     </ProjectItem>
   </Miscellaneous>
   <Configurations>

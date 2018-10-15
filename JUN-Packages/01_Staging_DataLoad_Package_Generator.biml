@@ -4,27 +4,25 @@
 	xmlns="http://schemas.varigence.com/biml.xsd">
 	<Packages>
 	        <#
-	        int i=0;
-	        string strConnectionString = "Server=localhost;Initial Catalog=JUN_ODS;Integrated Security=SSPI;";
-            List<string> Tables  = new List<string>();
+	        
+            int i=0;
+            string strConnectionString = "Server=localhost;Initial Catalog=JUN_ODS;Integrated Security=SSPI;";
             var connectionStringBuilder = new System.Data.SqlClient.SqlConnectionStringBuilder(strConnectionString);
             var sqlConnection  = new System.Data.SqlClient.SqlConnection(connectionStringBuilder.ConnectionString);
             sqlConnection.Open();
-        
-            string strSql = "SELECT Distinct TABLE_NAME as TableName From INFORMATION_SCHEMA.VIEW_TABLE_USAGE Where VIEW_NAME like 'vw_ndm_%' --and TABLE_NAME Not in (select Distinct Table_Name from INFORMATION_SCHEMA.COLUMNS where CHARACTER_MAXIMUM_LENGTH =-1 )Order by TABLE_NAME";
+            
+            System.Data.DataTable dtTables = new System.Data.DataTable();        
+            string strSql = "Select Distinct TABLE_NAME as TableName From INFORMATION_SCHEMA.VIEW_TABLE_USAGE Where VIEW_NAME like 'vw_ndm_%' --and TABLE_NAME Not in (select Distinct Table_Name from INFORMATION_SCHEMA.COLUMNS where CHARACTER_MAXIMUM_LENGTH =-1 )Order by TABLE_NAME";
+            
             System.Data.SqlClient.SqlCommand sqlCmdTable = new System.Data.SqlClient.SqlCommand(strSql,sqlConnection);
-            using(System.Data.SqlClient.SqlDataReader sqlReaderTable = sqlCmdTable.ExecuteReader())
-            {
-                while(sqlReaderTable.Read())
-                {
-                    Tables.Add(sqlReaderTable["TableName"].ToString());
-                }
-            }
-           
-           int iTableCount =0;
-           foreach(var Table in Tables) 
+            System.Data.SqlClient.SqlDataAdapter sqlDAPTable = new System.Data.SqlClient.SqlDataAdapter(sqlCmdTable);
+            sqlDAPTable.Fill(dtTables);
+         
+            int iTableCount =0;
+            foreach(System.Data.DataRow dtTableRow in dtTables.Rows ) 
             { 
                 //Fetch Table Columns
+                string Table =  dtTableRow["TableName"].ToString();
                 bool IsNVarcharMaxTypeTable=false;
                 System.Data.DataTable dtTableColumns = new System.Data.DataTable();
                 strSql = "Select Column_Name, DATA_TYPE, ISNull(CHARACTER_MAXIMUM_LENGTH,0) as MaxCharLength From INFORMATION_SCHEMA.COLUMNS Where TABLE_NAME='"+ Table +"'";
@@ -37,42 +35,17 @@
                     if (dtRow["MaxCharLength"].ToString() == "-1")
                         IsNVarcharMaxTypeTable = true;
                 }
-                
-              //  for (int j = dtTableColumns.Rows.Count - 1; j >= 0; j--) 
-            //    {
-             //   if (dtTableColumns.Rows[j]["MaxCharLength"].ToString() == "-1")
-              //  {
-        //        dtTableColumns.Rows[j].Delete();
-          ///      }
-             //   }
-              //  dtTableColumns.AcceptChanges();
-                
-                
-    
-               
-               ///* using(System.Data.SqlClient.SqlDataReader sqlReaderColumn = sqlCmdColumn.ExecuteReader())
-                //{
-                 //   while(sqlReaderColumn.Read())
-                   // {
-                     //   TableColumns.Add(sqlReaderColumn["Column_Name"].ToString());
-                      //  string strColumnType="Normal";
-                        //if(sqlReaderColumn["MaxCharLength"].ToString() == "-1")
-                          //  strColumnType = "NVARCHAR_MAX";
-                        //TableColumnType.Add(strColumnType);
-                //    }
-                //}*/
-                
                 iTableCount++;
                 
             #>
-            <Package Name="01_04_<#=iTableCount#>_<#=Table#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+           <Package Name="_STG_<#=iTableCount#>_<#=Table#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
 			<Tasks>
-						<ExecuteSQL Name="Execute SQL" ConnectionName="Dest">
+			            <ExecuteSQL Name="Truncate Temp Table" ConnectionName="STG">
 							<DirectInput>Truncate Table Temp_<#=Table#></DirectInput>
 						</ExecuteSQL>
 						<Dataflow Name="DataFlow-LoadData">
 							<Transformations>
-								<OleDbSource Name="Source-Table" ConnectionName="Source">
+								<OleDbSource Name="Source-Table" ConnectionName="ODS">
 									<ExternalTableInput Table="<#=Table#>"/>
 								</OleDbSource>
 								<#if(IsNVarcharMaxTypeTable) {#>
@@ -97,7 +70,7 @@
 										<Column SourceColumn="id" IsUsed="true" Sort="true" SortOrder="Asc" SortKeyPosition="1"/>
 									</Columns>
 								</Sort>
-								<OleDbSource Name="Dest-Table" ConnectionName="Dest">
+								<OleDbSource Name="Dest-Table" ConnectionName="STG">
 									<ExternalTableInput Table="<#=Table#>"/>
 								</OleDbSource>
 								<Sort Name="Sort-Dest" AutoPassThrough="false">
@@ -138,7 +111,7 @@
 										</OutputPath>
 									</OutputPaths>
 								</ConditionalSplit>
-								<Lookup Name="Update-Lookup" OleDbConnectionName="Dest" NoMatchBehavior="RedirectRowsToNoMatchOutput">
+								<Lookup Name="Update-Lookup" OleDbConnectionName="STG" NoMatchBehavior="RedirectRowsToNoMatchOutput">
 									<Parameters>
 									        <# 
                                             i=1;
@@ -190,15 +163,15 @@
                                                         where [refTable].[id] = ? <#=strReferenceColumns#>
                                     </ParameterizedQuery>
 								</Lookup>
-								<OleDbDestination Name="Insert-Update-Record" ConnectionName="Dest">
+								<OleDbDestination Name="Insert-Update-Record" ConnectionName="STG">
 								<InputPath OutputPathName="Update-Lookup.NoMatch" />
 								<ExternalTableOutput Table="[dbo].[Temp_<#=Table#>]" />
 							</OleDbDestination>
-								<OleDbDestination Name="Insert" ConnectionName="Dest">
+								<OleDbDestination Name="Insert" ConnectionName="STG">
 									<InputPath OutputPathName="Conditional-Split.New-Record" />
 									<ExternalTableOutput Table="[dbo].[<#=Table#>]" />
 								</OleDbDestination>
-								<OleDbCommand Name="Delete" ConnectionName="Dest">
+								<OleDbCommand Name="Delete" ConnectionName="STG">
 									<InputPath OutputPathName="Conditional-Split.Delete-Record" />
 									<Parameters>
 										<Parameter SourceColumn="id2" TargetColumn="Param_0" DataType="Int32" />
@@ -207,7 +180,7 @@
 								</OleDbCommand>
 							</Transformations>
 						</Dataflow>
-						<ExecuteSQL Name="Execute SQL-Update Record" ConnectionName="Dest">
+						<ExecuteSQL Name="Execute SQL-Update Record" ConnectionName="STG">
 							<DirectInput>
                                 <#
                                 string strQuery = "";
@@ -224,10 +197,9 @@
                                 On  A.Id = B.ID
 							</DirectInput>
 						</ExecuteSQL>
-			</Tasks>
-		</Package>
-		<#}
+	        </Tasks>
+	       </Package>
+			<#}
 		 sqlConnection.Close();
-		#>
-	</Packages>
+		#></Packages>
 </Biml>

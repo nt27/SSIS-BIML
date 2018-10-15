@@ -1,0 +1,30 @@
+﻿<#@template tier="2"#>
+<Biml
+	xmlns="http://schemas.varigence.com/biml.xsd">
+	<Packages>
+	    <Package Name="01_02_JUN_DataMovement_to_Staging_Delta" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+	        <Tasks>
+	            <# foreach(var package in RootNode.Packages) { 
+	            if(package.ToString().Contains("_STG_")) 
+	            {#>
+	            <ExecutePackage Name="Execute<#=package.Name#>">
+	                <Package PackageName="<#=package.Name#>" />
+	            </ExecutePackage>
+                <#}}#>
+	        </Tasks>
+	    </Package>
+   
+	    <Package Name="01_04_JUN_DataMovement_to_DataLake_Delta" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+	        <Tasks>
+	            <# foreach(var package in RootNode.Packages) { 
+	            if(package.ToString().Contains("_BDL_")) 
+	            {#>
+	            
+	            <ExecutePackage Name="Execute<#=package.Name#>">
+	                <Package PackageName="<#=package.Name#>" />
+	            </ExecutePackage>
+                <#}}#>
+	        </Tasks>
+	    </Package>
+    </Packages>
+</Biml>
