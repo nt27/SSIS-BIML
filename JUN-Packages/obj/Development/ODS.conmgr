@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="ODS"
+  DTS:DTSID="{1CEE3F05-D0BF-41A0-946C-E22ECCCD9F7F}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="data source=Win2016-SQL;initial catalog=JUN_ODS;provider=SQLNCLI11.1;integrated security=SSPI;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

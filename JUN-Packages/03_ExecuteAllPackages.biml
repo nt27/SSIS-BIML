@@ -8,7 +8,7 @@
 	            if(package.ToString().Contains("_STG_")) 
 	            {#>
 	            <ExecutePackage Name="Execute<#=package.Name#>">
-	                <Package PackageName="<#=package.Name#>" />
+	                <ExternalProjectPackage Package="<#=package.Name#>.dtsx"/>
 	            </ExecutePackage>
                 <#}}#>
 	        </Tasks>
@@ -21,7 +21,7 @@
 	            {#>
 	            
 	            <ExecutePackage Name="Execute<#=package.Name#>">
-	                <Package PackageName="<#=package.Name#>" />
+	                <ExternalProjectPackage Package="<#=package.Name#>.dtsx"/>
 	            </ExecutePackage>
                 <#}}#>
 	        </Tasks>

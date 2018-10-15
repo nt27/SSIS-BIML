@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="10/15/2018 4:42:56 PM"
+  DTS:CreationDate="10/15/2018 8:57:19 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="Win2016-SQL"
   DTS:CreatorName="cgiadmin"
-  DTS:DTSID="{9A53B821-CDC7-4135-BE48-0F57FCDBAE5D}"
+  DTS:DTSID="{35FBF467-E134-4881-B461-6F1FE8119C35}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3002.107"
   DTS:LocaleID="1033"
   DTS:ObjectName="01_04_JUN_DataMovement_to_DataLake_Delta"
-  DTS:VersionGUID="{565D3175-304A-4288-8975-3C0E0A57009C}"
+  DTS:VersionGUID="{2E44FE7B-5847-45B4-912C-4B2D88FEAB12}"
   DTS:VersionMajor="0">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>

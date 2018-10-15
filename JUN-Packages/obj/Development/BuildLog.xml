@@ -2,7 +2,7 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>JUN-Packages</Name>
-    <LastWriteTime>2018-10-15T17:01:44.3460894Z</LastWriteTime>
+    <LastWriteTime>2018-10-15T21:19:14.276904Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
@@ -18,7 +18,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>01_02_JUN_DataMovement_to_Staging_Delta.dtsx</Name>
-      <LastWriteTime>2018-10-15T16:43:11.6511743Z</LastWriteTime>
+      <LastWriteTime>2018-10-15T21:00:07.8276582Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -28,7 +28,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>01_04_JUN_DataMovement_to_DataLake_Delta.dtsx</Name>
-      <LastWriteTime>2018-10-15T16:43:11.6571768Z</LastWriteTime>
+      <LastWriteTime>2018-10-15T21:00:07.8336614Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
