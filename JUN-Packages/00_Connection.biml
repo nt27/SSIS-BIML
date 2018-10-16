@@ -1,15 +1,8 @@
 ﻿<#@ template tier="0" #>
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
      <Connections>
-        <OleDbConnection Name="ODS" CreateInProject="true" ConnectionString="Provider=SQLNCLI11.1;Data Source=Win2016-SQL;Initial Catalog=JUN_ODS;Integrated Security=SSPI;">
-          <!--     <Expressions>
-            <Expression PropertyName="ConnectionString">"Provider=SQLNCLI11.1;Data Source=Win2016-SQL;Initial Catalog=JUN_ODS;Integrated Security=SSPI;"</Expression>
-         <Expression ExternalProperty="ServerName">@[$Project::Junifer_ODS_ServerName]</Expression> 
-            <Expression ExternalProperty="UserName">@[$Project::Junifer_ODS_UserName]</Expression>
-            <Expression ExternalProperty="Password">@[$Project::Junifer_ODS_Password]</Expression> 
-            </Expressions>--> 
-        </OleDbConnection>
-        <OleDbConnection Name="STG" CreateInProject="true" ConnectionString="Provider=SQLNCLI11.1;Data Source=Win2016-SQL;Initial Catalog=JUN_STG;Integrated Security=SSPI;"/>
-        <OleDbConnection Name="BDL" CreateInProject="true" ConnectionString="Provider=SQLNCLI11.1;Data Source=Win2016-SQL;Initial Catalog=DataLake;Integrated Security=SSPI;"/>
+        <OleDbConnection Name="OLE_ODS" CreateInProject="true" ConnectionString="Provider=SQLNCLI11.1;Data Source=Win2016-SQL;Initial Catalog=JUN_ODS;Integrated Security=SSPI;"/>        
+        <OleDbConnection Name="OLE_STG" CreateInProject="true" ConnectionString="Provider=SQLNCLI11.1;Data Source=Win2016-SQL;Initial Catalog=JUN_STG;Integrated Security=SSPI;"/>
+        <OleDbConnection Name="OLE_BDL" CreateInProject="true" ConnectionString="Provider=SQLNCLI11.1;Data Source=Win2016-SQL;Initial Catalog=DataLake;Integrated Security=SSPI;"/>
     </Connections>
 </Biml>

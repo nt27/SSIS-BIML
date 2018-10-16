@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="SMO_STG"
+  DTS:DTSID="{37f4b585-0010-485b-a080-b986e18d74b1}"
+  DTS:CreationName="SMOServer">
+  <DTS:PropertyExpression
+    DTS:Name="Password">@[$Project::STG_Password]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="SqlServerName">@[$Project::STG_ServerName]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="UserName">@[$Project::STG_UserName]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <SMOServerConnectionManager
+      ConnectionString="SqlServerName=WIN2016-SQL;UseWindowsAuthentication=False;UserName=ssis-release-user;">
+      <PassWord
+        Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAACAAAAAAAQZgAAAAEAACAAAAA5j5uFzmh+FD+esv/oVcNm6uVEp+rlAADQvCqdblLVvgAAAAAOgAAAAAIAACAAAAAQx+9DrGw2lwUyxTKQ0GwUOfd7wI+fGdF9U9whc5hY5WAAAADZpTb9jaLNLxAtw3qu76EIeO2OaC+U5AqfuQ6MDEZAz2Y7ZSHDG6+Ej5TI/3/A0ofobTg9bbX7NIi+L+ILjApTPVh41Fsv98WGgoyFunr+OQemGH4zR5mWdQKJkdKsgh9AAAAA1mYmf6C8gI+dK+wgQNdTCbkcdJd0NSwrbJHC6gQK5t8Kla6EsyNrhQla7nNNKsWtF6Cz0rhkAUDqKi6Q7cUPXQ==</PassWord>
+    </SMOServerConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

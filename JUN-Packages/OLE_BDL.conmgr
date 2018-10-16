@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts" DTS:ObjectName="OLE_BDL" DTS:DTSID="{B8F719EA-8F7F-4B39-AF93-AACE5FB9E087}" DTS:refId="Package.ConnectionManagers[OLE_BDL]" DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts" DTS:ConnectionString="provider=SQLNCLI11.1;data source=Win2016-SQL;initial catalog=DataLake;integrated security=SSPI"></DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

@@ -1,4 +1,4 @@
-﻿<#@template tier="4"#>
+﻿<#@template tier="2"#>
 
 <Biml
 	xmlns="http://schemas.varigence.com/biml.xsd">
@@ -37,20 +37,21 @@
                         IsNVarcharMaxTypeTable = true;
                 }
                 iTableCount++;
-                
+                string strTableNo = iTableCount.ToString();
+                strTableNo= strTableNo.PadLeft(3, '0');
                 string strSourceTableKeyColumn = dtTableColumns.Rows[0]["Column_Name"].ToString();
                 //string strTargetTableKeyColumn = "";
                 
                 
             #>
-            <Package Name="_BDL_<#=iTableCount#>_<#=strTargetTableName#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+            <Package Name="_BDL_<#=strTableNo#>_<#=strTargetTableName#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
 			<Tasks>
-						<ExecuteSQL Name="Truncate Temp Table" ConnectionName="BDL">
+						<ExecuteSQL Name="Truncate Temp Table" ConnectionName="OLE_BDL">
 							<DirectInput>Truncate Table Temp_<#=strTargetTableName#></DirectInput>
 						</ExecuteSQL>
 						<Dataflow Name="DataFlow-LoadData">
 							<Transformations>
-								<OleDbSource Name="Source-Table" ConnectionName="STG">
+								<OleDbSource Name="Source-Table" ConnectionName="OLE_STG">
 									<ExternalTableInput Table="<#=strSourceTableName#>"/>
 								</OleDbSource>
 								<#if(IsNVarcharMaxTypeTable) {#>
@@ -75,7 +76,7 @@
 										<Column SourceColumn="<#=strSourceTableKeyColumn#>" IsUsed="true" Sort="true" SortOrder="Asc" SortKeyPosition="1"/>
 									</Columns>
 								</Sort>
-								<OleDbSource Name="Dest-Table" ConnectionName="BDL">
+								<OleDbSource Name="Dest-Table" ConnectionName="OLE_BDL">
 									<ExternalTableInput Table="<#=strTargetTableName#>"/>
 								</OleDbSource>
 								<Sort Name="Sort-Dest" AutoPassThrough="false">
@@ -116,7 +117,7 @@
 										</OutputPath>
 									</OutputPaths>
 								</ConditionalSplit>
-								<Lookup Name="Update-Lookup" OleDbConnectionName="BDL" NoMatchBehavior="RedirectRowsToNoMatchOutput">
+								<Lookup Name="Update-Lookup" OleDbConnectionName="OLE_BDL" NoMatchBehavior="RedirectRowsToNoMatchOutput">
 									<Parameters>
 									        <# 
                                             i=1;
@@ -168,15 +169,15 @@
                                                         where [refTable].[<#=strSourceTableKeyColumn#>] = ? <#=strReferenceColumns#>
                                     </ParameterizedQuery>
 								</Lookup>
-								<OleDbDestination Name="Insert-Update-Record" ConnectionName="BDL">
+								<OleDbDestination Name="Insert-Update-Record" ConnectionName="OLE_BDL">
 								<InputPath OutputPathName="Update-Lookup.NoMatch" />
 								<ExternalTableOutput Table="[dbo].[Temp_<#=strTargetTableName#>]" />
 							</OleDbDestination>
-								<OleDbDestination Name="Insert" ConnectionName="BDL">
+								<OleDbDestination Name="Insert" ConnectionName="OLE_BDL">
 									<InputPath OutputPathName="Conditional-Split.New-Record" />
 									<ExternalTableOutput Table="[dbo].[<#=strTargetTableName#>]" />
 								</OleDbDestination>
-								<OleDbCommand Name="Delete" ConnectionName="BDL">
+								<OleDbCommand Name="Delete" ConnectionName="OLE_BDL">
 									<InputPath OutputPathName="Conditional-Split.Delete-Record" />
 									<Parameters>
 										<Parameter SourceColumn="<#=strSourceTableKeyColumn#>2" TargetColumn="Param_0" DataType="Int32" />
@@ -185,7 +186,7 @@
 								</OleDbCommand>
 							</Transformations>
 						</Dataflow>
-						<ExecuteSQL Name="Execute SQL-Update Record" ConnectionName="BDL">
+						<ExecuteSQL Name="Execute SQL-Update Record" ConnectionName="OLE_BDL">
 							<DirectInput>
                                 <#
                                 string strQuery = "";

@@ -1,4 +1,4 @@
-﻿<#@template tier="2"#>
+﻿<#@template tier="3"#>
 <Biml
 	xmlns="http://schemas.varigence.com/biml.xsd">
 	<Packages>
@@ -19,7 +19,6 @@
 	            <# foreach(var package in RootNode.Packages) { 
 	            if(package.ToString().Contains("_BDL_")) 
 	            {#>
-	            
 	            <ExecutePackage Name="Execute<#=package.Name#>">
 	                <ExternalProjectPackage Package="<#=package.Name#>.dtsx"/>
 	            </ExecutePackage>

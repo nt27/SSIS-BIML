@@ -1,0 +1,2441 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/16/2018 4:17:03 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="Win2016-SQL"
+  DTS:CreatorName="cgiadmin"
+  DTS:DTSID="{9AC76A67-DC40-446E-BA43-6ECDA2CDB4C3}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.107"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="_BDL_028_ndm_TicketComplaint"
+  DTS:VersionGUID="{2BFF1C53-06FF-44FB-A805-4F6283736D40}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DataFlow-LoadData"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{468AC41E-55CD-4BBE-B5D4-F271392B3E94}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DataFlow-LoadData"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DataFlow-LoadData\Conditional-Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="Conditional-Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]"
+                  name="Merge Join_Output_Conditional-Split">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split].Columns[TicketComplaint_id]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split].Columns[TicketComplaint_id2]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_id2"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id2]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DataFlow-LoadData\Conditional-Split.Outputs[New-Record]"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="New-Record"
+                  synchronousInputId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      name="Expression">!ISNULL(#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id]}) &amp;&amp; ISNULL(#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id2]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      expressionType="Notify"
+                      name="FriendlyExpression">!ISNULL([TicketComplaint_id]) &amp;&amp; ISNULL([TicketComplaint_id2])</property>
+                    <property
+                      dataType="System.Int32"
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Delete-Record]"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Delete-Record"
+                  synchronousInputId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      name="Expression">ISNULL(#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id]}) &amp;&amp; !ISNULL(#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id2]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL([TicketComplaint_id]) &amp;&amp; !ISNULL([TicketComplaint_id2])</property>
+                    <property
+                      dataType="System.Int32"
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Default]"
+                  exclusionGroup="1"
+                  name="Default"
+                  synchronousInputId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="Convetion-For-NVARCHARMAX"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Inputs[Source-Table_Output_Convetion-For-NVARCHARMAX]"
+                  name="Source-Table_Output_Convetion-For-NVARCHARMAX">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Inputs[Source-Table_Output_Convetion-For-NVARCHARMAX].Columns[TicketComplaint_actions]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_actions"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_actions]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Inputs[Source-Table_Output_Convetion-For-NVARCHARMAX].Columns[TicketComplaint_outcome]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_outcome"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_outcome]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Inputs[Source-Table_Output_Convetion-For-NVARCHARMAX].Columns[TicketComplaint_reason]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_reason"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_reason]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output]"
+                  exclusionGroup="1"
+                  name="Output"
+                  synchronousInputId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Inputs[Source-Table_Output_Convetion-For-NVARCHARMAX]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_TicketComplaint_actions]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4000"
+                      lineageId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_TicketComplaint_actions]"
+                      name="Converted_TicketComplaint_actions"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_actions]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_TicketComplaint_outcome]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4000"
+                      lineageId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_TicketComplaint_outcome]"
+                      name="Converted_TicketComplaint_outcome"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_outcome]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_TicketComplaint_reason]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4000"
+                      lineageId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_TicketComplaint_reason]"
+                      name="Converted_TicketComplaint_reason"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_reason]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Inputs[Source-Table_Output_Convetion-For-NVARCHARMAX]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DataFlow-LoadData\Delete"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              name="Delete"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Delete from ndm_TicketComplaint Where TicketComplaint_id = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DataFlow-LoadData\Delete.Connections[OleDbConnection]"
+                  connectionManagerID="{B8F719EA-8F7F-4B39-AF93-AACE5FB9E087}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OLE_BDL]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Conditional-Split_Delete-Record_Delete">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete].Columns[TicketComplaint_id2]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_id2"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete].ExternalColumns[Param_0]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id2]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete].ExternalColumns[Param_0]"
+                      dataType="i4"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">17</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DataFlow-LoadData\Delete.Outputs[Output]"
+                  exclusionGroup="1"
+                  name="Output"
+                  synchronousInputId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DataFlow-LoadData\Delete.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Delete.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Delete.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Delete.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Delete.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DataFlow-LoadData\Dest-Table"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="Dest-Table"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">ndm_TicketComplaint</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DataFlow-LoadData\Dest-Table.Connections[OleDbConnection]"
+                  connectionManagerID="{B8F719EA-8F7F-4B39-AF93-AACE5FB9E087}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OLE_BDL]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_id]"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_id]"
+                      name="TicketComplaint_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_partitionId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_partitionId]"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_partitionId]"
+                      name="TicketComplaint_partitionId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketId]"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketId]"
+                      name="TicketId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_actions]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_actions]"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_actions]"
+                      name="TicketComplaint_actions"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_outcome]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_outcome]"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_outcome]"
+                      name="TicketComplaint_outcome"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_reason]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_reason]"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_reason]"
+                      name="TicketComplaint_reason"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_reference]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_reference]"
+                      length="255"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_reference]"
+                      name="TicketComplaint_reference"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_versionNo]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_versionNo]"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_versionNo]"
+                      name="TicketComplaint_versionNo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_deleteFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_deleteFlag]"
+                      length="1"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_deleteFlag]"
+                      name="TicketComplaint_deleteFlag"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_id]"
+                      dataType="i8"
+                      name="TicketComplaint_id" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_partitionId]"
+                      dataType="i8"
+                      name="TicketComplaint_partitionId" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketId]"
+                      dataType="i8"
+                      name="TicketId" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_actions]"
+                      dataType="nText"
+                      name="TicketComplaint_actions" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_outcome]"
+                      dataType="nText"
+                      name="TicketComplaint_outcome" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_reason]"
+                      dataType="nText"
+                      name="TicketComplaint_reason" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_reference]"
+                      dataType="wstr"
+                      length="255"
+                      name="TicketComplaint_reference" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_versionNo]"
+                      dataType="i4"
+                      name="TicketComplaint_versionNo" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].ExternalColumns[TicketComplaint_deleteFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="TicketComplaint_deleteFlag" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_id]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_id]"
+                      name="TicketComplaint_id" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_partitionId]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_partitionId]"
+                      name="TicketComplaint_partitionId" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketId]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketId]"
+                      name="TicketId" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_actions]"
+                      dataType="nText"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_actions]"
+                      name="TicketComplaint_actions" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_outcome]"
+                      dataType="nText"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_outcome]"
+                      name="TicketComplaint_outcome" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_reason]"
+                      dataType="nText"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_reason]"
+                      name="TicketComplaint_reason" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_reference]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_reference]"
+                      name="TicketComplaint_reference" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_versionNo]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_versionNo]"
+                      name="TicketComplaint_versionNo" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_deleteFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[TicketComplaint_deleteFlag]"
+                      name="TicketComplaint_deleteFlag" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DataFlow-LoadData\Insert"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="Insert"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[ndm_TicketComplaint]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DataFlow-LoadData\Insert.Connections[OleDbConnection]"
+                  connectionManagerID="{B8F719EA-8F7F-4B39-AF93-AACE5FB9E087}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OLE_BDL]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Conditional-Split_New-Record_Insert">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[TicketComplaint_id]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_id"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_id]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[TicketComplaint_partitionId]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_partitionId"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_partitionId]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_partitionId]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[TicketId]"
+                      cachedDataType="i8"
+                      cachedName="TicketId"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketId]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketId]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[TicketComplaint_actions]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_actions"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_actions]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_actions]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[TicketComplaint_outcome]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_outcome"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_outcome]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_outcome]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[TicketComplaint_reason]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_reason"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_reason]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_reason]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[TicketComplaint_reference]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TicketComplaint_reference"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_reference]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_reference]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[TicketComplaint_versionNo]"
+                      cachedDataType="i4"
+                      cachedName="TicketComplaint_versionNo"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_versionNo]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_versionNo]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].Columns[TicketComplaint_deleteFlag]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="TicketComplaint_deleteFlag"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_deleteFlag]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_deleteFlag]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_id]"
+                      dataType="i8"
+                      name="TicketComplaint_id" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_partitionId]"
+                      dataType="i8"
+                      name="TicketComplaint_partitionId" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketId]"
+                      dataType="i8"
+                      name="TicketId" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_actions]"
+                      dataType="nText"
+                      name="TicketComplaint_actions" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_outcome]"
+                      dataType="nText"
+                      name="TicketComplaint_outcome" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_reason]"
+                      dataType="nText"
+                      name="TicketComplaint_reason" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_reference]"
+                      dataType="wstr"
+                      length="255"
+                      name="TicketComplaint_reference" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_versionNo]"
+                      dataType="i4"
+                      name="TicketComplaint_versionNo" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert].ExternalColumns[TicketComplaint_deleteFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="TicketComplaint_deleteFlag" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DataFlow-LoadData\Insert.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Insert.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Insert.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Insert.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Insert.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DataFlow-LoadData\Insert-Update-Record"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="Insert-Update-Record"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Temp_ndm_TicketComplaint]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DataFlow-LoadData\Insert-Update-Record.Connections[OleDbConnection]"
+                  connectionManagerID="{B8F719EA-8F7F-4B39-AF93-AACE5FB9E087}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OLE_BDL]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Update-Lookup_NoMatch_Insert-Update-Record">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[TicketComplaint_id]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_id"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_id]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[TicketComplaint_partitionId]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_partitionId"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_partitionId]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_partitionId]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[TicketId]"
+                      cachedDataType="i8"
+                      cachedName="TicketId"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketId]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketId]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[TicketComplaint_actions]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_actions"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_actions]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_actions]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[TicketComplaint_outcome]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_outcome"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_outcome]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_outcome]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[TicketComplaint_reason]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_reason"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_reason]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_reason]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[TicketComplaint_reference]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TicketComplaint_reference"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_reference]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_reference]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[TicketComplaint_versionNo]"
+                      cachedDataType="i4"
+                      cachedName="TicketComplaint_versionNo"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_versionNo]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_versionNo]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].Columns[TicketComplaint_deleteFlag]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="TicketComplaint_deleteFlag"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_deleteFlag]"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_deleteFlag]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_id]"
+                      dataType="i8"
+                      name="TicketComplaint_id" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_partitionId]"
+                      dataType="i8"
+                      name="TicketComplaint_partitionId" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketId]"
+                      dataType="i8"
+                      name="TicketId" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_actions]"
+                      dataType="nText"
+                      name="TicketComplaint_actions" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_outcome]"
+                      dataType="nText"
+                      name="TicketComplaint_outcome" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_reason]"
+                      dataType="nText"
+                      name="TicketComplaint_reason" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_reference]"
+                      dataType="wstr"
+                      length="255"
+                      name="TicketComplaint_reference" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_versionNo]"
+                      dataType="i4"
+                      name="TicketComplaint_versionNo" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record].ExternalColumns[TicketComplaint_deleteFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="TicketComplaint_deleteFlag" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Insert-Update-Record.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DataFlow-LoadData\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join]"
+                  hasSideEffects="true"
+                  name="Sort-Source_Output_Merge Join">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[Converted_TicketComplaint_actions]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="Converted_TicketComplaint_actions"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[Converted_TicketComplaint_actions]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[Converted_TicketComplaint_outcome]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="Converted_TicketComplaint_outcome"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[Converted_TicketComplaint_outcome]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[Converted_TicketComplaint_reason]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="Converted_TicketComplaint_reason"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[Converted_TicketComplaint_reason]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_id]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_id]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_partitionId]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_partitionId"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_partitionId]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketId]"
+                      cachedDataType="i8"
+                      cachedName="TicketId"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketId]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_actions]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_actions"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_actions]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_outcome]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_outcome"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_outcome]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_reason]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_reason"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_reason]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_reference]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TicketComplaint_reference"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_reference]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_versionNo]"
+                      cachedDataType="i4"
+                      cachedName="TicketComplaint_versionNo"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_versionNo]" />
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_deleteFlag]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="TicketComplaint_deleteFlag"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_deleteFlag]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Dest_Output_Merge Join]"
+                  hasSideEffects="true"
+                  name="Sort-Dest_Output_Merge Join">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Dest_Output_Merge Join].Columns[TicketComplaint_id]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DataFlow-LoadData\Sort-Dest.Outputs[Output].Columns[TicketComplaint_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output]"
+                  isSorted="true"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Converted_TicketComplaint_actions]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Converted_TicketComplaint_actions]"
+                      name="Converted_TicketComplaint_actions">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[Converted_TicketComplaint_actions]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Converted_TicketComplaint_outcome]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Converted_TicketComplaint_outcome]"
+                      name="Converted_TicketComplaint_outcome">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[Converted_TicketComplaint_outcome]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Converted_TicketComplaint_reason]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Converted_TicketComplaint_reason]"
+                      name="Converted_TicketComplaint_reason">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[Converted_TicketComplaint_reason]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id]"
+                      name="TicketComplaint_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_partitionId]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_partitionId]"
+                      name="TicketComplaint_partitionId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_partitionId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketId]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketId]"
+                      name="TicketId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_actions]"
+                      dataType="nText"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_actions]"
+                      name="TicketComplaint_actions">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_actions]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_outcome]"
+                      dataType="nText"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_outcome]"
+                      name="TicketComplaint_outcome">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_outcome]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_reason]"
+                      dataType="nText"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_reason]"
+                      name="TicketComplaint_reason">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_reason]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_reference]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_reference]"
+                      name="TicketComplaint_reference">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_reference]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_versionNo]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_versionNo]"
+                      name="TicketComplaint_versionNo">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_versionNo]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_deleteFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_deleteFlag]"
+                      name="TicketComplaint_deleteFlag">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join].Columns[TicketComplaint_deleteFlag]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id2]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id2]"
+                      name="TicketComplaint_id2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Dest_Output_Merge Join].Columns[TicketComplaint_id]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DataFlow-LoadData\Sort-Dest"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              name="Sort-Dest"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DataFlow-LoadData\Sort-Dest.Inputs[Dest-Table_Output_Sort-Dest]"
+                  name="Dest-Table_Output_Sort-Dest">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Dest.Inputs[Dest-Table_Output_Sort-Dest].Columns[TicketComplaint_id]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_id"
+                      lineageId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DataFlow-LoadData\Sort-Dest.Outputs[Output]"
+                  isSorted="true"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Dest.Outputs[Output].Columns[TicketComplaint_id]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Sort-Dest.Outputs[Output].Columns[TicketComplaint_id]"
+                      name="TicketComplaint_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Dest-Table.Outputs[Output].Columns[TicketComplaint_id]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DataFlow-LoadData\Sort-Source"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              name="Sort-Source"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source]"
+                  name="Convetion-For-NVARCHARMAX_Output_Sort-Source">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[Converted_TicketComplaint_actions]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="Converted_TicketComplaint_actions"
+                      lineageId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_TicketComplaint_actions]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[Converted_TicketComplaint_outcome]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="Converted_TicketComplaint_outcome"
+                      lineageId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_TicketComplaint_outcome]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[Converted_TicketComplaint_reason]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="Converted_TicketComplaint_reason"
+                      lineageId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_TicketComplaint_reason]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[TicketComplaint_id]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_id"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[TicketComplaint_partitionId]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_partitionId"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_partitionId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[TicketId]"
+                      cachedDataType="i8"
+                      cachedName="TicketId"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[TicketComplaint_actions]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_actions"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_actions]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[TicketComplaint_outcome]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_outcome"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_outcome]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[TicketComplaint_reason]"
+                      cachedDataType="nText"
+                      cachedName="TicketComplaint_reason"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_reason]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[TicketComplaint_reference]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TicketComplaint_reference"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_reference]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[TicketComplaint_versionNo]"
+                      cachedDataType="i4"
+                      cachedName="TicketComplaint_versionNo"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_versionNo]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source].Columns[TicketComplaint_deleteFlag]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="TicketComplaint_deleteFlag"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_deleteFlag]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output]"
+                  isSorted="true"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[Converted_TicketComplaint_actions]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[Converted_TicketComplaint_actions]"
+                      name="Converted_TicketComplaint_actions">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_TicketComplaint_actions]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[Converted_TicketComplaint_outcome]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[Converted_TicketComplaint_outcome]"
+                      name="Converted_TicketComplaint_outcome">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_TicketComplaint_outcome]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[Converted_TicketComplaint_reason]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[Converted_TicketComplaint_reason]"
+                      name="Converted_TicketComplaint_reason">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output].Columns[Converted_TicketComplaint_reason]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_id]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_id]"
+                      name="TicketComplaint_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_partitionId]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_partitionId]"
+                      name="TicketComplaint_partitionId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_partitionId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketId]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketId]"
+                      name="TicketId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_actions]"
+                      dataType="nText"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_actions]"
+                      name="TicketComplaint_actions">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_actions]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_outcome]"
+                      dataType="nText"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_outcome]"
+                      name="TicketComplaint_outcome">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_outcome]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_reason]"
+                      dataType="nText"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_reason]"
+                      name="TicketComplaint_reason">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_reason]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_reference]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_reference]"
+                      name="TicketComplaint_reference">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_reference]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_versionNo]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_versionNo]"
+                      name="TicketComplaint_versionNo">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_versionNo]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_deleteFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output].Columns[TicketComplaint_deleteFlag]"
+                      name="TicketComplaint_deleteFlag">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_deleteFlag]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DataFlow-LoadData\Source-Table"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="Source-Table"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">vw_ndm_TicketComplaint</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DataFlow-LoadData\Source-Table.Connections[OleDbConnection]"
+                  connectionManagerID="{106297E0-A6BD-4F07-93AE-08D287E934CD}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OLE_STG]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_id]"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_id]"
+                      name="TicketComplaint_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_partitionId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_partitionId]"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_partitionId]"
+                      name="TicketComplaint_partitionId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketId]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketId]"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketId]"
+                      name="TicketId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_actions]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_actions]"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_actions]"
+                      name="TicketComplaint_actions"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_outcome]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_outcome]"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_outcome]"
+                      name="TicketComplaint_outcome"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_reason]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_reason]"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_reason]"
+                      name="TicketComplaint_reason"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_reference]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_reference]"
+                      length="255"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_reference]"
+                      name="TicketComplaint_reference"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_versionNo]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_versionNo]"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_versionNo]"
+                      name="TicketComplaint_versionNo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_deleteFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_deleteFlag]"
+                      length="1"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].Columns[TicketComplaint_deleteFlag]"
+                      name="TicketComplaint_deleteFlag"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_id]"
+                      dataType="i8"
+                      name="TicketComplaint_id" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_partitionId]"
+                      dataType="i8"
+                      name="TicketComplaint_partitionId" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketId]"
+                      dataType="i8"
+                      name="TicketId" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_actions]"
+                      dataType="nText"
+                      name="TicketComplaint_actions" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_outcome]"
+                      dataType="nText"
+                      name="TicketComplaint_outcome" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_reason]"
+                      dataType="nText"
+                      name="TicketComplaint_reason" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_reference]"
+                      dataType="wstr"
+                      length="255"
+                      name="TicketComplaint_reference" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_versionNo]"
+                      dataType="i4"
+                      name="TicketComplaint_versionNo" />
+                    <externalMetadataColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Output].ExternalColumns[TicketComplaint_deleteFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="TicketComplaint_deleteFlag" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_id]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_id]"
+                      name="TicketComplaint_id" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_partitionId]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_partitionId]"
+                      name="TicketComplaint_partitionId" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketId]"
+                      dataType="i8"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketId]"
+                      name="TicketId" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_actions]"
+                      dataType="nText"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_actions]"
+                      name="TicketComplaint_actions" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_outcome]"
+                      dataType="nText"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_outcome]"
+                      name="TicketComplaint_outcome" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_reason]"
+                      dataType="nText"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_reason]"
+                      name="TicketComplaint_reason" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_reference]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_reference]"
+                      name="TicketComplaint_reference" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_versionNo]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_versionNo]"
+                      name="TicketComplaint_versionNo" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_deleteFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[TicketComplaint_deleteFlag]"
+                      name="TicketComplaint_deleteFlag" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Source-Table.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DataFlow-LoadData\Update-Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              name="Update-Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select [TicketComplaint_id],[TicketComplaint_partitionId],[TicketId], Cast([TicketComplaint_actions] as NVarchar(4000)) as TicketComplaint_actions, Cast([TicketComplaint_outcome] as NVarchar(4000)) as TicketComplaint_outcome, Cast([TicketComplaint_reason] as NVarchar(4000)) as TicketComplaint_reason,[TicketComplaint_reference],[TicketComplaint_versionNo],[TicketComplaint_deleteFlag] from [dbo].[ndm_TicketComplaint]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[ndm_TicketComplaint]) [refTable]
+                                                        where [refTable].[TicketComplaint_id] = ?  and [refTable].[TicketComplaint_id] = ? and [refTable].[TicketComplaint_partitionId] = ? and [refTable].[TicketId] = ? and [refTable].[TicketComplaint_actions] = ? and [refTable].[TicketComplaint_outcome] = ? and [refTable].[TicketComplaint_reason] = ? and [refTable].[TicketComplaint_reference] = ? and [refTable].[TicketComplaint_versionNo] = ? and [refTable].[TicketComplaint_deleteFlag] = ?
+                                    </property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;
+  &lt;referenceColumns&gt;
+    &lt;referenceColumn name="TicketComplaint_id" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="TicketComplaint_partitionId" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="TicketId" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="TicketComplaint_actions" dataType="DT_WSTR" length="4000" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="TicketComplaint_outcome" dataType="DT_WSTR" length="4000" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="TicketComplaint_reason" dataType="DT_WSTR" length="4000" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="TicketComplaint_reference" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="TicketComplaint_versionNo" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="TicketComplaint_deleteFlag" dataType="DT_STR" length="1" precision="0" scale="0" codePage="1252" /&gt;
+  &lt;/referenceColumns&gt;
+&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_partitionId]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketId]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_actions]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_outcome]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_reason]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_reference]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_versionNo]};#{Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_deleteFlag]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DataFlow-LoadData\Update-Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{B8F719EA-8F7F-4B39-AF93-AACE5FB9E087}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OLE_BDL]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup]"
+                  name="Conditional-Split_Default_Update-Lookup">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[Converted_TicketComplaint_actions]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="Converted_TicketComplaint_actions"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Converted_TicketComplaint_actions]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TicketComplaint_actions</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[Converted_TicketComplaint_outcome]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="Converted_TicketComplaint_outcome"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Converted_TicketComplaint_outcome]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TicketComplaint_outcome</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[Converted_TicketComplaint_reason]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="Converted_TicketComplaint_reason"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[Converted_TicketComplaint_reason]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TicketComplaint_reason</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[TicketComplaint_id]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TicketComplaint_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[TicketComplaint_partitionId]"
+                      cachedDataType="i8"
+                      cachedName="TicketComplaint_partitionId"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_partitionId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TicketComplaint_partitionId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[TicketId]"
+                      cachedDataType="i8"
+                      cachedName="TicketId"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TicketId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[TicketComplaint_reference]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TicketComplaint_reference"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_reference]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TicketComplaint_reference</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[TicketComplaint_versionNo]"
+                      cachedDataType="i4"
+                      cachedName="TicketComplaint_versionNo"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_versionNo]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TicketComplaint_versionNo</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup].Columns[TicketComplaint_deleteFlag]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="TicketComplaint_deleteFlag"
+                      lineageId="Package\DataFlow-LoadData\Merge Join.Outputs[Output].Columns[TicketComplaint_deleteFlag]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TicketComplaint_deleteFlag</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DataFlow-LoadData\Update-Lookup.Outputs[Match]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Match"
+                  synchronousInputId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DataFlow-LoadData\Update-Lookup.Outputs[NoMatch]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="NoMatch"
+                  synchronousInputId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DataFlow-LoadData\Update-Lookup.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Update-Lookup.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Update-Lookup.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DataFlow-LoadData\Update-Lookup.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DataFlow-LoadData\Update-Lookup.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DataFlow-LoadData.Paths[Conditional-Split_Default_Update-Lookup]"
+              endId="Package\DataFlow-LoadData\Update-Lookup.Inputs[Conditional-Split_Default_Update-Lookup]"
+              name="Conditional-Split_Default_Update-Lookup"
+              startId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Default]" />
+            <path
+              refId="Package\DataFlow-LoadData.Paths[Conditional-Split_Delete-Record_Delete]"
+              endId="Package\DataFlow-LoadData\Delete.Inputs[Conditional-Split_Delete-Record_Delete]"
+              name="Conditional-Split_Delete-Record_Delete"
+              startId="Package\DataFlow-LoadData\Conditional-Split.Outputs[Delete-Record]" />
+            <path
+              refId="Package\DataFlow-LoadData.Paths[Conditional-Split_New-Record_Insert]"
+              endId="Package\DataFlow-LoadData\Insert.Inputs[Conditional-Split_New-Record_Insert]"
+              name="Conditional-Split_New-Record_Insert"
+              startId="Package\DataFlow-LoadData\Conditional-Split.Outputs[New-Record]" />
+            <path
+              refId="Package\DataFlow-LoadData.Paths[Convetion-For-NVARCHARMAX_Output_Sort-Source]"
+              endId="Package\DataFlow-LoadData\Sort-Source.Inputs[Convetion-For-NVARCHARMAX_Output_Sort-Source]"
+              name="Convetion-For-NVARCHARMAX_Output_Sort-Source"
+              startId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Outputs[Output]" />
+            <path
+              refId="Package\DataFlow-LoadData.Paths[Dest-Table_Output_Sort-Dest]"
+              endId="Package\DataFlow-LoadData\Sort-Dest.Inputs[Dest-Table_Output_Sort-Dest]"
+              name="Dest-Table_Output_Sort-Dest"
+              startId="Package\DataFlow-LoadData\Dest-Table.Outputs[Output]" />
+            <path
+              refId="Package\DataFlow-LoadData.Paths[Merge Join_Output_Conditional-Split]"
+              endId="Package\DataFlow-LoadData\Conditional-Split.Inputs[Merge Join_Output_Conditional-Split]"
+              name="Merge Join_Output_Conditional-Split"
+              startId="Package\DataFlow-LoadData\Merge Join.Outputs[Output]" />
+            <path
+              refId="Package\DataFlow-LoadData.Paths[Sort-Dest_Output_Merge Join]"
+              endId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Dest_Output_Merge Join]"
+              name="Sort-Dest_Output_Merge Join"
+              startId="Package\DataFlow-LoadData\Sort-Dest.Outputs[Output]" />
+            <path
+              refId="Package\DataFlow-LoadData.Paths[Sort-Source_Output_Merge Join]"
+              endId="Package\DataFlow-LoadData\Merge Join.Inputs[Sort-Source_Output_Merge Join]"
+              name="Sort-Source_Output_Merge Join"
+              startId="Package\DataFlow-LoadData\Sort-Source.Outputs[Output]" />
+            <path
+              refId="Package\DataFlow-LoadData.Paths[Source-Table_Output_Convetion-For-NVARCHARMAX]"
+              endId="Package\DataFlow-LoadData\Convetion-For-NVARCHARMAX.Inputs[Source-Table_Output_Convetion-For-NVARCHARMAX]"
+              name="Source-Table_Output_Convetion-For-NVARCHARMAX"
+              startId="Package\DataFlow-LoadData\Source-Table.Outputs[Output]" />
+            <path
+              refId="Package\DataFlow-LoadData.Paths[Update-Lookup_NoMatch_Insert-Update-Record]"
+              endId="Package\DataFlow-LoadData\Insert-Update-Record.Inputs[Update-Lookup_NoMatch_Insert-Update-Record]"
+              name="Update-Lookup_NoMatch_Insert-Update-Record"
+              startId="Package\DataFlow-LoadData\Update-Lookup.Outputs[NoMatch]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL-Update Record"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{B32657C4-1AF4-43BC-B954-77D4EE402FA9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL-Update Record"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B8F719EA-8F7F-4B39-AF93-AACE5FB9E087}"
+          SQLTask:SqlStatementSource="&#xA;                                           &#xA;           Update ndm_TicketComplaint Set &#xA;                                TicketComplaint_id =  B.[TicketComplaint_id],TicketComplaint_partitionId =  B.[TicketComplaint_partitionId],TicketId =  B.[TicketId],TicketComplaint_actions =  B.[TicketComplaint_actions],TicketComplaint_outcome =  B.[TicketComplaint_outcome],TicketComplaint_reason =  B.[TicketComplaint_reason],TicketComplaint_reference =  B.[TicketComplaint_reference],TicketComplaint_versionNo =  B.[TicketComplaint_versionNo],TicketComplaint_deleteFlag =  B.[TicketComplaint_deleteFlag]&#xA;                                From ndm_TicketComplaint A Inner Join Temp_ndm_TicketComplaint B&#xA;                                On  A.TicketComplaint_id = B.TicketComplaint_id&#xA;       " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Temp Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{508DCCAD-5F24-4CAF-A680-F0A65FEC8FAB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Temp Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B8F719EA-8F7F-4B39-AF93-AACE5FB9E087}"
+          SQLTask:SqlStatementSource="Truncate Table Temp_ndm_TicketComplaint" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_DataFlow-LoadData_To_Execute SQL-Update Record]"
+      DTS:CreationName=""
+      DTS:DTSID="{04685FEF-A913-4049-88FC-8ED9A0E9B6FE}"
+      DTS:From="Package\DataFlow-LoadData"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_DataFlow-LoadData_To_Execute SQL-Update Record"
+      DTS:To="Package\Execute SQL-Update Record" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_Truncate Temp Table_To_DataFlow-LoadData]"
+      DTS:CreationName=""
+      DTS:DTSID="{B81C5AEB-1105-4FF1-AC19-658A86AE00CD}"
+      DTS:From="Package\Truncate Temp Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_Truncate Temp Table_To_DataFlow-LoadData"
+      DTS:To="Package\DataFlow-LoadData" />
+  </DTS:PrecedenceConstraints>
+</DTS:Executable>

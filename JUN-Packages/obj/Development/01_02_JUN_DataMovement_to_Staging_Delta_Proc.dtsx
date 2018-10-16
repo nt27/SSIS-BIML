@@ -31,11 +31,11 @@
         DTS:Name="UserName">@[$Project::Junifer_STG_UserName]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=WIN2016-SQL;User ID=ssis-release-user;Initial Catalog=JUN_STG;Provider=SQLNCLI11.1;">
+          DTS:ConnectionString="Data Source=WIN2016-SQL\BDL,1440;User ID=ssis-release-user;Initial Catalog=JUN_STG;Provider=SQLNCLI11.1;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABkxR7SStDtck3O/RM3LXWpnpGmaVowVt7W1jJVqNfVXgAAAAAOgAAAAAIAACAAAAAahXq2wDWcLUqdqyJSCBBpsvb2FZnFKU/E4ftqKNDv8SAAAABOaamx7fcXuwEsGrCU2Ai3oaigrDMfMY5k/DnIPy7nG0AAAAAumcNQMIg7PoGoP6fvRJWEgwa40Dnny/WJiepgxqAH6U+z6oO4ftD/83OOVOHrRm++6VfTx5tojTEB+m34waKb</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABhd7A03l9MP+1aZPt8BoYKc5aMhwQIhyBy4pCcNqjL9QAAAAAOgAAAAAIAACAAAAAhWpxHmuuWVGwKLSuClgdHcHuCkrRKJI58G3rTGdTpSCAAAAAvUznJib/MU5EZDpHNv6j8tdpzNEOCqqnbbDy7gX01p0AAAAB3k8SutnhWd+sM4veu9vdX5hKEgGfk/SnLy42/GGN2wxopHi1hKQ6nmJBFIjA6d5Nt/tDgTq1sxEqAxcFxxAHn</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -59,7 +59,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAA9+QjRCCEqU1vI1sWbE2J6nYXnAUMxqkg1OC4UhE8L6QAAAAAOgAAAAAIAACAAAAAzg925v4ANLSQoToFv6NrP4VyNjTyQm4J/YGZK+lFpxCAAAAAkDq6sKHPiLUnvoNYVOpWFZiqh5HREsO1As96Y+/is2UAAAADePG41z2O4Pbv8iJH3TB3OoHCVwpsqV4FcHrxLBYJN8mkg+08K4Ztgnyn5TrygpgpKnsL1kJ299KjC6N3iCSJC</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAZuTHhyiMW3ASoFayduQjszbZ1e1MKYnv8b1TawJ4iwwAAAAAOgAAAAAIAACAAAAA2igOl7BG2UbZKIc4h+IMONDXogmnbXqBXM6UVLwF/RSAAAAATYg0hI3z1BHPiDPxxZF+vix4CeBfK+0tMN+159FynEEAAAACLZtTY4juNjLWJX6WDa5jg85O5Fsgz2IQrqQmzCjcG3HUsx+dE9vSRXo3j8pcJRDYAXQ195Mi5/3omOoRHMxQp</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -79,7 +79,7 @@
           ConnectionString="SqlServerName=WIN2016-SQL;UseWindowsAuthentication=False;UserName=ssis-release-user;">
           <PassWord
             Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADCAyNhl9eE/zCb9u71h9WqgPkgQW2wqm2RZRMl8zbHIwAAAAAOgAAAAAIAACAAAAB2dsz15WWRG8M0IuI1DWMNqW/kJkwnfVAge1QCNESn0iAAAABz2vg7Zxid+NVftz8WF0RUafwudxLvfIq2y8FkEIjxvUAAAAAbi69GBebpFpyq574L80D7WLdYX7VRSKFCLbgYdvuOM6Ap7k/i/WoQpzEItIQk07eW4yQxBy4qph15uMRbrSAR</PassWord>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAkZhQupphGfgUt8lc/u8fQDxG6J6a37+vk+1byV6dgfgAAAAAOgAAAAAIAACAAAADUbhKvmb6WZ1y1wVmJVpAD9TPSLF8XZsTufm7fiOpqdSAAAABh+6OOvxaWxWmnFjRz3tZpXLKRgOiiAAcAKA5sA5GsfEAAAACk8ZgDK4y9SC6X+Lzh9cpHuWHmvFVaSFWmglq7Myr1mTNXxjPgDpOZTGalZ9OCr6RoPxBCm5wnmV63Gr+A27YQ</PassWord>
         </SMOServerConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -96,10 +96,10 @@
         DTS:Name="UserName">@[$Project::Junifer_STG_UserName]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <SMOServerConnectionManager
-          ConnectionString="SqlServerName=WIN2016-SQL;UseWindowsAuthentication=False;UserName=ssis-release-user;">
+          ConnectionString="SqlServerName=WIN2016-SQL\BDL,1440;UseWindowsAuthentication=False;UserName=ssis-release-user;">
           <PassWord
             Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAACbAxOFd2rnG/NJR+Y6KXXYsTFMyFqupfyigbVr48B7gAAAAAOgAAAAAIAACAAAACI5Fff56A8sou36aK0r9FUsEPkfQ0VIZ/tRUADLHauxiAAAABmBiNP+/AckQeC57ukletZniowZiRcNG4vPEVHHSAeykAAAADE+3X4joqvqwXdQcywH9SaWm+z/9fr+LQGnBvXCnlMkeoaeVtdi5pG3ptGxnHLOcDMSr8UxqY6aq/BobN5JH4X</PassWord>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADKSiRZ1xujOplUYtTQDqN46ocywvZot8vNCjK8hEms/QAAAAAOgAAAAAIAACAAAACl2Gwy4tvyxHmMalc5uauq7sK5/CBS7xfg1uzpJNkvYiAAAAA7rM+88J1wSlnpBaSBuuqgO2SwJGho+l8zL/t6me87c0AAAAC+jIjMcngGX9QCVQrAsCeHU8CvoCnqT0/zohlJvY5Zcs1RRCpLt9MLtF6D/5OrXn3LLyr77kl5A2H2VfWDC3ng</PassWord>
         </SMOServerConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>

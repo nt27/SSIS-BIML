@@ -36,16 +36,17 @@
                         IsNVarcharMaxTypeTable = true;
                 }
                 iTableCount++;
-                
+                string strTableNo = iTableCount.ToString();
+                strTableNo= strTableNo.PadLeft(3, '0');
             #>
-           <Package Name="_STG_<#=iTableCount#>_<#=Table#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+           <Package Name="_STG_<#=strTableNo#>_<#=Table#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
 			<Tasks>
-			            <ExecuteSQL Name="Truncate Temp Table" ConnectionName="STG">
+			            <ExecuteSQL Name="Truncate Temp Table" ConnectionName="OLE_STG">
 							<DirectInput>Truncate Table Temp_<#=Table#></DirectInput>
 						</ExecuteSQL>
 						<Dataflow Name="DataFlow-LoadData">
 							<Transformations>
-								<OleDbSource Name="Source-Table" ConnectionName="ODS">
+								<OleDbSource Name="Source-Table" ConnectionName="OLE_ODS">
 									<ExternalTableInput Table="<#=Table#>"/>
 								</OleDbSource>
 								<#if(IsNVarcharMaxTypeTable) {#>
@@ -70,7 +71,7 @@
 										<Column SourceColumn="id" IsUsed="true" Sort="true" SortOrder="Asc" SortKeyPosition="1"/>
 									</Columns>
 								</Sort>
-								<OleDbSource Name="Dest-Table" ConnectionName="STG">
+								<OleDbSource Name="Dest-Table" ConnectionName="OLE_STG">
 									<ExternalTableInput Table="<#=Table#>"/>
 								</OleDbSource>
 								<Sort Name="Sort-Dest" AutoPassThrough="false">
@@ -111,7 +112,7 @@
 										</OutputPath>
 									</OutputPaths>
 								</ConditionalSplit>
-								<Lookup Name="Update-Lookup" OleDbConnectionName="STG" NoMatchBehavior="RedirectRowsToNoMatchOutput">
+								<Lookup Name="Update-Lookup" OleDbConnectionName="OLE_STG" NoMatchBehavior="RedirectRowsToNoMatchOutput">
 									<Parameters>
 									        <# 
                                             i=1;
@@ -163,15 +164,15 @@
                                                         where [refTable].[id] = ? <#=strReferenceColumns#>
                                     </ParameterizedQuery>
 								</Lookup>
-								<OleDbDestination Name="Insert-Update-Record" ConnectionName="STG">
+								<OleDbDestination Name="Insert-Update-Record" ConnectionName="OLE_STG">
 								<InputPath OutputPathName="Update-Lookup.NoMatch" />
 								<ExternalTableOutput Table="[dbo].[Temp_<#=Table#>]" />
 							</OleDbDestination>
-								<OleDbDestination Name="Insert" ConnectionName="STG">
+								<OleDbDestination Name="Insert" ConnectionName="OLE_STG">
 									<InputPath OutputPathName="Conditional-Split.New-Record" />
 									<ExternalTableOutput Table="[dbo].[<#=Table#>]" />
 								</OleDbDestination>
-								<OleDbCommand Name="Delete" ConnectionName="STG">
+								<OleDbCommand Name="Delete" ConnectionName="OLE_STG">
 									<InputPath OutputPathName="Conditional-Split.Delete-Record" />
 									<Parameters>
 										<Parameter SourceColumn="id2" TargetColumn="Param_0" DataType="Int32" />
@@ -180,7 +181,7 @@
 								</OleDbCommand>
 							</Transformations>
 						</Dataflow>
-						<ExecuteSQL Name="Execute SQL-Update Record" ConnectionName="STG">
+						<ExecuteSQL Name="Execute SQL-Update Record" ConnectionName="OLE_STG">
 							<DirectInput>
                                 <#
                                 string strQuery = "";

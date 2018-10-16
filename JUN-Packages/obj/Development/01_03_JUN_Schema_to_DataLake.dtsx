@@ -11,58 +11,10 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="01_03_Junifer_Schema_to_DataLake"
   DTS:PackageType="5"
-  DTS:VersionBuild="16"
-  DTS:VersionGUID="{E77A4523-74F5-4383-A5E9-D2181EB6B32E}">
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{064AFAD9-0AD6-4095-A468-4DF0ABE91BEE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:ConnectionManagers>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[OLEDB_Junifer_DL]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{5268759f-7fe0-4b06-bd0e-43648959e263}"
-      DTS:ObjectName="OLEDB_Junifer_DL">
-      <DTS:PropertyExpression
-        DTS:Name="InitialCatalog">@[$Project::Junifer_DL_DatabaseName]</DTS:PropertyExpression>
-      <DTS:PropertyExpression
-        DTS:Name="Password">@[$Project::Junifer_DL_Password]</DTS:PropertyExpression>
-      <DTS:PropertyExpression
-        DTS:Name="ServerName">@[$Project::Junifer_DL_ServerName]</DTS:PropertyExpression>
-      <DTS:PropertyExpression
-        DTS:Name="UserName">@[$Project::Junifer_DL_UserName]</DTS:PropertyExpression>
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=WIN2016-SQL;User ID=ssis-release-user;Initial Catalog=DataLake;Provider=SQLNCLI11.1;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADgZBRRB+sxuTgnAbBNVn18fMAMslsrCQV5l2kAC6E0fwAAAAAOgAAAAAIAACAAAAAMq18i+dy/JdSHLD4M+AtGBuSIX+iZoExgmleKy/vYECAAAACaTo/V0I1laXdTV0fKyn7lGHF9w2xnScQuJHe/7k9st0AAAADattSuD8sm6qHeplBKeSEiPu56/hVC9vjAtyhYEc4naPRx+m7WBQkNaacy+eHV8MbziU1oQ0YUeDUos3EXn5cA</DTS:Password>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[OLEDB_Junifer_STG]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{7248B6C8-3427-4D40-A57F-63F5FB9C430C}"
-      DTS:ObjectName="OLEDB_Junifer_STG">
-      <DTS:PropertyExpression
-        DTS:Name="InitialCatalog">@[$Project::Junifer_STG_DatabaseName]</DTS:PropertyExpression>
-      <DTS:PropertyExpression
-        DTS:Name="Password">@[$Project::Junifer_STG_Password]</DTS:PropertyExpression>
-      <DTS:PropertyExpression
-        DTS:Name="ServerName">@[$Project::Junifer_STG_ServerName]</DTS:PropertyExpression>
-      <DTS:PropertyExpression
-        DTS:Name="UserName">@[$Project::Junifer_STG_UserName]</DTS:PropertyExpression>
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=WIN2016-SQL;User ID=ssis-release-user;Initial Catalog=JUN_STG;Provider=SQLNCLI11.1;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWDIj2TzR2U2gjt5uModNbgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACNBznLVwMUamkuJLwFrNFkMAxcZUfgJ4hxvnbMPtmzGwAAAAAOgAAAAAIAACAAAAAzn5Ha9gk5TLAfDbSgu8I5JQBF4qY+RlDu9OlXB4XhwiAAAAAJTourbZiXvdkx3G6cb4AhDORmkTd9RmpC5LYUFhzZZkAAAADY1bZ1pCwI8SLClk1Jn/FBPAk+14It1nsnBIW26e/9JX5kqAuwEi7Z/J5i15r+ReLDBPxOI6Lds6uqpwZjTcEx</DTS:Password>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-  </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
@@ -78,15 +30,8 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{7248B6C8-3427-4D40-A57F-63F5FB9C430C}"
-          SQLTask:SqlStatementSource="Declare @Sql nVarchar(Max) = ''&#xA;Declare @crlf VARCHAR(2) = CHAR(13) + CHAR(10) ;&#xA;SELECT @Sql = @Sql + &#xA; 'If Not Exists(Select 1 From [DataLake].dbo.sysobjects Where Xtype=''U'' and Name = '''+ Replace(Name,'vw_','') + ''' )&#xA; Select * into [DataLake].[dbo].' + Replace(Name,'vw_','') + ' From [dbo].' + Name + ' Where 1=2 ' +';' + @crlf&#xA;From &#xA;sys.Views Where Name like 'vw_ndm%'&#xA;Exec (@Sql)&#xA;--PRINT @Sql&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-          <SQLTask:ParameterBinding
-            SQLTask:ParameterName="0"
-            SQLTask:DtsVariableName="$Project::Junifer_STG_DatabaseName"
-            SQLTask:ParameterDirection="Input"
-            SQLTask:DataType="129"
-            SQLTask:ParameterSize="-1" />
-        </SQLTask:SqlTaskData>
+          SQLTask:Connection="{106297E0-A6BD-4F07-93AE-08D287E934CD}"
+          SQLTask:SqlStatementSource="Declare @Sql nVarchar(Max) = ''&#xA;Declare @crlf VARCHAR(2) = CHAR(13) + CHAR(10) ;&#xA;SELECT @Sql = @Sql + &#xA; 'If Not Exists(Select 1 From [DataLake].dbo.sysobjects Where Xtype=''U'' and Name = '''+ Replace(Name,'vw_','') + ''' )&#xA; Select * into [DataLake].[dbo].' + Replace(Name,'vw_','') + ' From [dbo].' + Name + ' Where 1=2 ' +';' + @crlf&#xA;From &#xA;sys.Views Where Name like 'vw_ndm%'&#xA;Exec (@Sql)&#xA;--PRINT @Sql&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -101,7 +46,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{5268759f-7fe0-4b06-bd0e-43648959e263}"
+          SQLTask:Connection="{B8F719EA-8F7F-4B39-AF93-AACE5FB9E087}"
           SQLTask:SqlStatementSource="Declare @Sql nVarchar(Max) = ''&#xA;Declare @crlf VARCHAR(2) = CHAR(13) + CHAR(10) ;&#xA;SELECT @Sql = @Sql + &#xA; 'If Not Exists(Select 1 From sysobjects Where Xtype=''U'' and Name = ''temp_' + Name + ''' )&#xA;Select * into temp_' + Name  + ' From ' + Name + ' Where 1=2 ' +';' + @crlf&#xA;From Sys.tables&#xA;Exec (@Sql)&#xA;--PRINT @Sql" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -129,27 +74,27 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
         <NodeLayout
-          Size="206,42"
+          Size="248,42"
           Id="Package\Table Creation in DataLake"
-          TopLeft="250,112" />
+          TopLeft="239,156" />
         <NodeLayout
-          Size="283,42"
+          Size="318,42"
           Id="Package\Temp Table Creation in DataLake Database"
-          TopLeft="206,236" />
+          TopLeft="207,283" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="350.25,154">
+          TopLeft="364.5,198">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{x:Null}"
-              EndConnector="0,82"
+              EndConnector="0,85"
               Start="0,0"
-              End="0,74.5">
+              End="0,77.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,74.5" />
+                    End="0,77.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

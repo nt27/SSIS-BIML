@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="01_Junifer_Master_Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{7E5A463C-2FFC-4AF3-8858-B15A9D3E3092}">
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{B6215A6F-3D09-4494-9D08-D37886F57166}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -85,6 +85,38 @@
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Temp Table Deletion in DataLake"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{f59a8791-688c-4417-954e-5453f166b230}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Temp Table Deletion in DataLake"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B8F719EA-8F7F-4B39-AF93-AACE5FB9E087}"
+          SQLTask:SqlStatementSource="Declare @Sql nVarchar(Max) = ''&#xA;Declare @crlf VARCHAR(2) = CHAR(13) + CHAR(10) ;&#xA;SELECT @Sql = @Sql + &#xA;'If  Exists(Select 1 From sysobjects Where Xtype=''U'' and Name = ''' + Name + ''' )&#xA;Drop Table ' + Name  + ';' + @crlf&#xA;From sysobjects where Name like '%temp%'&#xA;Exec (@Sql)&#xA;--PRINT @Sql&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Temp Table Deletion in Staging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{72c024de-bb7f-496d-b0a5-9693ac1466cf}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Temp Table Deletion in Staging"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{106297E0-A6BD-4F07-93AE-08D287E934CD}"
+          SQLTask:SqlStatementSource="Declare @Sql nVarchar(Max) = ''&#xA;Declare @crlf VARCHAR(2) = CHAR(13) + CHAR(10) ;&#xA;SELECT @Sql = @Sql + &#xA;'If  Exists(Select 1 From sysobjects Where Xtype=''U'' and Name = ''' + Name + ''' )&#xA;Drop Table ' + Name  + ';' + @crlf&#xA;From sysobjects where Name like '%temp%'&#xA;Exec (@Sql)&#xA;--PRINT @Sql&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
@@ -111,6 +143,22 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
       DTS:To="Package\Junifer Data Mover to DataLake" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{493708C8-8215-46FC-9032-004330F0A604}"
+      DTS:From="Package\Temp Table Deletion in Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Temp Table Deletion in DataLake" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{D9C6BF26-858F-461C-86DB-AC529171488D}"
+      DTS:From="Package\Junifer Data Mover to DataLake"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Temp Table Deletion in Staging" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -123,19 +171,19 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
         <NodeLayout
-          Size="228,42"
+          Size="248,42"
           Id="Package\Junifer Data Mover to DataLake"
-          TopLeft="177,333" />
+          TopLeft="160,336" />
         <NodeLayout
           Size="259,42"
           Id="Package\Junifer Data Mover to Staging"
           TopLeft="164,166" />
         <NodeLayout
-          Size="252,42"
+          Size="266,42"
           Id="Package\Junifer Schema Creation in DataLake"
-          TopLeft="171,247" />
+          TopLeft="157,247" />
         <NodeLayout
           Size="272,42"
           Id="Package\Junifer Schema Creation in Staging"
@@ -145,7 +193,7 @@
           TopLeft="293.25,136">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,30"
               Start="0,0"
               End="0,22.5">
@@ -164,10 +212,10 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="295.25,208">
+          TopLeft="291.75,208">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,39"
               Start="0,0"
               End="0,31.5">
@@ -186,18 +234,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="294,289">
+          TopLeft="287,289">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,44"
+              StartConnector="{x:Null}"
+              EndConnector="0,47"
               Start="0,0"
-              End="0,36.5">
+              End="0,39.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.5" />
+                    End="0,39.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -217,6 +265,109 @@
               Family="Tahoma"
               Size="18"
               Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <NodeLayout
+          Size="233,42"
+          Id="Package\Temp Table Deletion in Staging"
+          TopLeft="165,437" />
+        <NodeLayout
+          Size="243,42"
+          Id="Package\Temp Table Deletion in DataLake"
+          TopLeft="159,529" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="281,479">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="282.75,378">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,59"
+              Start="0,0"
+              End="0,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Temp Table Deletion"
+          ParentId="Package"
+          Size="215,48"
+          Id="a4c488e5-92af-4b59-8fcb-dacab8cd3150"
+          TopLeft="461,478">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="20.25"
+              Color="#FF800000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Schema Creation in Staging"
+          ParentId="Package"
+          Size="276,48"
+          Id="6ebd2168-91bb-409a-9256-0a1cf101f214"
+          TopLeft="456,90">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="20.25"
+              Color="#FF800000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Schema Creation in DataLake"
+          ParentId="Package"
+          Size="292,48"
+          Id="4e196e9b-7305-457d-81ff-a2221dbe84e7"
+          TopLeft="463,238">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="20.25"
+              Color="#FF800000">
               <mssge:FontInfo.TextDecorations>
                 <av:TextDecorationCollection />
               </mssge:FontInfo.TextDecorations>
